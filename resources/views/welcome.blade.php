@@ -72,6 +72,7 @@
 
                                 <h1 class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
                                     Update lagi????
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, libero quasi fugit dolore, consequuntur molestias sit consectetur asperiores tenetur dolorum impedit suscipit deleniti corporis dolores debitis vero laudantium est labore velit. Ipsam quam inventore libero. Quasi molestiae et aliquid voluptatibus deserunt sapiente. Velit, sequi aliquam atque, praesentium iste excepturi dolorum rerum libero molestias ea delectus distinctio. Eveniet maiores hic facere doloremque ipsa aperiam, aliquid ab odit voluptas fugiat beatae eaque recusandae temporibus sequi officiis pariatur? Dolor temporibus quo voluptas accusantium? Velit consectetur, quis culpa quam doloremque doloribus eius beatae officia corrupti non veniam consequuntur quas impedit eveniet ea rem ducimus.
                                 </h1>
                             </div>
 
