@@ -73,11 +73,11 @@ class AuthController extends Controller
 
     public function login(Request $request) 
     {
-        $token = Auth::guard('user_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
+        // $token = Auth::guard('user_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
 
         return response()->json([
-            "msg" => 'success',
-            "token" => $token
+            "msg" => 'success update',
+            // "token" => $token
         ], 200);
 
         $validator = Validator::make($request->all(), [
