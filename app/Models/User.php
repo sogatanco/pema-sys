@@ -33,7 +33,7 @@ class User extends Authenticatable implements JWTSubject
     
     // protected $attributes = [
     //     'roles' => [],
-    // ];
+    // ];   
 
     protected $hidden = [
         'password',

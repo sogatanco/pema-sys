@@ -13,7 +13,8 @@ use App\Http\Models\Employe;
 
 class UserVendor extends Authenticatable implements JWTSubject
 {
-    protected $table = "userslklk";
+    protected $connection ='mysql2';
+    protected $table = "users";
     protected $primaryKey = "id";
     protected $keyType = "int";
     public $timestamps = true;
