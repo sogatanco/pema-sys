@@ -76,7 +76,7 @@ return [
 
         'vendor_users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\UserVendor::class,
+            'model' => App\Models\User::class,
         ],
 
         // 'users' => [
