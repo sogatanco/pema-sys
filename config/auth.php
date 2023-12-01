@@ -44,6 +44,11 @@ return [
             'driver' => 'jwt',
             'provider' => 'users',
         ],
+
+        'api_vendor' => [
+            'driver' => 'jwt',
+            'provider' => 'vendor_users',
+        ],
     ],
 
     /*
@@ -67,6 +72,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'vendor_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\UserVendor::class,
         ],
 
         // 'users' => [
