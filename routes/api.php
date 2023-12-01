@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth2Controller;
 use App\Http\Controllers\Employe\EmployeController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Task\TaskController;
@@ -21,6 +22,15 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/auth/refresh', 'refresh');
     Route::get('auth/welcome/test', 'welcome');
 });
+
+Route::controller(Auth2Controller::class)->group(function(){
+    Route::post('/auth2/register', 'register');
+    Route::post('/auth2/login', 'login');
+    Route::get('/auth2/logout', 'logout');
+    Route::get('/auth2/refresh', 'refresh');
+    Route::get('auth2/welcome/test', 'welcome');
+});
+
 
 // Employee Routes
 Route::controller(EmployeController::class)->group(function(){

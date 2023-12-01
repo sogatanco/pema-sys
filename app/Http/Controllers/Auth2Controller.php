@@ -10,10 +10,10 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use JWTAuth;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRegisterRequest;
-use App\Models\User;
+use App\Models\UserVendor;
 use App\Models\Employe;
 
-class AuthController extends Controller
+class Auth2Controller extends Controller
 {
     public function __construct()
     {
@@ -24,7 +24,7 @@ class AuthController extends Controller
     {
         $data = $request->validated();
 
-        if(User::where('email', $data['email'])->count() == 1){
+        if(UserVendor::where('email', $data['email'])->count() == 1){
             // user already exist
             throw new HttpResponseException(response([
                 "errors" => [
@@ -73,7 +73,8 @@ class AuthController extends Controller
 
     public function login(Request $request) 
     {
-        $validator = Validator::make($request->all(), [
+        
+         $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
@@ -84,35 +85,24 @@ class AuthController extends Controller
             ], 400));
         }
 
-        // checking & generate token
-        $token = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-
-        if(!$token){
+        $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
+        
+         if(!$token){
             throw new HttpResponseException(response([
                 "status" => false,
                 "message" => "Email or password is invalid."
             ], 400));
         }
-
-        $user = Auth::user();
-        $employeId = Employe::select('employe_id', 'first_name')
-                    ->where("user_id", $user->id)->first();
-        $user->employe_id = $employeId->employe_id;
-        $user->first_name = $employeId->first_name;
-        $user->roles = $user->roles;
-        $user = $user->makeHidden(["id", "email_verified_at", "created_at", "updated_at"]);
-
-        // get payload data
-        // $payload = Auth::payload();
+        
+        $user = Auth::guard('api_vendor')->user();
 
         return response()->json([
-            "status" => true,
-            "message" => "Login success.",
-            "auth" => [
-                "user" => $user,
-                "token" => $token,
-            ]
+            "msg" => 'success update',
+            "user" => $user,
+            "token" => $token
         ], 200);
+
+    
     }
 
     public function logout()
