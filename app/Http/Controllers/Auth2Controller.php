@@ -17,7 +17,7 @@ class Auth2Controller extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'welcome']]);
+        $this->middleware('auth:api_vendor', ['except' => ['login', 'register', 'welcome']]);
     }
 
     public function register(userRegisterRequest $request): userResource
@@ -35,7 +35,7 @@ class Auth2Controller extends Controller
             ], 409));
         }
 
-        $defaultRole = ["Employee"];
+        $defaultRole = ["Vendor"];
 
         $user = new User($data);
         $user->roles = $defaultRole;
@@ -45,30 +45,6 @@ class Auth2Controller extends Controller
 
         return new UserResource($user);
 
-        // $validator = Validator::make($request->all(), [
-        //     'email' => ['required' , 'email' , 'unique:users'],
-        //     'password' => ['required' , 'min:8' , 'confirmed']
-        // ]);
-
-        // if($validator->fails()){
-        //     return response()->json([
-        //         "status" => false,
-        //         "message" => $validator->errors()
-        //     ], 400);
-        // }
-
-        // $defaultRole = array("Employee");
-
-        // $user = User::create([
-        //     'email' => $request->email,
-        //     'password' => Hash::make($request->password),
-        //     'roles' => $defaultRole
-        // ]);
-
-        // return response()->json([
-        //     "message" => "User has been registered.",
-        //     "data" => $user
-        // ], 201);
     }
 
     public function login(Request $request) 
@@ -97,9 +73,12 @@ class Auth2Controller extends Controller
         $user = Auth::guard('api_vendor')->user();
 
         return response()->json([
-            "msg" => 'success update',
-            "user" => $user,
-            "token" => $token
+            "status" => true,
+            "message" => "Login success.",
+            "auth" => [
+                "user" => $user,
+                "token" => $token,
+            ]
         ], 200);
 
     
