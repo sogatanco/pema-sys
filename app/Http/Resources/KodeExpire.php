@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\KodeExpire;
+namespace App\Http\Resources;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
