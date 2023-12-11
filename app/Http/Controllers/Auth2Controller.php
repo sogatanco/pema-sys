@@ -11,8 +11,10 @@ use JWTAuth;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\UserVendor;
+use App\Models\Vendor\ViewPerusahaan;
 use Mail;
 use App\Mail\VendorMail;
+use App\Http\Resources\PostResource;
 
 class Auth2Controller extends Controller
 {
@@ -113,16 +115,19 @@ class Auth2Controller extends Controller
         ], 200);
     }
 
-    function kirimEmail($link)
+    function kirimEmail($id)
     {
+        $per=ViewPerusahaan::find($id);
+
         $mailData = [
-            'link' => $link
+            'link' => $id
         ];
 
-        if (Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))) {
-            return response()->json([
-                "messsage" => "Hello world!"
-            ], 200);
-        }
+        return new PostResource(true, 'sdgsdg', $per);
+        // if (Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))) {
+        //     return response()->json([
+        //         "messsage" => "Hello world!"
+        //     ], 200);
+        // }
     }
 }
