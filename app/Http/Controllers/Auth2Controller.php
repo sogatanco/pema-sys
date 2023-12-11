@@ -124,15 +124,12 @@ class Auth2Controller extends Controller
 
         $mailData = [
             'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
-            'decode'=>base64_decode($uniq)
+            'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
         ];
-
-        return new PostResource(true, 'sdgsdg',$mailData );
-        // return new PostResource(true, 'sdgsdg', env('APP_LINK') . 'api/auth2/verivication/');
-        // if (Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))) {
-        //     return response()->json([
-        //         "messsage" => "Hello world!"
-        //     ], 200);
-        // }
+        if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
+            return new PostResource(true, 'Email Verification sent succesfully', []);
+        }else{
+            return new PostResource(false, 'Failed to send', []);
+        }
     }
 }

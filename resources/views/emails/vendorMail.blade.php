@@ -167,6 +167,7 @@
           <!-- start copy -->
           <tr>
             <td align="left" bgcolor="#ffffff" style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;">
+              <p style="margin: 0;">Hello <?php echo $mailData['link']?>,</p>
               <p style="margin: 0;">Tap the button below to confirm your email address. </p>
               <p style="margin: 0;">If that doesn't work, copy and paste the following link in your browser:</p>
               <p style="margin: 0;"><a href="<?php echo $mailData['link']?>" target="_blank"><?php echo $mailData['link']?></a></p>
