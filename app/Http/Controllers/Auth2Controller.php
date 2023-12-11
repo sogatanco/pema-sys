@@ -119,9 +119,7 @@ class Auth2Controller extends Controller
             'title' => 'Mail Verification',
             'body' => 'This is for testing email using smtp.'
 
-        ];
-
-         
+        ];       
 
         if(Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))){
             return response()->json([
