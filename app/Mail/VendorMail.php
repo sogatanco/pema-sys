@@ -24,7 +24,7 @@ class VendorMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Email Verification')
+        return $this->subject('EMAIL VERIFICATION')
                     ->view('emails.vendorMail');
     }
 }

@@ -11,9 +11,9 @@ use JWTAuth;
 use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\UserVendor;
-use App\Models\Employe;
 use Mail;
 use App\Mail\VendorMail;
+use App\Models\User;
 
 class Auth2Controller extends Controller
 {
@@ -26,7 +26,7 @@ class Auth2Controller extends Controller
     {
         $data = $request->validated();
 
-        if(UserVendor::where('email', $data['email'])->count() == 1){
+        if (UserVendor::where('email', $data['email'])->count() == 1) {
             // user already exist
             throw new HttpResponseException(response([
                 "errors" => [
@@ -39,39 +39,40 @@ class Auth2Controller extends Controller
 
         $defaultRole = ["Vendor"];
 
-        $user = new User($data);
+        $user = new UserVendor($data);
         $user->roles = $defaultRole;
         $user->password = Hash::make($data['password']);
 
-        $user->save();
+        if ($user->save()) {
+            $this->kirimEmail($user->id);
 
-        return new UserResource($user);
-
+            return new UserResource($user);
+        }
     }
 
-    public function login(Request $request) 
+    public function login(Request $request)
     {
-        
-         $validator = Validator::make($request->all(), [
+
+        $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             throw new HttpResponseException(response([
                 "message" => $validator->errors()
             ], 400));
         }
 
         $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
-        
-         if(!$token){
+
+        if (!$token) {
             throw new HttpResponseException(response([
                 "status" => false,
                 "message" => "Email or password is invalid."
             ], 400));
         }
-        
+
         $user = Auth::guard('api_vendor')->user();
 
         return response()->json([
@@ -113,21 +114,16 @@ class Auth2Controller extends Controller
         ], 200);
     }
 
-    function kirimEmail(){
+    function kirimEmail($link)
+    {
         $mailData = [
+            'link' => $link
+        ];
 
-            'title' => 'Email Verification', 
-            'link'=>'https://ptpema.co.id/uploads/settings/16347907124310.PNG'
-
-        ];       
-
-        if(Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))){
+        if (Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))) {
             return response()->json([
                 "messsage" => "Hello world!"
-            ], 200); 
+            ], 200);
         }
-
-        
-           
     }
 }
