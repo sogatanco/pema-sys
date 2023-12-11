@@ -17,7 +17,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-    'link_verif'=>env('APP_LINK', 'localhost:8080'),
+    // 'link_verif'=>env('APP_LINK', 'localhost:8080'),
 
     /*
     |--------------------------------------------------------------------------

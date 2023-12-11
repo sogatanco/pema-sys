@@ -125,7 +125,7 @@ class Auth2Controller extends Controller
             'link' => $id
         ];
 
-        return new PostResource(true, 'sdgsdg',[(rand(pow(10, $digits - 1), pow(10, $digits) - 1)).'sdgsdgsdg'.Config::get('app.link_verif')] );
+        return new PostResource(true, 'sdgsdg',[(rand(pow(10, $digits - 1), pow(10, $digits) - 1)).'sdgsdgsdg'.Config::get('app.url')] );
         // return new PostResource(true, 'sdgsdg', env('APP_LINK') . 'api/auth2/verivication/');
         // if (Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))) {
         //     return response()->json([
