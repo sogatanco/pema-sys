@@ -29,6 +29,7 @@ Route::controller(Auth2Controller::class)->group(function(){
     Route::get('/auth2/logout', 'logout');
     Route::get('/auth2/refresh', 'refresh');
     Route::get('auth2/resend/{id}', 'kirimEmail');
+    Route::get('auth2/verif/{id}/{exp}', 'verifEmail');
 });
 
 

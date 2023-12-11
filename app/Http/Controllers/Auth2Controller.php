@@ -134,15 +134,22 @@ class Auth2Controller extends Controller
         //     return new PostResource(false, 'Failed to send', []);
         // }
 
-        $kodeExpire = new KodeExpire();
-        $kodeExpire->generateKode();
-        $kode = $kodeExpire->getKode();
+        $kodeExpire = new KodeExpire('65773ac8b06e7');
+        // $kodeExpire->generateKode();
+        // $kode = $kodeExpire->getKode();
 
-        echo "Kode: $kode\n";
+        // echo "Kode: $kode\n";
         if ($kodeExpire->isExpired()) {
             echo "Kode sudah kadaluwarsa.\n";
         } else {
             echo "Kode masih berlaku.\n";
         }
     }
+
+
+    function verifEmail($id_token, $exp_token){
+        return new PostResource(true, 'sgdsdg', [$id_token]);
+    }
 }
+
+
