@@ -116,8 +116,7 @@ class Auth2Controller extends Controller
     function kirimEmail(){
         $mailData = [
 
-            'title' => 'Mail Verification',
-            'body' => 'This is for testing email using smtp.', 
+            'title' => 'Email Verification', 
             'link'=>'https://ptpema.co.id/uploads/settings/16347907124310.PNG'
 
         ];       
