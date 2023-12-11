@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Resources;
+
 class KodeExpire {
     private $kode;
     private $timestampCreated;
