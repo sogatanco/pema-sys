@@ -7,7 +7,7 @@ class KodeExpire {
     private $timestampCreated;
     private $expirationTime; // Waktu kadaluwarsa dalam detik
 
-    public function __construct($expirationTime = 300) {
+    public function __construct($expirationTime = 30) {
         $this->expirationTime = $expirationTime;
     }
 

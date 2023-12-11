@@ -134,13 +134,15 @@ class Auth2Controller extends Controller
         //     return new PostResource(false, 'Failed to send', []);
         // }
 
-        $kodeExpire = new KodeExpire('657736c258537');
+        $kodeExpire = new KodeExpire();
+        $kodeExpire->generateKode();
+        $kode = $kodeExpire->getKode();
+
+        echo "Kode: $kode\n";
         if ($kodeExpire->isExpired()) {
             echo "Kode sudah kadaluwarsa.\n";
         } else {
             echo "Kode masih berlaku.\n";
         }
-
     }
-
 }
