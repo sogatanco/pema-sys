@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use JWTAuth;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\KodeExpire;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\UserVendor;
 use App\Models\Vendor\ViewPerusahaan;
@@ -118,18 +119,32 @@ class Auth2Controller extends Controller
 
     function kirimEmail($id)
     {
-        $per = ViewPerusahaan::where('id_user', $id)->get()->first();
-        $digits = 10;
-        $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45));
+        // $per = ViewPerusahaan::where('id_user', $id)->get()->first();
+        // $digits = 10;
+        // $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45));
 
-        $mailData = [
-            'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
-            'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
-        ];
-        if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
-            return new PostResource(true, 'Email Verification sent succesfully', []);
-        }else{
-            return new PostResource(false, 'Failed to send', []);
+        // $mailData = [
+        //     'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
+        //     'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
+        // ];
+        // if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
+        //     return new PostResource(true, 'Email Verification sent succesfully', []);
+        // }else{
+        //     return new PostResource(false, 'Failed to send', []);
+        // }
+        $kodeExpire = new KodeExpire();
+
+        // Membuat kode
+        $kodeExpire->generateKode();
+        $kode = $kodeExpire->getKode();
+
+        echo "Kode: $kode\n";
+
+        // Memeriksa apakah kode sudah kadaluwarsa
+        if ($kodeExpire->isExpired()) {
+            echo "Kode sudah kadaluwarsa.\n";
+        } else {
+            echo "Kode masih berlaku.\n";
         }
     }
 }
