@@ -162,7 +162,10 @@ class EmployeController extends Controller
 
     public function assignmentList()
     {
-        $list = Employe::select('employe_id', 'first_name')->get();
+        $list = Employe::select('employe_id', 'first_name', 'users.roles')
+                ->join('users', 'users.id','=', 'employees.user_id')
+                ->get();
+
         $total = $list->count();
         $assignment = [];
 
@@ -170,6 +173,7 @@ class EmployeController extends Controller
             $assignment[$i] = [
                 "value" => $list[$i]->employe_id,
                 "label" => $list[$i]->first_name,
+                "roles" => $list[$i]->roles
             ];
         }
 
@@ -235,6 +239,30 @@ class EmployeController extends Controller
             "ata" => $atasan,
             "atasan" => $atasan->level_1 === null ? 
                         $atasan->level_2 : $atasan->level_1
+        ], 200);
+    }
+
+    public function employeesByDivision($managerId)
+    {
+        $managerDivision = Employe::getEmployeDivision($managerId);
+
+        $memberOfDivision = Structure::select('employe_id', 'first_name')
+                            ->where('organization_id', $managerDivision->organization_id)
+                            ->get();
+
+        $total = $memberOfDivision->count();
+        $assignment = [];
+                    
+        for ($i=0; $i < $total; $i++) { 
+            $assignment[$i] = [
+                "value" => $memberOfDivision[$i]->employe_id,
+                "label" => $memberOfDivision[$i]->first_name,
+            ];
+        }
+
+        return response()->json([
+            "status" =>true,
+            "data" => $assignment
         ], 200);
     }
 

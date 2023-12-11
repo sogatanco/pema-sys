@@ -19,6 +19,7 @@ use App\Models\Structure;
 use App\Models\Tasks\Task;
 use App\Models\Tasks\TaskStatus;
 use App\Models\Tasks\TaskApproval;
+use App\Models\Tasks\TaskPic;
 use App\Models\Tasks\TaskFile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -369,12 +370,11 @@ class ProjectController extends Controller
 
     public function members($projectId)
     {
-        $key = ['project_tasks.project_id' => $projectId];
-        $members = TaskApproval::select('project_task_approval.employe_id')
-                    ->where($key)
-                    ->join('project_tasks', 'project_tasks.task_id', '=', 'project_task_approval.task_id')
+        $members = TaskPic::select('employe_id')
+                    ->where('project_id', $projectId)
                     ->get();
 
+        $totalData = [];
         $membersFiltered = [];
         for ($m=0; $m < count($members) ; $m++) { 
             $array[$m] = $members[$m]->employe_id;
@@ -382,18 +382,22 @@ class ProjectController extends Controller
             if(!in_array($members[$m]->employe_id, $membersFiltered)){
                 array_push($membersFiltered, $array[$m]);
             }
+
+            array_push($totalData, $array[$m]);
         }
 
-        $mem = Employe::select('employees.first_name', 'positions.position_name', 'organizations.organization_name')
+        $totalTaskByMember = array_count_values($totalData);
+
+        $mem = Employe::select('employees.employe_id', 'employees.first_name', 'positions.position_name', 'organizations.organization_name')
                 ->whereIn('employe_id', $membersFiltered)
                 ->join('positions', "positions.position_id", "=", 'employees.position_id')
                 ->join('organizations', "organizations.organization_id", "=", 'positions.organization_id')
                 ->get();
         
         return response()->json([
-            "total" => count($members),
-            "data" => $mem
-
+            "total" => count($membersFiltered),
+            "data" => $mem,
+            "count_task" => $totalTaskByMember
         ], 200, [], JSON_NUMERIC_CHECK);
     }
 

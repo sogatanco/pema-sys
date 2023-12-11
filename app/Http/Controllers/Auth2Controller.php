@@ -80,8 +80,6 @@ class Auth2Controller extends Controller
                 "token" => $token,
             ]
         ], 200);
-
-    
     }
 
     public function logout()
