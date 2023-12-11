@@ -9,7 +9,7 @@ Request
 GET /resend/[id_user]
 ```
 Parameter
-- `id_user` : [integer] - userId  
+- `id_user` : `[integer]` - userId  
 
 Success Response
 ```
