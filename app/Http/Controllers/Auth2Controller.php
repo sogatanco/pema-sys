@@ -117,7 +117,7 @@ class Auth2Controller extends Controller
 
     function kirimEmail($id)
     {
-        $per=ViewPerusahaan::find($id);
+        $per=ViewPerusahaan::where('id_user', $id)->get()->first();
 
         $mailData = [
             'link' => $id
