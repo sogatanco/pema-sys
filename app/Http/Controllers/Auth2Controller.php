@@ -135,7 +135,7 @@ class Auth2Controller extends Controller
         //     return new PostResource(false, 'Failed to send', []);
         // }
 
-        $token = GlobalKodeExpire::generateToken(36); // Token kadaluwarsa dalam 1 jam
+        $token = GlobalKodeExpire::generateToken(36); 
         return response()->json(['token' => $token]);
     }
 
