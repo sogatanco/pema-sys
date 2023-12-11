@@ -122,9 +122,10 @@ class Auth2Controller extends Controller
         // $per = ViewPerusahaan::where('id_user', $id)->get()->first();
         // $digits = 10;
         // $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45));
-
+        // $kodeExpire = new KodeExpire();
+        // $kodeExpire->generateKode();
         // $mailData = [
-        //     'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
+        //     'link' => Config::get('app.url').'api/auth2/verif/'.$uniq.'/'.$kodeExpire->getKode(),
         //     'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
         // ];
         // if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
@@ -132,19 +133,14 @@ class Auth2Controller extends Controller
         // }else{
         //     return new PostResource(false, 'Failed to send', []);
         // }
-        $kodeExpire = new KodeExpire();
 
-        // Membuat kode
-        $kodeExpire->generateKode();
-        $kode = $kodeExpire->getKode();
-
-        echo "Kode: $kode\n";
-
-        // Memeriksa apakah kode sudah kadaluwarsa
+        $kodeExpire = new KodeExpire('657736c258537');
         if ($kodeExpire->isExpired()) {
             echo "Kode sudah kadaluwarsa.\n";
         } else {
             echo "Kode masih berlaku.\n";
         }
+
     }
+
 }
