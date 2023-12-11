@@ -136,7 +136,8 @@ class Auth2Controller extends Controller
         // }
 
         $token = GlobalKodeExpire::generateToken(36); 
-        return response()->json(['token' => $token]);
+        $token2 = GlobalKodeExpire::generateToken(3600); 
+        return response()->json(['token' => $token, 'token2'=>$token2]);
     }
 
 
