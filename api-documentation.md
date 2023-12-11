@@ -1,9 +1,9 @@
-## Vendor API
+# Vendor API
 
-### Authentication
+## Authentication
 `https://api.ptpema.co.id/api/auth2`
 
-#### Resend Email Verification
+### Resend Email Verification
 Request
 ```http
 GET /resend/[id_user]
@@ -16,6 +16,14 @@ Success Response
 {
     "success": true,
     "message": "Email Verification sent succesfully",
+    "data": []
+}
+```
+Error Response
+```
+{
+    "success": false,
+    "message": "Failed to send",
     "data": []
 }
 ```
