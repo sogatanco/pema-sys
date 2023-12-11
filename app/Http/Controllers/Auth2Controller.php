@@ -15,6 +15,7 @@ use App\Models\Vendor\ViewPerusahaan;
 use Mail;
 use App\Mail\VendorMail;
 use App\Http\Resources\PostResource;
+use Illuminate\Support\Str;
 
 class Auth2Controller extends Controller
 {
@@ -119,13 +120,12 @@ class Auth2Controller extends Controller
     {
         $per = ViewPerusahaan::where('id_user', $id)->get()->first();
         $digits = 5;
-        ;
 
         $mailData = [
             'link' => $id
         ];
 
-        return new PostResource(true, 'sdgsdg', rand(pow(10, $digits - 1), pow(10, $digits) - 1));
+        return new PostResource(true, 'sdgsdg',[(rand(pow(10, $digits - 1), pow(10, $digits) - 1)).'sdgsdgsdg'.env('APP_LINK')] );
         // return new PostResource(true, 'sdgsdg', env('APP_LINK') . 'api/auth2/verivication/');
         // if (Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))) {
         //     return response()->json([
