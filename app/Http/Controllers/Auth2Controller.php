@@ -118,7 +118,7 @@ class Auth2Controller extends Controller
 
             'title' => 'Mail Verification',
             'body' => 'This is for testing email using smtp.', 
-            'link'=>'https:://ptpema.co.id/'
+            'link'=>'https://ptpema.co.id/uploads/settings/16347907124310.PNG'
 
         ];       
 
