@@ -10,7 +10,9 @@ use App\Http\Controllers\Task\TaskController;
 use App\Http\Controllers\Comment\CommentController;
 use App\Http\Controllers\Tickets\TicketController;
 
-
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 // Auth Route
 Route::controller(AuthController::class)->group(function(){
