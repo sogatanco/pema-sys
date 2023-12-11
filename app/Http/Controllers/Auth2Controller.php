@@ -74,16 +74,22 @@ class Auth2Controller extends Controller
 
         return response()->json([
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> cf2af62 (wahyu)
             "status" => true,
             "message" => "Login success.",
             "auth" => [
                 "user" => $user,
                 "token" => $token,
             ]
+<<<<<<< HEAD
 =======
             "user" => $user,
             "token" => $token
 >>>>>>> 7ee063c (update)
+=======
+>>>>>>> cf2af62 (wahyu)
         ], 200);
 
     
