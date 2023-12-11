@@ -17,6 +17,7 @@ use Mail;
 use App\Mail\VendorMail;
 use App\Http\Resources\PostResource;
 use Config;
+use KodeExpire as GlobalKodeExpire;
 
 class Auth2Controller extends Controller
 {
@@ -134,16 +135,8 @@ class Auth2Controller extends Controller
         //     return new PostResource(false, 'Failed to send', []);
         // }
 
-        $kodeExpire = new KodeExpire('65773ac8b06e7');
-        // $kodeExpire->generateKode();
-        // $kode = $kodeExpire->getKode();
-
-        // echo "Kode: $kode\n";
-        if ($kodeExpire->isExpired()) {
-            echo "Kode sudah kadaluwarsa.\n";
-        } else {
-            echo "Kode masih berlaku.\n";
-        }
+        $token = GlobalKodeExpire::generateToken(36); // Token kadaluwarsa dalam 1 jam
+        return response()->json(['token' => $token]);
     }
 
 
