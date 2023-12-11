@@ -31,7 +31,6 @@ class UserVendor extends Authenticatable implements JWTSubject
     protected $casts = [
         'roles' => 'array',
         'password' => 'hashed',
-        'email_verified_at' => 'datetime',
     ];
     
     // protected $attributes = [
@@ -42,10 +41,6 @@ class UserVendor extends Authenticatable implements JWTSubject
         'password',
     ];
 
-    public function employe(): HasOne
-    {
-        return $this->hasOne(Employe::class, 'user_id', 'id ');
-    }
 
     public function getJWTIdentifier()
     {
