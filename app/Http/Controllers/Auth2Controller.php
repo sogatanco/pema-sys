@@ -15,7 +15,7 @@ use App\Models\Vendor\ViewPerusahaan;
 use Mail;
 use App\Mail\VendorMail;
 use App\Http\Resources\PostResource;
-use Illuminate\Support\Str;
+use Config;
 
 class Auth2Controller extends Controller
 {
@@ -125,7 +125,7 @@ class Auth2Controller extends Controller
             'link' => $id
         ];
 
-        return new PostResource(true, 'sdgsdg',[(rand(pow(10, $digits - 1), pow(10, $digits) - 1)).'sdgsdgsdg'.env('MAIL_FROM_NAME', 'localhost')] );
+        return new PostResource(true, 'sdgsdg',[(rand(pow(10, $digits - 1), pow(10, $digits) - 1)).'sdgsdgsdg'.Config::get('app.link_verif')] );
         // return new PostResource(true, 'sdgsdg', env('APP_LINK') . 'api/auth2/verivication/');
         // if (Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))) {
         //     return response()->json([
