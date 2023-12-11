@@ -13,7 +13,6 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Models\UserVendor;
 use Mail;
 use App\Mail\VendorMail;
-use App\Models\User;
 
 class Auth2Controller extends Controller
 {

@@ -2,13 +2,8 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Http\Models\Employe;
 
 
 class UserVendor extends Authenticatable implements JWTSubject
@@ -33,10 +28,6 @@ class UserVendor extends Authenticatable implements JWTSubject
         'password' => 'hashed',
     ];
     
-    // protected $attributes = [
-    //     'roles' => [],
-    // ];
-
     protected $hidden = [
         'password',
     ];
