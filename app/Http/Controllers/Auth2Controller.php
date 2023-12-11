@@ -73,12 +73,17 @@ class Auth2Controller extends Controller
         $user = Auth::guard('api_vendor')->user();
 
         return response()->json([
+<<<<<<< HEAD
             "status" => true,
             "message" => "Login success.",
             "auth" => [
                 "user" => $user,
                 "token" => $token,
             ]
+=======
+            "user" => $user,
+            "token" => $token
+>>>>>>> 7ee063c (update)
         ], 200);
 
     
