@@ -120,12 +120,14 @@ class Auth2Controller extends Controller
     {
         $per = ViewPerusahaan::where('id_user', $id)->get()->first();
         $digits = 10;
+        $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45));
 
         $mailData = [
-            'link' => Config::get('app.url').'api/auth2/verif/'.base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45))
+            'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
+            'decode'=>base64_decode($uniq)
         ];
 
-        return new PostResource(true, 'sdgsdg',$mailData['link'] );
+        return new PostResource(true, 'sdgsdg',$mailData );
         // return new PostResource(true, 'sdgsdg', env('APP_LINK') . 'api/auth2/verivication/');
         // if (Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))) {
         //     return response()->json([
