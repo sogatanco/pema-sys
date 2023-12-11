@@ -135,8 +135,8 @@ class Auth2Controller extends Controller
         //     return new PostResource(false, 'Failed to send', []);
         // }
 
-        $token = GlobalKodeExpire::generateToken(36); 
-        $token2 = GlobalKodeExpire::generateToken(3600); 
+        $token = KodeExpire::generateToken(36); 
+        $token2 = KodeExpire::generateToken(3600); 
         return response()->json(['token' => $token, 'token2'=>$token2]);
     }
 
