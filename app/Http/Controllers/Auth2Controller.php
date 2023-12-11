@@ -117,7 +117,8 @@ class Auth2Controller extends Controller
         $mailData = [
 
             'title' => 'Mail Verification',
-            'body' => 'This is for testing email using smtp.'
+            'body' => 'This is for testing email using smtp.', 
+            'link'=>'https:://ptpema.co.id/'
 
         ];       
 
