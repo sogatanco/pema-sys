@@ -24,12 +24,14 @@ class UserVendor extends Authenticatable implements JWTSubject
         'email',
         'password',
         'roles',
+        'is_email_verified'
 
     ];
 
     protected $casts = [
         'roles' => 'array',
         'password' => 'hashed',
+        'email_verified_at' => 'datetime',
     ];
     
     // protected $attributes = [
