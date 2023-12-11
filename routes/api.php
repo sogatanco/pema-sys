@@ -28,7 +28,7 @@ Route::controller(Auth2Controller::class)->group(function(){
     Route::post('/auth2/login', 'login');
     Route::get('/auth2/logout', 'logout');
     Route::get('/auth2/refresh', 'refresh');
-    Route::get('auth2/welcome/test', 'welcome');
+    Route::get('auth2/welcome/test', 'kirimEmail');
 });
 
 

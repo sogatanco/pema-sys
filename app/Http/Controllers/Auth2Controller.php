@@ -12,6 +12,8 @@ use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\UserVendor;
 use App\Models\Employe;
+use Mail;
+use App\Mail\VendorMail;
 
 class Auth2Controller extends Controller
 {
@@ -73,23 +75,12 @@ class Auth2Controller extends Controller
         $user = Auth::guard('api_vendor')->user();
 
         return response()->json([
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> cf2af62 (wahyu)
             "status" => true,
             "message" => "Login success.",
             "auth" => [
                 "user" => $user,
                 "token" => $token,
             ]
-<<<<<<< HEAD
-=======
-            "user" => $user,
-            "token" => $token
->>>>>>> 7ee063c (update)
-=======
->>>>>>> cf2af62 (wahyu)
         ], 200);
     }
 
@@ -120,5 +111,26 @@ class Auth2Controller extends Controller
         return response()->json([
             "messsage" => "Hello world!"
         ], 200);
+    }
+
+    function kirimEmail(){
+        $mailData = [
+
+            'title' => 'Mail from ItSolutionStuff.com',
+
+            'body' => 'This is for testing email using smtp.'
+
+        ];
+
+         
+
+        if(Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))){
+            return response()->json([
+                "messsage" => "Hello world!"
+            ], 200); 
+        }
+
+        
+           
     }
 }
