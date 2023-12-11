@@ -112,11 +112,11 @@
         <tr>
         <td align="center" valign="top" width="600">
         <![endif]-->
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 800px;">
           <tr>
             <td align="center" valign="top" style="padding: 36px 24px;">
               <a href="https://ptpema.co.id/" target="_blank" style="display: inline-block;">
-                <img src="https://ptpema.co.id/uploads/settings/16347907124310.PNG" alt="Logo" border="0" width="70" style=" width: 70px; max-width: 70px; min-width: 70px;">
+                <img src="https://ptpema.co.id/uploads/settings/16347907124310.PNG" alt="Logo" border="0" width="150" style=" width: 150px; max-width: 150px; min-width: 150px;">
               </a>
             </td>
           </tr>
