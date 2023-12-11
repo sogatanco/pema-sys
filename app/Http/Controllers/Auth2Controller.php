@@ -119,7 +119,7 @@ class Auth2Controller extends Controller
     function kirimEmail($id)
     {
         $per = ViewPerusahaan::where('id_user', $id)->get()->first();
-        $digits = 100;
+        $digits = 10;
 
         $mailData = [
             'link' => Config::get('app.url').'api/auth2/verif/'.base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45))
