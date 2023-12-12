@@ -42,7 +42,7 @@
         }
 
         .logo {
-            max-width: 100px;
+            max-width: 200px;
             margin-bottom: 20px;
         }
     </style>
