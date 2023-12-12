@@ -52,7 +52,7 @@
 <div class="container">
     <img class="logo" src="path/to/your/logo.png" alt="Your Logo">
     <h1>Email Verification Sent</h1>
-    <p>We have sent a verification email to your registered email address. Please check your email and follow the instructions to verify your account.</p>
+    <p>We have sent a verification email to <?php echo $email; ?>. Please check your email and follow the instructions to verify your account.</p>
     <a href="#">Resend Verification Email</a>
 </div>
 

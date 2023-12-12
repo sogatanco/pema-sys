@@ -132,9 +132,9 @@ class Auth2Controller extends Controller
             'company_name' => $per['bentuk_usaha'] . ' ' . $per['nama_perusahaan']
         ];
         if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
-            return new PostResource(true, 'Email Verification sent succesfully', []);
+            return view('emails.sentEmail')->with('email', $per['email']);
         } else {
-            return new PostResource(false, 'Failed to send', []);
+            echo `<script type='text/javascript'>alert('Fail');</script>`;
         }
     }
 
