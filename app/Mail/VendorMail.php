@@ -4,8 +4,6 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
 class VendorMail extends Mailable
@@ -24,7 +22,7 @@ class VendorMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Mail from ItSolutionStuff.com')
+        return $this->subject('EMAIL VERIFICATION')
                     ->view('emails.vendorMail');
     }
 }

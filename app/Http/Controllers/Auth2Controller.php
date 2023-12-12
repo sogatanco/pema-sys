@@ -9,24 +9,28 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use JWTAuth;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\KodeExpire;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\UserVendor;
-use App\Models\Employe;
+use App\Models\Vendor\ViewPerusahaan;
 use Mail;
 use App\Mail\VendorMail;
+use App\Http\Resources\PostResource;
+use Config;
+use KodeExpire as GlobalKodeExpire;
 
 class Auth2Controller extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api_vendor', ['except' => ['login', 'register', 'welcome', 'kirimEmail']]);
+        $this->middleware('auth:api_vendor', ['except' => ['login', 'register', 'welcome', 'kirimEmail', 'verifEmail']]);
     }
 
     public function register(userRegisterRequest $request): userResource
     {
         $data = $request->validated();
 
-        if(UserVendor::where('email', $data['email'])->count() == 1){
+        if (UserVendor::where('email', $data['email'])->count() == 1) {
             // user already exist
             throw new HttpResponseException(response([
                 "errors" => [
@@ -39,39 +43,40 @@ class Auth2Controller extends Controller
 
         $defaultRole = ["Vendor"];
 
-        $user = new User($data);
+        $user = new UserVendor($data);
         $user->roles = $defaultRole;
         $user->password = Hash::make($data['password']);
 
-        $user->save();
+        if ($user->save()) {
+            $this->kirimEmail($user->id);
 
-        return new UserResource($user);
-
+            return new UserResource($user);
+        }
     }
 
-    public function login(Request $request) 
+    public function login(Request $request)
     {
-        
-         $validator = Validator::make($request->all(), [
+
+        $validator = Validator::make($request->all(), [
             'email' => ['required', 'email'],
             'password' => ['required']
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             throw new HttpResponseException(response([
                 "message" => $validator->errors()
             ], 400));
         }
 
         $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
-        
-         if(!$token){
+
+        if (!$token) {
             throw new HttpResponseException(response([
                 "status" => false,
                 "message" => "Email or password is invalid."
             ], 400));
         }
-        
+
         $user = Auth::guard('api_vendor')->user();
 
         return response()->json([
@@ -113,19 +118,41 @@ class Auth2Controller extends Controller
         ], 200);
     }
 
-    function kirimEmail(){
+    function kirimEmail($id)
+    {
+        $per = ViewPerusahaan::where('id_user', $id)->get()->first();
+        $digits = 10;
+        $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45).'-'.strtotime(now()));
         $mailData = [
-
-            'title' => 'Mail from ItSolutionStuff.com',
-
-            'body' => 'This is for testing email using smtp.'
-
+            'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
+            'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
         ];
+        if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
+            return new PostResource(true, 'Email Verification sent succesfully', []);
+        }else{
+            return new PostResource(false, 'Failed to send', []);
+        }
+    }
 
+<<<<<<< HEAD
         if(Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))){
             return response()->json([
                 "messsage" => "Hello world!"
             ], 200); 
         }
+=======
+
+    function verifEmail($id_token)
+    {
+        $token_explode=explode("-", base64_decode($id_token));
+        $id=$token_explode[0];
+        $timeRequest=$token_explode[1];
+        if(round(abs(strtotime(now()) - $timeRequest) / 60,2)>10){
+            return view('emails.expiredToken');
+        }else{
+            return new PostResource(true, 'sgdsdg', ['id'=>$id, 'timeRequest'=>$timeRequest, 'timeNow'=>strtotime(now()), 'selisih'=>round(abs(strtotime(now()) - $timeRequest) / 60,2)]);
+        }
+       
+>>>>>>> a79f9063cbf835fa3df27a006e730e06e5ab0f0b
     }
 }

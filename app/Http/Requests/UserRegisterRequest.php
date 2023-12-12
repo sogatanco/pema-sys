@@ -25,7 +25,7 @@ class UserRegisterRequest extends FormRequest
     {
         // untuk ketentuan password lihat di laravel validation pzn
         return [
-            'email' => ['required', 'max:100', 'unique:users'],
+            'email' => ['required', 'max:100'],
             'password' => ['required', 'min:8', 'max:100']
         ];
     }
