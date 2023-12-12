@@ -80,6 +80,9 @@ class Auth2Controller extends Controller
         }
         $user = Auth::guard('api_vendor')->user();
 
+        $userCompany = Perusahaan::select('id')->where('user_id', $user->id)->first();
+        $user['companyId'] = $userCompany->id;
+
         if ($user->is_email_verified === 0) {
             throw new HttpResponseException(response([
                 "status" => false,
