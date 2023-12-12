@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Verification Expired</title>
+    <title>Email Verification Success</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,7 +27,7 @@
         }
 
         h1 {
-            color: #ff5733;
+            color: #2ecc71;
         }
 
         p {
@@ -42,7 +42,7 @@
         }
 
         .logo {
-            max-width: 200px;
+            max-width: 100px;
             margin-bottom: 20px;
         }
     </style>
@@ -51,9 +51,9 @@
 
 <div class="container">
     <img class="logo" src="https://ptpema.co.id/uploads/settings/16347907124310.PNG" alt="Your Logo">
-    <h1>Email Verification Expired</h1>
-    <p>The email verification token has expired. Please request a new verification email.</p>
-    <a href="#">Request Verification Email</a>
+    <h1>Email Verification Successful</h1>
+    <p>Congratulations! Your email has been successfully verified.</p>
+    <a href="#">Go to Dashboard</a>
 </div>
 
 </body>

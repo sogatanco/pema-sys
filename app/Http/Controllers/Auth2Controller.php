@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use JWTAuth;
 use App\Http\Resources\UserResource;
-use App\Http\Resources\KodeExpire;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\UserVendor;
 use App\Models\Vendor\ViewPerusahaan;
@@ -145,11 +144,16 @@ class Auth2Controller extends Controller
     function verifEmail($id_token)
     {
         $token_explode=explode("-", base64_decode($id_token));
-        $id=$token_explode[0];
+        $id=substr($token_explode[0],10);
         $timeRequest=$token_explode[1];
         if(round(abs(strtotime(now()) - $timeRequest) / 60,2)>10){
             return view('emails.expiredToken');
         }else{
+            $uv=UserVendor::find((int)$id);
+            $uv->is_email_verified=1;
+            if($uv->save()){
+                return view('emails.verificationSuccess');
+            }
             return new PostResource(true, 'sgdsdg', ['id'=>$id, 'timeRequest'=>$timeRequest, 'timeNow'=>strtotime(now()), 'selisih'=>round(abs(strtotime(now()) - $timeRequest) / 60,2)]);
         }
        
