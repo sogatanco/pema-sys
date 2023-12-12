@@ -135,28 +135,24 @@ class Auth2Controller extends Controller
         //     return new PostResource(false, 'Failed to send', []);
         // }
 
-        // $token = KodeExpire::generateToken(36); 
+        $dataToStore = ['user_id' => 123, 'username' => 'john_doe'];
+        $token = KodeExpire::generateToken($dataToStore);
         // $token2 = KodeExpire::generateToken(3600); 
-        // return response()->json(['token' => $token, 'token2'=>$token2]);
+        return response()->json(['token' => $token]);
 
-        if (KodeExpire::isTokenValid('HYGuhZJvzvzI5BW9XcClDQyYMtBUKhRX')) {
-           echo 'Token valid 1';
-        } else {
-           echo 'Token tidak valid 1';
-        }
+
 
         // if (KodeExpire::isTokenValid('i6G8jH5s9ENGXBZLW6Ly0WVutawhFEOQ')) {
         //     echo 'Token valid 2';
         //  } else {
         //     echo 'Token tidak valid 2';
         //  }
-      
+
     }
 
 
-    function verifEmail($id_token, $exp_token){
+    function verifEmail($id_token, $exp_token)
+    {
         return new PostResource(true, 'sgdsdg', [$id_token]);
     }
 }
-
-

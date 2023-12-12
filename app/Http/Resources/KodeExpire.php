@@ -1,44 +1,39 @@
 <?php
 namespace App\Http\Resources;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Str;
 
 class KodeExpire {
-        /**
-         * Generate token dengan waktu kadaluwarsa.
-         *
-         * @param int $expirationTimeSeconds
-         * @return string
-         */
-        public static function generateToken($expirationTimeSeconds = 3600)
-        {
-            $token = Str::random(32); // Gunakan metode sesuai kebutuhan Anda
+    public function generateToken($data)
+    {
+        // Menambahkan data waktu ke dalam array data
+        $data['timestamp'] = time();
     
-            // Simpan token ke dalam cache dengan waktu kadaluwarsa
-            Cache::put($token, true, now()->addSeconds($expirationTimeSeconds));
+        // Mengkonversi array data menjadi JSON
+        $jsonData = json_encode($data);
     
-            return $token;
+        // Menghasilkan hash dari data JSON
+        $token = password_hash($jsonData, PASSWORD_BCRYPT);
+    
+        return $token;
+    }
+    
+    public function verifyToken($token)
+    {
+        // Mengecek apakah token sesuai dengan data
+        if (password_verify($token, $hashedToken)) {
+            // Memvalidasi waktu
+            $data = json_decode($hashedToken, true);
+            $timestamp = $data['timestamp'];
+    
+            // Contoh: Memeriksa apakah token masih berlaku selama 1 jam
+            $expirationTime = 3600; // 1 jam dalam detik
+            if (time() - $timestamp <= $expirationTime) {
+                echo "Token valid dan belum kadaluwarsa.\n";
+            } else {
+                echo "Token kadaluwarsa.\n";
+            }
+        } else {
+            echo "Token tidak valid.\n";
         }
+    }
     
-        /**
-         * Cek apakah token masih berlaku.
-         *
-         * @param string $token
-         * @return bool
-         */
-        public static function isTokenValid($token)
-        {
-            return Cache::has($token);
-        }
-    
-        /**
-         * Hapus token dari cache.
-         *
-         * @param string $token
-         * @return void
-         */
-        public static function invalidateToken($token)
-        {
-            Cache::forget($token);
-        }
 }
