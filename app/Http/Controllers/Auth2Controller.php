@@ -145,6 +145,7 @@ class Auth2Controller extends Controller
     {
         $token_explode = explode("-", base64_decode($id_token));
         $id = substr($token_explode[0], 10);
+        $digits = 10;
         $timeRequest = $token_explode[1];
         if (round(abs(strtotime(now()) - $timeRequest) / 60, 2) > 10) {
             $uniq = base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)) . $id . '-' . strtotime(now()));
