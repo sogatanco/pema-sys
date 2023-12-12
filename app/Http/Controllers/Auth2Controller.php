@@ -120,37 +120,20 @@ class Auth2Controller extends Controller
 
     function kirimEmail($id)
     {
-        // $per = ViewPerusahaan::where('id_user', $id)->get()->first();
-        // $digits = 10;
-        // $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45));
-        // $kodeExpire = new KodeExpire();
-        // $kodeExpire->generateKode();
-        // $mailData = [
-        //     'link' => Config::get('app.url').'api/auth2/verif/'.$uniq.'/'.$kodeExpire->getKode(),
-        //     'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
-        // ];
-        // if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
-        //     return new PostResource(true, 'Email Verification sent succesfully', []);
-        // }else{
-        //     return new PostResource(false, 'Failed to send', []);
-        // }
-
-        $payload = [
-            'user_id' => 'sdgdsg',
-            'username' => 'sdgdg',
-            // Add any other claims you want in the payload
+        $per = ViewPerusahaan::where('id_user', $id)->get()->first();
+        $digits = 10;
+        $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45));
+        $kodeExpire = new KodeExpire();
+        $kodeExpire->generateKode();
+        $mailData = [
+            'link' => Config::get('app.url').'api/auth2/verif/'.$uniq.'/'.$kodeExpire->getKode(),
+            'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
         ];
-        try {
-            // Encode the payload and get the token
-            $token = JWTAuth::encode($payload);
-
-            return response()->json(['token' => $token]);
-        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
-            return response()->json(['error' => 'Unable to generate token'], 500);
+        if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
+            return new PostResource(true, 'Email Verification sent succesfully', []);
+        }else{
+            return new PostResource(false, 'Failed to send', []);
         }
-
-        // KodeExpire::verifyToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjMsInVzZXJuYW1lIjoiam9obl9kb2UifQ.g-laq-qpp4oMXdkWAbrwthT5-FgEEkpiFL8fg06oStk');
-
     }
 
 
