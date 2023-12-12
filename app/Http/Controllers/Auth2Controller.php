@@ -75,14 +75,22 @@ class Auth2Controller extends Controller
         }
         $user = Auth::guard('api_vendor')->user();
 
-        return response()->json([
-            "status" => true,
-            "message" => "Login success.",
-            "auth" => [
-                "user" => $user->is_email_verified,
-                "token" => $token,
-            ]
-        ], 200);
+        if($user->is_email_verified!==0){
+            throw new HttpResponseException(response([
+                "status" => false,
+                "message" => "User not verified"
+            ], 400));
+        }else{
+            return response()->json([
+                "status" => true,
+                "message" => "Login success.",
+                "auth" => [
+                    "user" => $user->is_email_verified,
+                    "token" => $token,
+                ]
+            ], 200);
+        }
+        
     }
 
     public function logout()
