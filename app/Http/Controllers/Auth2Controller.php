@@ -137,7 +137,7 @@ class Auth2Controller extends Controller
 
     function verifEmail($id_token)
     {
-        $token_explode=explode("-", [base64_decode($id_token)]);
+        $token_explode=explode("-", base64_decode($id_token));
         return new PostResource(true, 'sgdsdg', [$token_explode]);
     }
 }
