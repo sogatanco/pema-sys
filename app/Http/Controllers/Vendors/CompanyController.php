@@ -10,8 +10,11 @@ class CompanyController extends Controller
 {
     public function listBidangUsaha()
     {
+        $data = MasterBidangUsaha::get();
+
         return response()->json([
-            "message" => 'from list bidang usaha'
+            "success" => true,
+            "data" => $data
         ]);
     }
 }
