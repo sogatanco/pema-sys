@@ -66,7 +66,7 @@ class Auth2Controller extends Controller
             ], 400));
         }
 
-        $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
+        $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password, 'is_email_verified'=>1]);
 
         if (!$token) {
             throw new HttpResponseException(response([
