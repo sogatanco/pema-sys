@@ -42,7 +42,7 @@
         }
 
         .logo {
-            max-width: 100px;
+            max-width: 200px;
             margin-bottom: 20px;
         }
     </style>
@@ -50,7 +50,7 @@
 <body>
 
 <div class="container">
-    <img class="logo" src="path/to/your/logo.png" alt="Your Logo">
+    <img class="logo" src="https://ptpema.co.id/uploads/settings/16347907124310.PNG" alt="Your Logo">
     <h1>Email Verification Sent</h1>
     <p>We have sent a verification email to <?php echo $email; ?>. Please check your email and follow the instructions to verify your account.</p>
     <a href="#">Resend Verification Email</a>
