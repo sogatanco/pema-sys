@@ -135,11 +135,19 @@ class Auth2Controller extends Controller
         //     return new PostResource(false, 'Failed to send', []);
         // }
 
-        $dataToStore = ['user_id' => 123, 'username' => 'john_doe'];
-        $token =JWTAuth::encode($dataToStore);
-        // // $data = json_decode($token, true);
-        // // $token2 = KodeExpire::generateToken(3600); 
-        return response()->json($token);
+        $payload = [
+            'user_id' => 'sdgdsg',
+            'username' => 'sdgdg',
+            // Add any other claims you want in the payload
+        ];
+        try {
+            // Encode the payload and get the token
+            $token = JWTAuth::encode($payload);
+
+            return response()->json(['token' => $token]);
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return response()->json(['error' => 'Unable to generate token'], 500);
+        }
 
         // KodeExpire::verifyToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjMsInVzZXJuYW1lIjoiam9obl9kb2UifQ.g-laq-qpp4oMXdkWAbrwthT5-FgEEkpiFL8fg06oStk');
 
