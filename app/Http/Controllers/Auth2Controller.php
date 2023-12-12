@@ -90,7 +90,7 @@ class Auth2Controller extends Controller
                 "status" => true,
                 "message" => "Login success.",
                 "auth" => [
-                    "user" => $user->is_email_verified,
+                    "user" => $user,
                     "token" => $token,
                 ]
             ], 200);
