@@ -122,8 +122,8 @@ class Auth2Controller extends Controller
     {
         $per = ViewPerusahaan::where('id_user', $id)->get()->first();
         $digits = 10;
-        $dateTime = new DateTime();
-        $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45).'-'.$dateTime);
+        // $dateTime = new DateTime();
+        $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45).'-'.now());
         $mailData = [
             'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
             'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
