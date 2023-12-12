@@ -142,10 +142,11 @@ class Auth2Controller extends Controller
             return view('emails.expiredToken');
         }else{
             $uv=UserVendor::find((int)$id);
-            $uv->is_email_verified=1;
-            if($uv->save()){
-                return view('emails.verificationSuccess');
-            }
+            return $uv;
+            // $uv->is_email_verified=1;
+            // if($uv->save()){
+            //     return view('emails.verificationSuccess');
+            // }
         }
        
     }
