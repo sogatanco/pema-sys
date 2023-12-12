@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Vendors\UserController;
 use App\Http\Controllers\Vendors\PerusahaanController;
 
+Route::middleware('auth:api')->get('/uservendor', function (Request $request) {
+    return $request->user();
+});
+
 Route::controller(UserController::class)->group(function() {
     Route::get('user', 'index');
     Route::post('user/register-company', 'registerCompany');
