@@ -48,7 +48,6 @@ class Auth2Controller extends Controller
 
         if ($user->save()) {
             $this->kirimEmail($user->id);
-
             return new UserResource($user);
         }
     }
@@ -133,9 +132,7 @@ class Auth2Controller extends Controller
         ];
         if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
             return view('emails.sentEmail')->with('email', $per['email']);
-        } else {
-            echo `<script type='text/javascript'>alert('Fail');</script>`;
-        }
+        } 
     }
 
     function verifEmail($id_token)
