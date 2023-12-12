@@ -66,16 +66,9 @@ class Auth2Controller extends Controller
                 "message" => $validator->errors()
             ], 400));
         }
-
-        $user = Auth::guard('api_vendor')->user();
-        if ($user->is_email_verified !== 1) {
-            throw new HttpResponseException(response([
-                "status" => false,
-                "message" => "User Not Verified",
-                "verification_link" => "User Not Verified"
-            ], 400));
-        } else {
-            $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
+        $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
+     
+        
 
             if (!$token) {
                 throw new HttpResponseException(response([
@@ -83,6 +76,7 @@ class Auth2Controller extends Controller
                     "message" => "Email or password is invalid."
                 ], 400));
             }
+            $user = Auth::guard('api_vendor')->user();
 
             return response()->json([
                 "status" => true,
@@ -92,7 +86,7 @@ class Auth2Controller extends Controller
                     "token" => $token,
                 ]
             ], 200);
-        }
+        
     }
 
     public function logout()
