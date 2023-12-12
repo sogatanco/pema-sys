@@ -135,11 +135,13 @@ class Auth2Controller extends Controller
         //     return new PostResource(false, 'Failed to send', []);
         // }
 
-        $dataToStore = ['user_id' => 123, 'username' => 'john_doe'];
-        $token = KodeExpire::generateToken($dataToStore);
-        // $data = json_decode($token, true);
-        // $token2 = KodeExpire::generateToken(3600); 
-        return response()->json($token);
+        // $dataToStore = ['user_id' => 123, 'username' => 'john_doe'];
+        // $token = KodeExpire::generateToken($dataToStore);
+        // // $data = json_decode($token, true);
+        // // $token2 = KodeExpire::generateToken(3600); 
+        // return response()->json($token);
+
+        KodeExpire::verifyToken('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMjMsInVzZXJuYW1lIjoiam9obl9kb2UifQ.g-laq-qpp4oMXdkWAbrwthT5-FgEEkpiFL8fg06oStk');
 
 
 
