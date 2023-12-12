@@ -25,6 +25,7 @@ class PerusahaanController extends Controller
 
     public function getDataPerusahaan($companyId)
     {
+        $data = [];
         return response()->json([
             "success" => true,
             "data" => $data

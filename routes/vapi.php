@@ -21,5 +21,5 @@ Route::controller(PerusahaanController::class)->group(function() {
 });
 
 Route::controller(JajaranController::class)->group(function() {
-    Route::post('jajaran/store', 'store');
+    Route::post('jajaran/store/{companyId}', 'store');
 });

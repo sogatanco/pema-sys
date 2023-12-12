@@ -12,13 +12,14 @@ class JajaranController extends Controller
         $this->middleware('auth:api_vendor');
     }
 
-    public function store(Request $request)
+    public function store(Request $request, $companyId)
     {
         $data = $request->all();
 
         return response()->json([
             "status" => true,
-            "data" => $data
+            "data" => $data,
+            "companyId" => $companyId
         ], 200);
     }
 }
