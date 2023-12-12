@@ -10,7 +10,7 @@ class CompanyController extends Controller
 {
     public function listBidangUsaha()
     {
-        $data = MasterBidangUsaha::get();
+        $data = MasterBidangUsaha::select('id_bidang', 'nama_bidang')->get();
 
         return response()->json([
             "success" => true,
