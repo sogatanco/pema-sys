@@ -136,7 +136,7 @@ class Auth2Controller extends Controller
         // }
 
         $dataToStore = ['user_id' => 123, 'username' => 'john_doe'];
-        $token = KodeExpire::generateToken($dataToStore);
+        $token =JWTAuth::encode($dataToStore);
         // // $data = json_decode($token, true);
         // // $token2 = KodeExpire::generateToken(3600); 
         return response()->json($token);
