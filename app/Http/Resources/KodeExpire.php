@@ -2,8 +2,6 @@
 
 namespace App\Http\Resources;
 
-require 'vendor/autoload.php';
-
 use Firebase\JWT\JWT;
 
 class KodeExpire
