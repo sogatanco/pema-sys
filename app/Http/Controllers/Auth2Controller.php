@@ -122,15 +122,10 @@ class Auth2Controller extends Controller
 
         ];
 
-         
-
         if(Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))){
             return response()->json([
                 "messsage" => "Hello world!"
             ], 200); 
         }
-
-        
-           
     }
 }
