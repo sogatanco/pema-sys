@@ -122,7 +122,6 @@ class Auth2Controller extends Controller
     {
         $per = ViewPerusahaan::where('id_user', $id)->get()->first();
         $digits = 10;
-        // $dateTime = new DateTime();
         $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45).'-'.strtotime(now()));
         $mailData = [
             'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
@@ -138,6 +137,7 @@ class Auth2Controller extends Controller
 
     function verifEmail($id_token)
     {
-        return new PostResource(true, 'sgdsdg', [base64_decode($id_token)]);
+        $token_explode=explode("-", [base64_decode($id_token)]);
+        return new PostResource(true, 'sgdsdg', [$token_explode]);
     }
 }
