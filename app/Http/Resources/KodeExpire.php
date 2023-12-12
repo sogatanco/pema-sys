@@ -2,7 +2,7 @@
 namespace App\Http\Resources;
 
 class KodeExpire {
-    public function generateToken($data)
+    public static function generateToken($data)
     {
         // Menambahkan data waktu ke dalam array data
         $data['timestamp'] = time();
@@ -16,7 +16,7 @@ class KodeExpire {
         return $token;
     }
     
-    public function verifyToken($token)
+    public static function verifyToken($token)
     {
         // Mengecek apakah token sesuai dengan data
         if (password_verify($token, $hashedToken)) {
