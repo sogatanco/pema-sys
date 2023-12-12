@@ -67,26 +67,22 @@ class Auth2Controller extends Controller
             ], 400));
         }
         $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
-     
-        
+        if (!$token) {
+            throw new HttpResponseException(response([
+                "status" => false,
+                "message" => "Email or password is invalid."
+            ], 400));
+        }
+        $user = Auth::guard('api_vendor')->user();
 
-            if (!$token) {
-                throw new HttpResponseException(response([
-                    "status" => false,
-                    "message" => "Email or password is invalid."
-                ], 400));
-            }
-            $user = Auth::guard('api_vendor')->user();
-
-            return response()->json([
-                "status" => true,
-                "message" => "Login success.",
-                "auth" => [
-                    "user" => $user,
-                    "token" => $token,
-                ]
-            ], 200);
-        
+        return response()->json([
+            "status" => true,
+            "message" => "Login success.",
+            "auth" => [
+                "user" => $user->is_email_verified,
+                "token" => $token,
+            ]
+        ], 200);
     }
 
     public function logout()
@@ -133,14 +129,14 @@ class Auth2Controller extends Controller
             return new PostResource(false, 'Failed to send', []);
         }
     }
-    
+
     function verifEmail($id_token)
     {
         $token_explode = explode("-", base64_decode($id_token));
         $id = substr($token_explode[0], 10);
         $timeRequest = $token_explode[1];
         if (round(abs(strtotime(now()) - $timeRequest) / 60, 2) > 10) {
-            return view('emails.expiredToken')->with('link', Config::get('app.url') . 'api/auth2/resend/' . ($id-45));
+            return view('emails.expiredToken')->with('link', Config::get('app.url') . 'api/auth2/resend/' . ($id - 45));
         } else {
             $uv = UserVendor::find($id - 45);
             $uv->is_email_verified = 1;
