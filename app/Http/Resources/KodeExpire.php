@@ -1,21 +1,30 @@
 <?php
+
 namespace App\Http\Resources;
 
-class KodeExpire {
+require 'vendor/autoload.php';
+
+use Firebase\JWT\JWT;
+
+class KodeExpire
+{
     public static function generateToken($data)
     {
-        // Menambahkan data waktu ke dalam array data
-        $data['timestamp'] = time();
-    
-        // Mengkonversi array data menjadi JSON
-        $jsonData = json_encode($data);
-    
-        // Menghasilkan hash dari data JSON
-        $token = password_hash($jsonData, PASSWORD_BCRYPT);
-    
+        $secretKey = 'wahyudin';
+
+        // Data to be included in the token
+        // $data = [
+        //     'user_id' => 123,
+        //     'username' => 'john_doe',
+        // ];
+
+        // Generate a token
+        $token = JWT::encode($data, $secretKey, 'HS256');
+
+
         return $token;
     }
-    
+
     public static function verifyToken($token)
     {
         // Mengecek apakah token sesuai dengan data
@@ -23,7 +32,7 @@ class KodeExpire {
             // Memvalidasi waktu
             $data = json_decode($hashedToken, true);
             $timestamp = $data['timestamp'];
-    
+
             // Contoh: Memeriksa apakah token masih berlaku selama 1 jam
             $expirationTime = 3600; // 1 jam dalam detik
             if (time() - $timestamp <= $expirationTime) {
@@ -35,5 +44,4 @@ class KodeExpire {
             echo "Token tidak valid.\n";
         }
     }
-    
 }
