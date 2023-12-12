@@ -140,6 +140,6 @@ class Auth2Controller extends Controller
         $token_explode=explode("-", base64_decode($id_token));
         $id=$token_explode[0];
         $timeRequest=$token_explode[1];
-        return new PostResource(true, 'sgdsdg', ['id'=>$id, 'timeRequest'=>$timeRequest, 'timeNow'=>strtotime(now()), 'selisih'=>(strtotime(now())-$timeRequest)/60000]);
+        return new PostResource(true, 'sgdsdg', ['id'=>$id, 'timeRequest'=>$timeRequest, 'timeNow'=>strtotime(now()), 'selisih'=>round(abs(strtotime(now()) - $timeRequest) / 60,2)]);
     }
 }
