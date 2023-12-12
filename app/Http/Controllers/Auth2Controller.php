@@ -139,16 +139,7 @@ class Auth2Controller extends Controller
             return new PostResource(false, 'Failed to send', []);
         }
     }
-
-<<<<<<< HEAD
-        if(Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))){
-            return response()->json([
-                "messsage" => "Hello world!"
-            ], 200); 
-        }
-=======
->>>>>>> 57599bda1fcc56116f3253578eb744dba2c2697e
-
+    
     function verifEmail($id_token)
     {
         $token_explode = explode("-", base64_decode($id_token));
@@ -163,9 +154,5 @@ class Auth2Controller extends Controller
                 return view('emails.verificationSuccess');
             }
         }
-<<<<<<< HEAD
-       
-=======
->>>>>>> 57599bda1fcc56116f3253578eb744dba2c2697e
     }
 }
