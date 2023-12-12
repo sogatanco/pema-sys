@@ -27,7 +27,7 @@ class KodeExpire
     {
         $secretKey = 'wahyudin';
         try {
-            $decoded = JWT::decode($token, $secretKey, ['HS256']);
+            $decoded = JWT::decode($token, $secretKey, 'HS256');
             return $decoded;
         } catch (Exception $e) {
             return 'Invalid token: ' . $e->getMessage();
