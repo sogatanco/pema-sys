@@ -78,7 +78,7 @@ class Auth2Controller extends Controller
         if($user->is_email_verified===0){
             throw new HttpResponseException(response([
                 "status" => false,
-                "message" => "User not verified"
+                "message" => "User not verified, Please Check your email for verification"
             ], 400));
         }else{
             return response()->json([
