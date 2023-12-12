@@ -7,11 +7,18 @@ use Illuminate\Http\Request;
 
 class JajaranController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api_vendor');
+    }
+
     public function store(Request $request)
     {
+        $data = $request->all();
+
         return response()->json([
             "status" => true,
-            "message" => 'from jajaran store'
+            "data" => $data
         ], 200);
     }
 }
