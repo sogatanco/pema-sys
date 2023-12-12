@@ -141,7 +141,7 @@ class Auth2Controller extends Controller
         if(round(abs(strtotime(now()) - $timeRequest) / 60,2)>10){
             return view('emails.expiredToken');
         }else{
-            $uv=UserVendor::find((int)$id);
+            $uv=UserVendor::find($id-45);
             return $uv;
             // $uv->is_email_verified=1;
             // if($uv->save()){
