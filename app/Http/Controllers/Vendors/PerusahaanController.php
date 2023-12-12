@@ -34,8 +34,11 @@ class PerusahaanController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
+
+        // save to db
+
         return response()->json([
-            "success" => "from store endpoint",
+            "success" => true,
             "data" => $data
         ]);
     }
