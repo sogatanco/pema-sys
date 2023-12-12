@@ -139,14 +139,14 @@ class Auth2Controller extends Controller
         $id=substr($token_explode[0],10);
         $timeRequest=$token_explode[1];
         if(round(abs(strtotime(now()) - $timeRequest) / 60,2)>10){
-            return view('emails.expiredToken');
+            $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).$id.'-'.strtotime(now()));
+            return view('emails.expiredToken')->with('link', Config::get('app.url').'api/auth2/verif/'.$uniq);
         }else{
             $uv=UserVendor::find($id-45);
-            return $uv;
-            // $uv->is_email_verified=1;
-            // if($uv->save()){
-            //     return view('emails.verificationSuccess');
-            // }
+            $uv->is_email_verified=1;
+            if($uv->save()){
+                return view('emails.verificationSuccess');
+            }
         }
        
     }
