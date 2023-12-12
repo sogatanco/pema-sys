@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Vendor\MasterBidangUsaha;
 use Illuminate\Http\Request;
 
-class CompanyController extends Controller
+class PerusahaanController extends Controller
 {
     public function listBidangUsaha()
     {
@@ -16,5 +16,22 @@ class CompanyController extends Controller
             "success" => true,
             "data" => $data
         ]);
+    }
+
+    public function getDataPerusahaan($companyId)
+    {
+        return response()->json([
+            "success" => true,
+            "data" => $data
+        ]);
+    }
+    
+    public function store(Request $request)
+    {
+        return response()->json([
+            "success" => true,
+            "data" => $data
+        ]);
+
     }
 }
