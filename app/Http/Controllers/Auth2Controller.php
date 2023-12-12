@@ -133,13 +133,11 @@ class Auth2Controller extends Controller
         }
     }
 
-<<<<<<< HEAD
         if(Mail::to('wahyudin@ptpema.co.id')->send(new VendorMail($mailData))){
             return response()->json([
                 "messsage" => "Hello world!"
             ], 200); 
         }
-=======
 
     function verifEmail($id_token)
     {
@@ -157,6 +155,5 @@ class Auth2Controller extends Controller
             return new PostResource(true, 'sgdsdg', ['id'=>$id, 'timeRequest'=>$timeRequest, 'timeNow'=>strtotime(now()), 'selisih'=>round(abs(strtotime(now()) - $timeRequest) / 60,2)]);
         }
        
->>>>>>> a79f9063cbf835fa3df27a006e730e06e5ab0f0b
     }
 }
