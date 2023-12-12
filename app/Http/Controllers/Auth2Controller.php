@@ -135,8 +135,8 @@ class Auth2Controller extends Controller
     }
 
 
-    function verifEmail($id_token, $exp_token)
+    function verifEmail($id_token)
     {
-        return new PostResource(true, 'sgdsdg', [$id_token]);
+        return new PostResource(true, 'sgdsdg', [base64_decode($id_token)]);
     }
 }
