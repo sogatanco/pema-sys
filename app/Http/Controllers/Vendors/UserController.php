@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Vendors;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\Vendor\MasterBidangUsaha;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -22,5 +23,12 @@ class UserController extends Controller
         return response()->json([
             "data" => $request->all(),
         ],200);
+    }
+
+    public function listBidangUsaha()
+    {
+        return response()->json([
+            "message" => "from list bidang usaha"
+        ]);
     }
 }
