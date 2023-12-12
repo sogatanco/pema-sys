@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class PerusahaanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api_vendor');
+    }
+
     public function listBidangUsaha()
     {
         $data = MasterBidangUsaha::select('id_bidang', 'nama_bidang')->get();
