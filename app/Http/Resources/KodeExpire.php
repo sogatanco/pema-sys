@@ -1,26 +1,19 @@
 <?php
 
 namespace App\Http\Resources;
-
-use Firebase\JWT\JWT;
+use JWTAuth;
 
 class KodeExpire
 {
     public static function generateToken($data)
     {
-        $secretKey = 'wahyudin';
-
-        // Data to be included in the token
-        // $data = [
-        //     'user_id' => 123,
-        //     'username' => 'john_doe',
-        // ];
-
-        // Generate a token
-        $token = JWT::encode($data, $secretKey, 'HS256');
-
-
-        return $token;
+        try {
+            // Encode the payload and get the token
+            $token = JWTAuth::encode($data);
+            return $token;
+        }catch(\Tymon\JWTAuth\Exceptions\JWTException $e){
+            return $e;
+        }   
     }
 
     public static function verifyToken($token)
