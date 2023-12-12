@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -66,25 +67,32 @@ class Auth2Controller extends Controller
             ], 400));
         }
 
-        $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password, 'is_email_verified'=>1]);
-
-        if (!$token) {
+        $user = Auth::guard('api_vendor')->user();
+        if ($user['is_email_verified'] !== 1) {
             throw new HttpResponseException(response([
                 "status" => false,
-                "message" => "Email or password is invalid."
+                "message" => "User Not Verified",
+                "verification_link" => "User Not Verified"
             ], 400));
+        } else {
+            $token = Auth::guard('api_vendor')->attempt(['email' => $request->email, 'password' => $request->password]);
+
+            if (!$token) {
+                throw new HttpResponseException(response([
+                    "status" => false,
+                    "message" => "Email or password is invalid."
+                ], 400));
+            }
+
+            return response()->json([
+                "status" => true,
+                "message" => "Login success.",
+                "auth" => [
+                    "user" => $user,
+                    "token" => $token,
+                ]
+            ], 200);
         }
-
-        $user = Auth::guard('api_vendor')->user();
-
-        return response()->json([
-            "status" => true,
-            "message" => "Login success.",
-            "auth" => [
-                "user" => $user,
-                "token" => $token,
-            ]
-        ], 200);
     }
 
     public function logout()
@@ -120,14 +128,14 @@ class Auth2Controller extends Controller
     {
         $per = ViewPerusahaan::where('id_user', $id)->get()->first();
         $digits = 10;
-        $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).($id+45).'-'.strtotime(now()));
+        $uniq = base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)) . ($id + 45) . '-' . strtotime(now()));
         $mailData = [
-            'link' => Config::get('app.url').'api/auth2/verif/'.$uniq,
-            'company_name'=>$per['bentuk_usaha'].' '.$per['nama_perusahaan']
+            'link' => Config::get('app.url') . 'api/auth2/verif/' . $uniq,
+            'company_name' => $per['bentuk_usaha'] . ' ' . $per['nama_perusahaan']
         ];
         if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
             return new PostResource(true, 'Email Verification sent succesfully', []);
-        }else{
+        } else {
             return new PostResource(false, 'Failed to send', []);
         }
     }
@@ -135,19 +143,18 @@ class Auth2Controller extends Controller
 
     function verifEmail($id_token)
     {
-        $token_explode=explode("-", base64_decode($id_token));
-        $id=substr($token_explode[0],10);
-        $timeRequest=$token_explode[1];
-        if(round(abs(strtotime(now()) - $timeRequest) / 60,2)>10){
-            $uniq=base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)).$id.'-'.strtotime(now()));
-            return view('emails.expiredToken')->with('link', Config::get('app.url').'api/auth2/verif/'.$uniq);
-        }else{
-            $uv=UserVendor::find($id-45);
-            $uv->is_email_verified=1;
-            if($uv->save()){
+        $token_explode = explode("-", base64_decode($id_token));
+        $id = substr($token_explode[0], 10);
+        $timeRequest = $token_explode[1];
+        if (round(abs(strtotime(now()) - $timeRequest) / 60, 2) > 10) {
+            $uniq = base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)) . $id . '-' . strtotime(now()));
+            return view('emails.expiredToken')->with('link', Config::get('app.url') . 'api/auth2/verif/' . $uniq);
+        } else {
+            $uv = UserVendor::find($id - 45);
+            $uv->is_email_verified = 1;
+            if ($uv->save()) {
                 return view('emails.verificationSuccess');
             }
         }
-       
     }
 }
