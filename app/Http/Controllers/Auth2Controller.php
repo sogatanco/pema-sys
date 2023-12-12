@@ -138,6 +138,8 @@ class Auth2Controller extends Controller
     function verifEmail($id_token)
     {
         $token_explode=explode("-", base64_decode($id_token));
-        return new PostResource(true, 'sgdsdg', [$token_explode]);
+        $id=$token_explode[0];
+        $timeRequest=$token_explode[1];
+        return new PostResource(true, 'sgdsdg', ['id'=>$id, 'timeRequest'=>$timeRequest, 'timeNow'=>strtotime(now())]);
     }
 }
