@@ -12,6 +12,7 @@ use App\Http\Resources\UserResource;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\UserVendor;
 use App\Models\Vendor\ViewPerusahaan;
+use App\Models\Vendor\Perusahaan;
 use Mail;
 use App\Mail\VendorMail;
 use App\Http\Resources\PostResource;
@@ -30,7 +31,6 @@ class Auth2Controller extends Controller
         $data = $request->validated();
 
         if (UserVendor::where('email', $data['email'])->count() == 1) {
-            // user already exist
             throw new HttpResponseException(response([
                 "errors" => [
                     "email" => [
@@ -47,8 +47,14 @@ class Auth2Controller extends Controller
         $user->password = Hash::make($data['password']);
 
         if ($user->save()) {
-            $this->kirimEmail($user->id);
-            return new UserResource($user);
+            $p = new Perusahaan();
+            $p->user_id = $user->id;
+            $p->bentuk_usaha = $data['bentuk_usaha'];
+            $p->nama_perusahaan = $data['nama_perusahaan'];
+            if ($p->save()) {
+                $this->kirimEmail($user->id);
+                return new UserResource($user);
+            }
         }
     }
 
@@ -74,12 +80,12 @@ class Auth2Controller extends Controller
         }
         $user = Auth::guard('api_vendor')->user();
 
-        if($user->is_email_verified===0){
+        if ($user->is_email_verified === 0) {
             throw new HttpResponseException(response([
                 "status" => false,
                 "message" => "User not verified, Please Check your email for verification"
             ], 400));
-        }else{
+        } else {
             return response()->json([
                 "status" => true,
                 "message" => "Login success.",
@@ -89,7 +95,6 @@ class Auth2Controller extends Controller
                 ]
             ], 200);
         }
-        
     }
 
     public function logout()
@@ -127,12 +132,12 @@ class Auth2Controller extends Controller
         $digits = 10;
         $uniq = base64_encode((rand(pow(10, $digits - 1), pow(10, $digits) - 1)) . ($id + 45) . '-' . strtotime(now()));
         $mailData = [
-            'link' => Config::get('app.url') . 'api/auth2/verif/' . $uniq
-            // 'company_name' => $per['bentuk_usaha'] . ' ' . $per['nama_perusahaan']
+            'link' => Config::get('app.url') . 'api/auth2/verif/' . $uniq,
+            'company_name' => $per['bentuk_usaha'] . ' ' . $per['nama_perusahaan']
         ];
         if (Mail::to($per['email'])->send(new VendorMail($mailData))) {
             return view('emails.sentEmail')->with('email', $per['email']);
-        } 
+        }
     }
 
     function verifEmail($id_token)
