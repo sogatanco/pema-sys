@@ -75,7 +75,7 @@ class Auth2Controller extends Controller
         }
         $user = Auth::guard('api_vendor')->user();
 
-        if($user->is_email_verified!==0){
+        if($user->is_email_verified===0){
             throw new HttpResponseException(response([
                 "status" => false,
                 "message" => "User not verified"
