@@ -25,12 +25,12 @@ class PerusahaanController extends Controller
         ]);
     }
 
-    public function getDataPerusahaan($companyId)
+    public function getDataPerusahaan()
     {
-        $data = [];
+        $user = Auth::user();
         return response()->json([
             "success" => true,
-            "data" => $data
+            "data" => $user
         ]);
     }
     
