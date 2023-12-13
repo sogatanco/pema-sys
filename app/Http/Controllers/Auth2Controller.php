@@ -51,6 +51,7 @@ class Auth2Controller extends Controller
             $p->user_id = $user->id;
             $p->bentuk_usaha = $data['bentuk_usaha'];
             $p->nama_perusahaan = $data['nama_perusahaan'];
+            $p->nama_perusahaan = $data['tipe_penyedia'];
             $p->nomor_registrasi= 'PEMA-VEND-'.date('Y').'-'.date('m').'-'.rand(1000,9999);
             if ($p->save()) {
                 if($this->kirimEmail($user->id)){
