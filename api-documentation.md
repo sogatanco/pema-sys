@@ -167,7 +167,7 @@ Error Response
 
 ### My Directors
 Request
-```http
+```
 GET /jajaran/my
 ```
 Success Response
@@ -178,3 +178,25 @@ Success Response
     "data": 
 }
 ```
+### Delete Direksi
+Request
+```
+POST /jajaran/delete/[id]
+```
+Parameter
+- `id` : `[number]` parameter in link
+Success Response
+```
+{
+    "success": true,
+    "message": "Deleted Succesfully",
+    "data": []
+}
+```
+Error Response
+```
+{
+    "success": false,
+    "message": "Failed to delete,
+    "data": []
+}
