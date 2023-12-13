@@ -31,7 +31,7 @@ class JajaranController extends Controller
     }
 
     public function edit($id, Request $request){
-        $jjr=Jajaran::where('id_direksi', $id)->get()->first();
+        $jjr=Jajaran::find($id);
         $jjr->nama = $request->nama;
         $jjr->jabatan = $request->jabatan;
         $jjr->no_npwp_direksi = $request->no_npwp_direksi;
