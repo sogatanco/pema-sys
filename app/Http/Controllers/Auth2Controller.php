@@ -34,7 +34,7 @@ class Auth2Controller extends Controller
             // throw new HttpResponseException(response([
             //     "message" => "Email already registered."
             // ], 409));
-            new PostResource(false, 'Email already registered.', []); 
+            return new PostResource(false, 'Email already registered.', []); 
         }
 
         $defaultRole = ["Vendor"];
