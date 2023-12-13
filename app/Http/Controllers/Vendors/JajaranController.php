@@ -36,11 +36,14 @@ class JajaranController extends Controller
         $jjr->jabatan = $request->jabatan;
         $jjr->no_npwp_direksi = $request->no_npwp_direksi;
         if ($jjr->save()) {
-            return new PostResource(true, 'Jajaran Direksi Updated Succesfullya', []);
+            return new PostResource(true, 'Jajaran Direksi Updated Succesfully', []);
         } else {
             return new PostResource(true, 'Failed to update!', []);
         }
     }
 
-    
+    public function myDirek(){
+        $jjr=Jajaran::where('perusahaan_id',ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id)->get();
+        return new PostResource(true, 'My Directors', $jjr);
+    }   
 }

@@ -53,13 +53,22 @@ class Auth2Controller extends Controller
                 if($this->kirimEmail($user->id)){
                     return new UserResource($user);
                 }else{
-                    new PostResource(false, 'Failed To Register', []); 
+                    throw new HttpResponseException(response([
+                        "status"=>false,
+                        "message" => "Failed To Register"
+                    ], 409));
                 }
             }else{
-                new PostResource(false, 'Failed To Register', []); 
+                throw new HttpResponseException(response([
+                    "status"=>false,
+                    "message" => "Failed To Register"
+                ], 409));
             }
         }else{
-            new PostResource(false, 'Failed To Register', []);
+            throw new HttpResponseException(response([
+                "status"=>false,
+                "message" => "Failed To Register"
+            ], 409));
         }
     }
 
