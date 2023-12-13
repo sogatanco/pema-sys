@@ -32,11 +32,7 @@ class Auth2Controller extends Controller
 
         if (UserVendor::where('email', $data['email'])->count() == 1) {
             throw new HttpResponseException(response([
-                "errors" => [
-                    "email" => [
-                        "Email already registered."
-                    ]
-                ]
+                "message" => "Email already registered."
             ], 409));
         }
 
