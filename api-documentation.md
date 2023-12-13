@@ -36,7 +36,7 @@ POST /register
 Parameter
 - `email` : `[email]` 
 - `password` : `[text]` 
-- `bentuk_usaha` : `[text]` 
+- `bentuk_usaha` : `enum[PT, CV, Firma, PO]` 
 - `nama_perusahaan` : `[text]` 
 
 
