@@ -28,3 +28,31 @@ Error Response
 }
 ```
 
+### Register
+Request
+```http
+POST /register
+```
+Parameter
+- `email` : `[email]` 
+- `password` : `[text]` 
+- `bentuk_usaha` : `[text]` 
+- `nama_perusahaan` : `[text]` 
+
+
+Success Response
+```
+{
+    "success": true,
+    "message": "Email Verification sent succesfully",
+    "data": []
+}
+```
+Error Response
+```
+{
+    "success": false,
+    "message": "Failed to send",
+    "data": []
+}
+```

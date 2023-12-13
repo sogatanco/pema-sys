@@ -54,9 +54,15 @@ class Auth2Controller extends Controller
             $p->nomor_registrasi= 'PEMA-VEND-'.date('Y').'-'.date('m').rand(1000,9999);
             if ($p->save()) {
                 if($this->kirimEmail($user->id)){
-                    return new PostResource(true, 'Register Success',$user );
+                    return new PostResource(true, 'Register Success',new UserResource($user) );
+                }else{
+                    new PostResource(false, 'Failed To Register', []); 
                 }
+            }else{
+                new PostResource(false, 'Failed To Register', []); 
             }
+        }else{
+            new PostResource(false, 'Failed To Register', []);
         }
     }
 
