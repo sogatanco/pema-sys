@@ -17,7 +17,7 @@ Route::controller(UserController::class)->group(function() {
 
 Route::controller(PerusahaanController::class)->group(function() {
     Route::get('perusahaan/list-bidang-usaha', 'listBidangUsaha');
-    Route::get('perusahaan/get-data', 'getDataPerusahaan');
+    Route::get('perusahaan/data-umum', 'getDataUmum');
     Route::post('perusahaan/store', 'store');
 });
 

@@ -7,6 +7,7 @@ use App\Models\Vendor\MasterBidangUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Auth;
 
 class PerusahaanController extends Controller
 {
@@ -25,12 +26,15 @@ class PerusahaanController extends Controller
         ]);
     }
 
-    public function getDataPerusahaan()
+    public function getDataUmum()
     {
         $user = Auth::user();
+
+        $dataUmum = Perusahaan::where('user_id')->get();
+
         return response()->json([
             "success" => true,
-            "data" => $user
+            "data" => $dataUmum
         ]);
     }
     
