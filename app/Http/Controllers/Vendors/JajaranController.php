@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor\Jajaran;
 use App\Models\Vendor\ViewPerusahaan;
+use App\Http\Resources\PostResource;
 
 class JajaranController extends Controller
 {
@@ -17,18 +18,27 @@ class JajaranController extends Controller
 
     public function store(Request $request)
     {
-        $jjr=new Jajaran();
-        $jjr->perusahaan_id=ViewPerusahaan::where('user_id',Auth::user()->id )->get()->first()->id;
-        $jjr->nama=$request->nama;
-        $jjr->jabatan=$request->jabatan;
-        $jjr->no_npwp_direksi=$request->no_npwp_direksi;
-        if($jjr->save()){
-            return response()->json([
-                "status" => true,
-                "data" => $jjr,
-                "companyId" => Auth::user()->id
-            ], 200);
+        $jjr = new Jajaran();
+        $jjr->perusahaan_id = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id;
+        $jjr->nama = $request->nama;
+        $jjr->jabatan = $request->jabatan;
+        $jjr->no_npwp_direksi = $request->no_npwp_direksi;
+        if ($jjr->save()) {
+            return new PostResource(true, 'Jajaran Direksi Inserted !', []);
+        } else {
+            return new PostResource(true, 'Jajaran Direksi Failed to insert!', []);
         }
+    }
+
+    public function edit($id, Request $request){
+        $jjr=Jajaran::find($id);
+        $jjr->nama = $request->nama;
+        $jjr->jabatan = $request->jabatan;
+        $jjr->no_npwp_direksi = $request->no_npwp_direksi;
+        if ($jjr->save()) {
+            return new PostResource(true, 'Jajaran Direksi Updated Succesfullya', []);
+        } else {
+            return new PostResource(true, 'Failed to update!', []);
         }
-        
+    }
 }

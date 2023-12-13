@@ -111,7 +111,7 @@ Error Response
 
 ## Company Information
 `https://api.ptpema.co.id/vapi`
-### Jajaran Direksi
+### Add Jajaran Direksi
 Request
 ```http
 POST /jajaran/store
@@ -120,3 +120,20 @@ Parameter
 - `nama` : `[text]`
 - `jabatan` : `[text]`
 - `no_npwp_direksi` : `[text]`
+
+Success Response
+```
+{
+    "status": true,
+    "message": "Jajaran Direksi Inserted !",
+    "data":[]
+}
+```
+Error Response
+```
+{
+    "status": true,
+    "message": "Jajaran Direksi Failed to insert!",
+    "data":[]
+}
+```

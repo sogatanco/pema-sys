@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jajaran extends Model
 {
-    use HasFactory;
     protected $connection ='mysql2';
     protected $table = 'jajaran_direksi';
-    protected $primaryKey = 'id_direksi';
-    protected $guarded = [];
 }
