@@ -17,7 +17,7 @@ use Mail;
 use App\Mail\VendorMail;
 use App\Http\Resources\PostResource;
 use Config;
-use KodeExpire as GlobalKodeExpire;
+
 
 class Auth2Controller extends Controller
 {

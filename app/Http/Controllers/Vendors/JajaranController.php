@@ -41,4 +41,6 @@ class JajaranController extends Controller
             return new PostResource(true, 'Failed to update!', []);
         }
     }
+
+    
 }
