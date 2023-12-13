@@ -49,7 +49,7 @@ class Auth2Controller extends Controller
         if ($user->save()) {
             $p = new Perusahaan();
             $p->user_id = $user->id;
-            $p->bentuk_usaha = $data['bentuk_perusahaan'];
+            $p->bentuk_usaha = $data['bentuk_usaha'];
             $p->nama_perusahaan = $data['nama_perusahaan'];
             $p->tipe_penyedia = $data['tipe_Penyedia'];
             $p->nomor_registrasi= 'PEMA-VEND-'.date('Y').'-'.date('m').'-'.rand(1000,9999);
