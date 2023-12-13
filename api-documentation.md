@@ -106,6 +106,17 @@ Error Response
 {
     "status": false,
     "message": "User not verified, Please Check your email for verification"
-}x
+}
 ```
 
+## Company Information
+`https://api.ptpema.co.id/vapi`
+### Jajaran Direksi
+Request
+```http
+POST /jajaran/store
+```
+Parameter
+- `nama` : `[text]`
+- `jabatan` : `[text]`
+- `no_npwp_direksi` : `[text]`

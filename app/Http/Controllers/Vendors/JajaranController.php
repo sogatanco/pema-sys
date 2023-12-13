@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Vendors;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JajaranController extends Controller
 {
@@ -12,14 +13,13 @@ class JajaranController extends Controller
         $this->middleware('auth:api_vendor');
     }
 
-    public function store(Request $request, $companyId)
+    public function store(Request $request)
     {
         $data = $request->all();
-
         return response()->json([
             "status" => true,
             "data" => $data,
-            "companyId" => $companyId
+            "companyId" => Auth::user()
         ], 200);
     }
 }
