@@ -31,9 +31,10 @@ class Auth2Controller extends Controller
         $data = $request->validated();
 
         if (UserVendor::where('email', $data['email'])->count() == 1) {
-            throw new HttpResponseException(response([
-                "message" => "Email already registered."
-            ], 409));
+            // throw new HttpResponseException(response([
+            //     "message" => "Email already registered."
+            // ], 409));
+            new PostResource(false, 'Email already registered.', []); 
         }
 
         $defaultRole = ["Vendor"];
