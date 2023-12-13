@@ -25,5 +25,5 @@ Route::controller(JajaranController::class)->group(function() {
     Route::post('jajaran/store', 'store');
     Route::post('jajaran/edit/{id}', 'edit');
     Route::get('jajaran/my', 'myDirek');
-    Route::post('jajaran/delete{id}', 'deleteDir');
+    Route::post('jajaran/delete/{id}', 'deleteDir');
 });
