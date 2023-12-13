@@ -165,30 +165,16 @@ Error Response
 }
 ```
 
-### My Direksi
+### My Directors
 Request
 ```http
-POST /jajaran/edit/[id]
+GET /jajaran/my
 ```
-Parameter
-- `id` : `[number]` parameter in link
-- `nama` : `[text]`
-- `jabatan` : `[text]`
-- `no_npwp_direksi` : `[text]`
-
 Success Response
 ```
 {
     "success": true,
-    "message": "Jajaran Direksi Updated Succesfully",
-    "data": []
-}
-```
-Error Response
-```
-{
-    "success": false,
-    "message": "Failed to update!",
-    "data": []
+    "message": "My Directors",
+    "data": 
 }
 ```
