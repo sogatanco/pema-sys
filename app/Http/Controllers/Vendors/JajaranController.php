@@ -46,4 +46,12 @@ class JajaranController extends Controller
         $jjr=Jajaran::where('perusahaan_id',ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id)->get();
         return new PostResource(true, 'My Directors', $jjr);
     }   
+
+    public function deleteDir($id){
+        if(Jajaran::find($id)->delete()){
+            return new PostResource(true, 'Deleted Succesfully', []);
+        }else{
+            return new PostResource(false, 'Failed to delete', []);
+        }
+    }
 }
