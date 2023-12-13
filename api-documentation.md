@@ -64,3 +64,47 @@ Error Response
     "data": []
 }
 ```
+### Login
+Request
+```http
+POST /login
+```
+Parameter
+- `email` : `[email]` 
+- `password` : `[text]` 
+
+Success Response
+```
+{
+    "status": true,
+    "message": "Login success.",
+    "auth": {
+        "user": {
+            "id": 16,
+            "email": "wahyudin@ptpema.co.id",
+            "roles": [
+                "Vendor"
+            ],
+            "created_at": "2023-12-13T03:38:19.000000Z",
+            "updated_at": "2023-12-13T03:38:40.000000Z",
+            "is_email_verified": 1,
+            "company_id": 30
+        },
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vYXBpLnB0cGVtYS5jby5pZC9hcGkvYXV0aDIvbG9naW4iLCJpYXQiOjE3MDI0Mzg4ODgsImV4cCI6MTcwMjQ0MjQ4OCwibmJmIjoxNzAyNDM4ODg4LCJqdGkiOiIyTTUyYzFOclFTSk1iQjg0Iiwic3ViIjoiMTYiLCJwcnYiOiI0MDdlNzcyOTMzY2Q2MDVjYTc2MmZhM2E4MjRmOWIwZjY3ZmRiMDI5IiwiaWQiOjE2LCJlbWFpbCI6IndhaHl1ZGluQHB0cGVtYS5jby5pZCIsInJvbGVzIjpbIlZlbmRvciJdfQ.1Xr78xmPv-tBhkj1rstAoiAHVBLouhGrxK7FgGVe6hk"
+    }
+}
+```
+Error Response
+```
+{
+    "status": false,
+    "message": "Email or password is invalid."
+}
+```
+```
+{
+    "status": false,
+    "message": "User not verified, Please Check your email for verification"
+}x
+```
+
