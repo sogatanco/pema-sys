@@ -44,15 +44,23 @@ Success Response
 ```
 {
     "success": true,
-    "message": "Email Verification sent succesfully",
-    "data": []
+    "message": "Register Success",
+    "data": [user data]
 }
 ```
 Error Response
 ```
 {
     "success": false,
-    "message": "Failed to send",
+    "message": "Failed To Register",
+    "data": []
+}
+```
+
+```
+{
+    "success": false,
+    "message": "Email already registered",
     "data": []
 }
 ```
