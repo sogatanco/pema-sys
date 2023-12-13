@@ -164,3 +164,31 @@ Error Response
     "data": []
 }
 ```
+
+### My Direksi
+Request
+```http
+POST /jajaran/edit/[id]
+```
+Parameter
+- `id` : `[number]` parameter in link
+- `nama` : `[text]`
+- `jabatan` : `[text]`
+- `no_npwp_direksi` : `[text]`
+
+Success Response
+```
+{
+    "success": true,
+    "message": "Jajaran Direksi Updated Succesfully",
+    "data": []
+}
+```
+Error Response
+```
+{
+    "success": false,
+    "message": "Failed to update!",
+    "data": []
+}
+```
