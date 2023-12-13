@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Vendors;
 
 use App\Http\Controllers\Controller;
 use App\Models\Vendor\MasterBidangUsaha;
+use App\Models\Vendor\Perusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
