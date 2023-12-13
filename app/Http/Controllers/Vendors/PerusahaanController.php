@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Vendors;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor\MasterBidangUsaha;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class PerusahaanController extends Controller
 {
@@ -36,11 +38,33 @@ class PerusahaanController extends Controller
     {
         $data = $request->all();
 
+        $nomorRegis = 'PEMA-VEND-23-12-0001';
+        
         // save to db
+        $validator = Validator::make($request->all(), [
+            'email' => ["required"],
+            'bidangUsaha' => ["required"],
+            'kontak' => ['required'],
+            'provinsi' => ['required']
+        ]);
+
+        if($validator->fails()){
+            throw new HttpResponseException(response([
+                "message" => $validator->errors()
+            ], 400));
+        }
+
+        $newData = [
+            'email' => $request->email,
+            'bidangUsaha' => $request->bidangUsaha,
+            'kontak' => $request->kontak,
+            'provinsi' => $request->provinsi,
+            'nomor_registrasi' => $nomorRegis
+        ];
 
         return response()->json([
             "success" => true,
-            "data" => $data
+            "data" => $newData
         ]);
     }
 
