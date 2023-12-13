@@ -31,7 +31,7 @@ class PerusahaanController extends Controller
     {
         $user = Auth::user();
 
-        $dataUmum = Perusahaan::where('user_id')->get();
+        $dataUmum = Perusahaan::where('user_id', $user->id)->get();
 
         return response()->json([
             "success" => true,
