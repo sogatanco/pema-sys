@@ -32,6 +32,6 @@ Route::controller(JajaranController::class)->group(function() {
 
 Route::controller(AktaController::class)->group(function() {
     Route::post('akta/store', 'store');
-    Route::get('akta/view/{id}', 'viewFile');
+    Route::get('akta/view', 'viewFile');
     Route::get('akta/delete/{id}', 'deleteAkta');
 });

@@ -31,7 +31,7 @@ class AktaController extends Controller
             $akt->tgl_terbit = $request->tgl_terbit;
             $akt->nama_notaris = $request->nama_notaris;
             $akt->file_akta = $filename;
-            $akt->jenis=$request->jenis;
+            $akt->jenis = $request->jenis;
             if ($akt->save()) {
                 return new PostResource(true, 'New Akta Inserted', []);
             } else {
@@ -42,16 +42,17 @@ class AktaController extends Controller
         }
     }
 
-    public function viewFile($id)
+
+
+    public function viewFile()
     {
 
-        $filename = Akta::where('id_akta', $id)->first();
-        if ($filename->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
-            $filename->file_base64 = base64_encode(file_get_contents(public_path('vendor_file/' . $filename->file_akta)));
-            return new PostResource(true, 'Detail Akta ' . $id, $filename);
-        } else {
-            return new PostResource(false, 'Not Permitted', []);
+        $filename = Akta::where('id_perusahaan', ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id)->get();
+
+        foreach ($filename as $f) {
+            $f->file_base64 = base64_encode(file_get_contents(public_path('vendor_file/' . $f->file_akta)));
         }
+        return new PostResource(true, 'Detail Akta ' , $filename);
     }
 
     public function deleteAkta($id)
