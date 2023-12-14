@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Vendors\UserController;
 use App\Http\Controllers\Vendors\PerusahaanController;
 use App\Http\Controllers\Vendors\JajaranController;
+use App\Http\Controllers\Vendors\AktaController;
+use App\Models\Vendor\Akta;
 
 Route::middleware('auth:api')->get('/uservendor', function (Request $request) {
     return $request->user();
@@ -26,4 +28,8 @@ Route::controller(JajaranController::class)->group(function() {
     Route::post('jajaran/edit/{id}', 'edit');
     Route::get('jajaran/my', 'myDirek');
     Route::post('jajaran/delete/{id}', 'deleteDir');
+});
+
+Route::controller(AktaController::class)->group(function() {
+    Route::post('akta/store', 'store');
 });

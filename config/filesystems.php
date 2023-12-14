@@ -68,6 +68,10 @@ return [
         'public_inven' => [
             'driver' => 'local',
             'root' => public_path(). '/inven',
+        ],
+        'public_vendor' => [
+            'driver' => 'local',
+            'root' => public_path(). '/vendor',
         ]
     ],
 
