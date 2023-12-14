@@ -16,7 +16,7 @@ class AktaController extends Controller
     {
         $file = base64_decode($request->file, true);
         $filename = 'akta/' . time() . '.pdf'; 
-        if (Storage::disk('public_inven')->put($filename, $file)) {
+        if (Storage::disk('public_vendor')->put($filename, $file)) {
             return new PostResource(true, 'dsgsdg', []);
         }
         // $akt=new Akta();
