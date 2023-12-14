@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vendors;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor\MasterBidangUsaha;
 use App\Models\Vendor\Perusahaan;
+use App\Models\Vendor\BidangUsaha;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -58,15 +59,18 @@ class PerusahaanController extends Controller
 
         $newData = [
             'email_alternatif' => $request->email,
-            'bidang_usaha' => $request->bidangUsaha,
             'kontak' => $request->kontak,
             'provinsi' => $request->provinsi,
         ];
 
         $user = Auth::user();
-        $savedData = Perusahaan::where('user_id', $user->id)->update($newData);
+        $savedData = Perusahaan::where('user_id', $user->id)->update($newData)->first();
 
         if($savedData){
+
+            // simpan bentuk usaha,
+            $savedBidang = BidangUsaha::create(['master_bidangusaha_id' => $request->bidang_usaha, 'perusahaan_id' => $savedData->perusahaan_id]);
+
             return response()->json([
                 "success" => true,
                 "data" => $newData
