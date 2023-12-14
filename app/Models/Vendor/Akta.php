@@ -8,5 +8,6 @@ class Akta extends Model
 {
     protected $connection ='mysql2';
     protected $table = 'akta';
+    protected $primaryKey='id_akta';
 }
 
