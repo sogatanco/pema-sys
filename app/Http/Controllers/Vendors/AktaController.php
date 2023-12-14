@@ -25,7 +25,7 @@ class AktaController extends Controller
             $akt->file_akta = $filename;
             if($akt->save()){
                 return new PostResource(true, 'dsgsdg', []);
-            }else
+            }
            
         }
     }
