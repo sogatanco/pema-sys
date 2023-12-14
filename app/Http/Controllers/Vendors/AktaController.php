@@ -14,7 +14,7 @@ class AktaController extends Controller
 {
     public function store(Request $request)
     {
-        return new PostResource(false, 'dsgsdg', ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first());
+        return new PostResource(false, 'dsgsdg', Auth::user());
         // $file = base64_decode($request->file, true);
         // $filename = 'akta/' . time() . '.pdf';
         // if (Storage::disk('public_vendor')->put($filename, $file)) {
