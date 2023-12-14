@@ -234,10 +234,9 @@ Error Response
 ### View Akta
 Request
 ```
-GET /view/[id]
+GET /view
 ```
 Parameter
-- `id`:`[number]` in link
 
 Success Response
 ```
@@ -255,14 +254,6 @@ Success Response
         "updated_at": "2023-12-14T04:19:27.000000Z",
         "file_base64": "JVBERi0xLjMKJcTl8uXrp/"
     }
-}
-```
-Error Response
-```
-{
-    "success": false,
-    "message": "Not Permitted",
-    "data": []
 }
 ```
 
