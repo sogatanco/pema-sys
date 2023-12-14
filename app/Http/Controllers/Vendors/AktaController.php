@@ -10,6 +10,9 @@ use App\Models\Vendor\ViewPerusahaan;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
 
+use File;
+use Response;
+
 class AktaController extends Controller
 {
     public function __construct()
@@ -51,11 +54,13 @@ class AktaController extends Controller
 
         $filename = "/vendor_file/akta/the/1702527660.pdf";
 
-        header("Content-type: application/pdf");
+        // header("Content-type: application/pdf");
 
-        header("Content-Length: " . filesize($filename));
+        // header("Content-Length: " . filesize($filename));
 
-        // Send the file to the browser. 
-        readfile($filename);
+        // // Send the file to the browser. 
+        // readfile($filename);
+
+        return response()->file(public_path('vendor_file/akta/1702527660.pdf'),['content-type'=>'application/pdf']);
     }
 }
