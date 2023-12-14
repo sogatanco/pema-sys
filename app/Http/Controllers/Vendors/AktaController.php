@@ -48,7 +48,7 @@ class AktaController extends Controller
         $filename = Akta::where('id_akta', $id)->first();
         if ($filename->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
             $filename->file_base64 = base64_encode(file_get_contents(public_path('vendor_file/' . $filename->file_akta)));
-            return new PostResource(true, 'New Akta Inserted', $filename);
+            return new PostResource(true, 'Detail Akta '.$id, $filename);
         } else {
             return new PostResource(false, 'Not Permitted', []);
         }
