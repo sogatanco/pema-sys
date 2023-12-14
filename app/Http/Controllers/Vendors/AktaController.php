@@ -45,20 +45,12 @@ class AktaController extends Controller
     public function viewFile($id)
     {
 
-        // $filename = Akta::where('id_akta', $id)->first();
-        // if ($filename->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
-        //     return new PostResource(true, 'New Akta Inserted', $filename);
-        // } else {
-        //     return new PostResource(false, 'Not Permitted', []);
-        // }
-
-        $filename = "/vendor_file/akta/the/1702527660.pdf";
-
-
-
-        $b64Doc = base64_encode(file_get_contents(public_path('vendor_file/akta/1702527660.pdf')));
-        return new PostResource(true, 'New Akta Inserted',$b64Doc);
-
-        // return response()->file(public_path('vendor_file/akta/1702527660.pdf'),['content-type'=>'application/pdf']);
+        $filename = Akta::where('id_akta', $id)->first();
+        if ($filename->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
+            $filename->file_base64 = base64_encode(file_get_contents(public_path('vendor_file/' . $filename->file_akta)));
+            return new PostResource(true, 'New Akta Inserted', $filename);
+        } else {
+            return new PostResource(false, 'Not Permitted', []);
+        }
     }
 }
