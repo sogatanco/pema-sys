@@ -8,7 +8,7 @@ use App\Http\Controllers\Vendors\JajaranController;
 use App\Http\Controllers\Vendors\AktaController;
 use App\Models\Vendor\Akta;
 
-Route::middleware('auth:api')->get('/uservendor', function (Request $request) {
+Route::middleware('auth:api_vendor')->get('/uservendor', function (Request $request) {
     return $request->user();
 });
 
