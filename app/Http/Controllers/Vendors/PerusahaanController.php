@@ -63,7 +63,7 @@ class PerusahaanController extends Controller
 
         $newData = [
             'email_alternatif' => $request->email,
-            'npwp' => $request->npwp,
+            'no_npwp' => $request->npwp,
             'hp' => $request->kontak,
             'alamat' => $request->alamat,
             'provinsi' => $request->provinsi,
