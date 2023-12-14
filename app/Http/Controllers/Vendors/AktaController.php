@@ -39,14 +39,23 @@ class AktaController extends Controller
         }
     }
 
-    public function viewFile($id){
-        
+    public function viewFile($id)
+    {
+
         $filename = Akta::where('id_akta', $id)->first();
-        if($filename->id_perusahaan===ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id){
+        if ($filename->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
             return new PostResource(true, 'New Akta Inserted', $filename);
-        }else{
+        } else {
             return new PostResource(false, 'Not Permitted', []);
         }
-        
+
+        // $filename = "/vendor_file/akta/the/1702527660.pdf";
+
+        // header("Content-type: application/pdf");
+
+        // header("Content-Length: " . filesize($filename));
+
+        // // Send the file to the browser. 
+        // readfile($filename);
     }
 }
