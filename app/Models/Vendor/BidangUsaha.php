@@ -11,5 +11,5 @@ class BidangUsaha extends Model
     protected $connection ='mysql2';
     protected $table = 'bidang_usaha';
     protected $primaryKey = 'id_bidangusaha';
-
+    protected $fillable = ['master_bidangusaha_id', 'perusahaan_id'];
 }
