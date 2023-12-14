@@ -72,7 +72,7 @@ class PerusahaanController extends Controller
         if($savedData){
 
             // simpan bentuk usaha,
-            $savedBidang = BidangUsaha::create(['master_bidangusaha_id' => $request->bidang_usaha, 'perusahaan_id' => $company->perusahaan_id]);
+            $savedBidang = BidangUsaha::create(['master_bidangusaha_id' => $request->bidang_usaha, 'perusahaan_id' => $company->id]);
 
             return response()->json([
                 "success" => true,
