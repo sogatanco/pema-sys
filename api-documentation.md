@@ -218,7 +218,7 @@ Success Response
 ```
 {
     "success": true,
-    "message": "Deleted Succesfully",
+    "message": "New Akta Inserted",
     "data": []
 }
 ```
@@ -226,7 +226,7 @@ Error Response
 ```
 {
     "success": false,
-    "message": "Failed to delete,
+    "message": "Failed to add akta,
     "data": []
 }
 ```
