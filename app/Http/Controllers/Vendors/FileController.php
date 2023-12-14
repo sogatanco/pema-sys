@@ -23,7 +23,7 @@ class AktaController extends Controller
         $file = base64_decode($request->file, true);
         if($request->whatfile=='struktur'){
             $filename = 'struktur/' . time() . '.pdf';
-            if (Storage::disk('public_vendor')->put($filename, $file)) 
+            // if (Storage::disk('public_vendor')->put($filename, $file)) 
         }
     }
 }
