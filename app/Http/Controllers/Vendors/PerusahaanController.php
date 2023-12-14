@@ -55,6 +55,7 @@ class PerusahaanController extends Controller
 
         if($validator->fails()){
             throw new HttpResponseException(response([
+                "errors" => $validator->errors(),
                 "message" => "Semua kolom wajib diisi dan tidak boleh ada yang kosong."
             ], 400));
         }
