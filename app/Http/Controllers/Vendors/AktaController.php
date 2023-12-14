@@ -24,7 +24,7 @@ class AktaController extends Controller
         $filename = 'akta/' . time() . '.pdf';
         if (Storage::disk('public_vendor')->put($filename, $file)) {
             $akt = new Akta();
-            $akt->id_perusahaan = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first();
+            $akt->id_perusahaan = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id;
             $akt->no_akta = $request->no_akta;
             $akt->tgl_terbit = $request->tgl_terbit;
             $akt->nama_notaris = $request->nama_notaris;
