@@ -230,3 +230,38 @@ Error Response
     "data": []
 }
 ```
+
+### View Akta
+Request
+```
+GET /view/[id]
+```
+Parameter
+- `id`:`[number]` in link
+
+Success Response
+```
+{
+"success": true,
+    "message": "New Akta Inserted",
+    "data": {
+        "id_akta": 4,
+        "id_perusahaan": 30,
+        "no_akta": "gdagsdasdg",
+        "tgl_terbit": "2023-11-02",
+        "nama_notaris": "whyudin",
+        "file_akta": "akta/1702527567.pdf",
+        "created_at": "2023-12-14T04:19:27.000000Z",
+        "updated_at": "2023-12-14T04:19:27.000000Z",
+        "file_base64": "JVBERi0xLjMKJcTl8uXrp/"
+    }
+}
+```
+Error Response
+```
+{
+    "success": false,
+    "message": "Not Permitted",
+    "data": []
+}
+```
