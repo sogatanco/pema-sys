@@ -46,7 +46,7 @@ class PerusahaanController extends Controller
         
         $validator = Validator::make($request->all(), [
             'email' => ["required"],
-            'bidangUsaha' => ["required"],
+            'bidang_usaha' => ["required"],
             'kontak' => ['required'],
             'provinsi' => ['required']
         ]);
@@ -56,6 +56,8 @@ class PerusahaanController extends Controller
                 "message" => $validator->errors()
             ], 400));
         }
+
+        // upload file
 
         $newData = [
             'email_alternatif' => $request->email,
