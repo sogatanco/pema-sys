@@ -50,7 +50,7 @@ class PerusahaanController extends Controller
         $validator = Validator::make($request->all(), [
             'email' => ["required"],
             'npwp' => ['required'],
-            'bidang_usaha' => ["required"],
+            'id_bidang' => ["required"],
             'kontak' => ['required'],
             'alamat' => ['required'],
             'provinsi' => ['required']
@@ -80,7 +80,7 @@ class PerusahaanController extends Controller
         if($savedData){
 
             // simpan bentuk usaha,
-            $savedBidang = BidangUsaha::create(['master_bidangusaha_id' => $request->bidang_usaha, 'perusahaan_id' => $company->id]);
+            $savedBidang = BidangUsaha::create(['master_bidangusaha_id' => $request->id_bidang, 'perusahaan_id' => $company->id]);
 
             return response()->json([
                 "status" => true,
