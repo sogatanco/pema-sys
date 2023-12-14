@@ -57,7 +57,7 @@ class PerusahaanController extends Controller
         }
 
         $newData = [
-            'email' => $request->email,
+            'email_alternatif' => $request->email,
             'bidangUsaha' => $request->bidangUsaha,
             'kontak' => $request->kontak,
             'provinsi' => $request->provinsi,
