@@ -55,7 +55,7 @@ class PerusahaanController extends Controller
 
         if($validator->fails()){
             throw new HttpResponseException(response([
-                "message" => $validator->errors()
+                "message" => "Kolom harus diisi semua."
             ], 400));
         }
 
