@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Storage;
 
 class AktaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api_vendor');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api_vendor');
+    // }
 
     public function store(Request $request)
     {
