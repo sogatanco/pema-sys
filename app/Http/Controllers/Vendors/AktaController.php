@@ -30,12 +30,16 @@ class AktaController extends Controller
             $akt->nama_notaris = $request->nama_notaris;
             $akt->file_akta = $filename;
             if ($akt->save()) {
-                return new PostResource(true, 'dsgsdg', []);
+                return new PostResource(true, 'New Akta Inserted', []);
             } else {
-                return new PostResource(false, 'dsgsdg', []);
+                return new PostResource(false, 'Failed to add akta', []);
             }
         } else {
-            return new PostResource(false, 'dsgsdg', []);
+            return new PostResource(false, 'Failed to upload akta', []);
         }
+    }
+
+    public function viewFile($id){
+
     }
 }
