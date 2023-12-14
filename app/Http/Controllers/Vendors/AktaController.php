@@ -48,7 +48,19 @@ class AktaController extends Controller
         $filename = Akta::where('id_akta', $id)->first();
         if ($filename->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
             $filename->file_base64 = base64_encode(file_get_contents(public_path('vendor_file/' . $filename->file_akta)));
-            return new PostResource(true, 'Detail Akta '.$id, $filename);
+            return new PostResource(true, 'Detail Akta ' . $id, $filename);
+        } else {
+            return new PostResource(false, 'Not Permitted', []);
+        }
+    }
+
+    public function deleteAkta($id)
+    {
+        $akta = Akta::where('id_akta', $id)->first();
+        if ($akta->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
+            if ($akta->delete()) {
+                return new PostResource(true, 'Deleted Succesfully', []);
+            }
         } else {
             return new PostResource(false, 'Not Permitted', []);
         }
