@@ -10,6 +10,9 @@ use App\Models\Vendor\ViewPerusahaan;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
 
+use File;
+use Response;
+
 class AktaController extends Controller
 {
     public function __construct()
@@ -30,12 +33,32 @@ class AktaController extends Controller
             $akt->nama_notaris = $request->nama_notaris;
             $akt->file_akta = $filename;
             if ($akt->save()) {
-                return new PostResource(true, 'dsgsdg', []);
+                return new PostResource(true, 'New Akta Inserted', []);
             } else {
-                return new PostResource(false, 'dsgsdg', []);
+                return new PostResource(false, 'Failed to add akta', []);
             }
         } else {
-            return new PostResource(false, 'dsgsdg', []);
+            return new PostResource(false, 'Failed to upload akta', []);
         }
+    }
+
+    public function viewFile($id)
+    {
+
+        // $filename = Akta::where('id_akta', $id)->first();
+        // if ($filename->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
+        //     return new PostResource(true, 'New Akta Inserted', $filename);
+        // } else {
+        //     return new PostResource(false, 'Not Permitted', []);
+        // }
+
+        $filename = "/vendor_file/akta/the/1702527660.pdf";
+
+
+
+        $b64Doc = base64_encode(file_get_contents(public_path('vendor_file/akta/1702527660.pdf')));
+        return new PostResource(true, 'New Akta Inserted',$b64Doc);
+
+        // return response()->file(public_path('vendor_file/akta/1702527660.pdf'),['content-type'=>'application/pdf']);
     }
 }

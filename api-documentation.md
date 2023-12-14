@@ -109,7 +109,7 @@ Error Response
 }
 ```
 
-## Company Information
+## Directors
 `https://api.ptpema.co.id/vapi`
 ### Add Jajaran Direksi
 Request
@@ -200,3 +200,33 @@ Error Response
     "message": "Failed to delete,
     "data": []
 }
+```
+
+## Akta Perusahaan
+`https://api.ptpema.co.id/vapi/akta`
+### Tambah Akta baru
+Request
+```
+POST /store
+```
+Parameter
+- `file` : `[text]` .pdf in base64 format
+- `no_akta` : `[text]`
+- `nama_notaris` : `[text]`
+- `tgl_terbit` : `[date]` must in format YYYY-MM-DD ex : 2023-11-02
+Success Response
+```
+{
+    "success": true,
+    "message": "New Akta Inserted",
+    "data": []
+}
+```
+Error Response
+```
+{
+    "success": false,
+    "message": "Failed to add akta,
+    "data": []
+}
+```
