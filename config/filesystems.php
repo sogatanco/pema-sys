@@ -71,7 +71,7 @@ return [
         ],
         'public_vendor' => [
             'driver' => 'local',
-            'root' => public_path(). '/vendor',
+            'root' => public_path(). '/vendor_file',
         ]
     ],
 
