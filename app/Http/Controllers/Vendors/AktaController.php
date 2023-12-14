@@ -40,6 +40,8 @@ class AktaController extends Controller
     }
 
     public function viewFile($id){
-
+        
+        $filename = Akta::where('id_akta', $id)->first();
+        return new PostResource(true, 'New Akta Inserted', $filename);
     }
 }

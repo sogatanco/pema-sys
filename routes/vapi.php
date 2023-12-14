@@ -32,4 +32,5 @@ Route::controller(JajaranController::class)->group(function() {
 
 Route::controller(AktaController::class)->group(function() {
     Route::post('akta/store', 'store');
+    Route::get('akta/view/{id}', 'viewFile');
 });
