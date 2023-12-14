@@ -265,3 +265,28 @@ Error Response
     "data": []
 }
 ```
+
+### Delete Akta
+Request
+```
+GET /delete/[id]
+```
+Parameter
+- `id`:`[number]` in link
+
+Success Response
+```
+{
+    "success": true,
+    "message": "Deleted Succesfully",
+    "data": []
+}
+```
+Error Response
+```
+{
+    "success": false,
+    "message": "Not Permitted",
+    "data": []
+}
+```
