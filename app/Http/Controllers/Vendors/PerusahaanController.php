@@ -42,10 +42,7 @@ class PerusahaanController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
-        $nomorRegis = 'PEMA-VEND-23-12-0001';
         
-        // save to db
         $validator = Validator::make($request->all(), [
             'email' => ["required"],
             'bidangUsaha' => ["required"],
@@ -64,13 +61,21 @@ class PerusahaanController extends Controller
             'bidangUsaha' => $request->bidangUsaha,
             'kontak' => $request->kontak,
             'provinsi' => $request->provinsi,
-            'nomor_registrasi' => $nomorRegis
         ];
 
-        return response()->json([
-            "success" => true,
-            "data" => $newData
-        ]);
+        $user = Auth::user();
+        $savedData = Perusahaan::where('user_id', $user->id)->update($newData);
+
+        if($savedData){
+            return response()->json([
+                "success" => true,
+                "data" => $newData
+            ]);
+        }else{
+            throw new HttpResponseException(response([
+                "message" => "Something went wrong."
+            ], 500));
+        }
     }
 
     public function uploadStrukturOrganisasi(Request $request, $companyId)
