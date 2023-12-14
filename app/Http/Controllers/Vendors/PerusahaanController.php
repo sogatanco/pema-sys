@@ -66,12 +66,13 @@ class PerusahaanController extends Controller
         ];
 
         $user = Auth::user();
-        $savedData = Perusahaan::where('user_id', $user->id)->update($newData)->first();
+        $company = Perusahaan::where('user_id', $user->id)->first();
+        $savedData = Perusahaan::where('user_id', $user->id)->update($newData);
 
         if($savedData){
 
             // simpan bentuk usaha,
-            $savedBidang = BidangUsaha::create(['master_bidangusaha_id' => $request->bidang_usaha, 'perusahaan_id' => $savedData->perusahaan_id]);
+            $savedBidang = BidangUsaha::create(['master_bidangusaha_id' => $request->bidang_usaha, 'perusahaan_id' => $company->perusahaan_id]);
 
             return response()->json([
                 "success" => true,
