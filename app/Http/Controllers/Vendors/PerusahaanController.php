@@ -32,7 +32,10 @@ class PerusahaanController extends Controller
     {
         $user = Auth::user();
 
-        $dataUmum = Perusahaan::where('user_id', $user->id)->first();
+        $dataUmum = Perusahaan::where('user_id', $user->id)
+                    ->join('bidang_usaha', 'bidang_usaha.perusahaan_id', '=', 'perusahaan.id')
+                    ->join('master_bidangusaha', 'master_bidangusaha.id_bidang', '=', 'bidang_usaha.master_bidangusaha_id')
+                    ->first();
 
         return response()->json([
             "success" => true,
@@ -63,8 +66,8 @@ class PerusahaanController extends Controller
         // upload file
 
         $newData = [
-            'email_alternatif' => $request->email,
-            'no_npwp' => $request->npwp,
+            'email_alternatif' => $request->email_alternatif,
+            'no_npwp' => $request->no_npwp,
             'hp' => $request->kontak,
             'alamat' => $request->alamat,
             'provinsi' => $request->provinsi,
@@ -81,7 +84,7 @@ class PerusahaanController extends Controller
 
             return response()->json([
                 "status" => true,
-                "data" => $newData
+                "message" => "Update data success."
             ]);
         }else{
             throw new HttpResponseException(response([
