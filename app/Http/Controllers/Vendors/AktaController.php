@@ -56,7 +56,7 @@ class AktaController extends Controller
 
 
 
-        $b64Doc = base64_encode(file_get_contents(public_path('vendor_file/akta/1702527660.pdf')));
+        $b64Doc = base64_encode(public_path('vendor_file/akta/1702527660.pdf'));
         return new PostResource(true, 'New Akta Inserted',$b64Doc);
 
         // return response()->file(public_path('vendor_file/akta/1702527660.pdf'),['content-type'=>'application/pdf']);
