@@ -42,6 +42,11 @@ class AktaController extends Controller
     public function viewFile($id){
         
         $filename = Akta::where('id_akta', $id)->first();
-        return new PostResource(true, 'New Akta Inserted', $filename);
+        if($filename->id_perusahaan===ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id){
+            return new PostResource(true, 'New Akta Inserted', $filename);
+        }else{
+            return new PostResource(false, 'Not Permitted', []);
+        }
+        
     }
 }
