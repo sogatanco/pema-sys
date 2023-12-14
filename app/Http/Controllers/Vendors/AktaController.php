@@ -54,13 +54,11 @@ class AktaController extends Controller
 
         $filename = "/vendor_file/akta/the/1702527660.pdf";
 
-        // header("Content-type: application/pdf");
+        
 
-        // header("Content-Length: " . filesize($filename));
+        $b64Doc = chunk_split(base64_encode(file_get_contents(public_path('vendor_file/akta/1702527660.pdf'))));
+        return new PostResource(true, 'New Akta Inserted',$b64Doc);
 
-        // // Send the file to the browser. 
-        // readfile($filename);
-
-        return response()->file(public_path('vendor_file/akta/1702527660.pdf'),['content-type'=>'application/pdf']);
+        // return response()->file(public_path('vendor_file/akta/1702527660.pdf'),['content-type'=>'application/pdf']);
     }
 }
