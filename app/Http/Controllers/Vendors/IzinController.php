@@ -32,7 +32,7 @@ class IzinController extends Controller
             $akt->tgl_berakhir = $request->tgl_berakhir;
             $akt->file_izin = $filename;
             if ($akt->save()) {
-                return new PostResource(true, 'New Akta Inserted', []);
+                return new PostResource(true, 'New Izin Inserted', []);
             } else {
                 return new PostResource(false, 'Failed to add akta', []);
             }
