@@ -57,7 +57,7 @@ class IzinController extends Controller
         if ($izin->perusahaan_id == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
             if (file_exists(public_path('vendor_file/' . $izin->file_izin))) {
                 // return new PostResource(true, 'ada', []);
-                Storage::delete('vendor_file/' . $izin->file_izin);
+                Storage::delete(public_path('vendor_file/' . $izin->file_izin));
             }
            
 
