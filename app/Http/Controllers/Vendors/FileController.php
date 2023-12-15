@@ -23,7 +23,7 @@ class FileController extends Controller
     {   
         if($request->whatfile=='struktur'){
             $file = base64_decode($request->file, true);
-            $filename = 'struktur/' .  ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id . '.pdf';
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/struktur.pdf';
             if(Storage::disk('public_vendor')->put($filename, $file)){
                 $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
                 $p->struktur_organisasi=$filename;
