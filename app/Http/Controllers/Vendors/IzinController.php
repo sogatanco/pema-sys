@@ -59,7 +59,7 @@ class IzinController extends Controller
                 return new PostResource(true, 'ada', []);
                 // Storage::delete('vendor_file/' . $izin->file_izin);
             }
-            return new PostResource(true, 'tdidak sada', []);
+            return new PostResource(true,  $izin->file_izin, []);
 
             // if ($izin->delete()) {
             //     return new PostResource(true, 'Deleted Succesfully', []);
