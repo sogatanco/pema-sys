@@ -51,4 +51,20 @@ class PortoController extends Controller
         }
         return new PostResource(true, 'Detail Akta ', $filename);
     }
+
+    public function delete($id)
+    {
+        $porto = Porto::where('id_porto', $id)->first();
+        if ($porto->perusahaan_id == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
+            if (file_exists(public_path('vendor_file/' . $porto->spk))) {
+                Storage::disk('public_vendor')->delete($porto->spk);
+            }
+
+            if ($porto->delete()) {
+                return new PostResource(true, 'Deleted Succesfully', []);
+            }
+        } else {
+            return new PostResource(false, 'Not Permitted', []);
+        }
+    }
 }
