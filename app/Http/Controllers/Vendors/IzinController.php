@@ -22,7 +22,7 @@ class IzinController extends Controller
     public function store(Request $request)
     {
         $file = base64_decode($request->file, true);
-        $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id.'/'.'izin/' . time() . '.pdf';
+        $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id . '/' . 'izin/' . time() . '.pdf';
         if (Storage::disk('public_vendor')->put($filename, $file)) {
             $akt = new Izin();
             $akt->perusahaan_id = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id;
@@ -41,18 +41,24 @@ class IzinController extends Controller
         }
     }
 
-    public function view(){
+    public function view()
+    {
         $filename = Izin::where('perusahaan_id', ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id)->get();
 
         foreach ($filename as $f) {
             $f->file_base64 = base64_encode(file_get_contents(public_path('vendor_file/' . $f->file_izin)));
         }
-        return new PostResource(true, 'Detail Akta ' , $filename);
+        return new PostResource(true, 'Detail Akta ', $filename);
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $izin = Izin::where('id_izin', $id)->first();
         if ($izin->perusahaan_id == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
+            if (Storage::exists('vendor_file/' . $izin->file_izin)) {
+                Storage::delete('vendor_file/' . $izin->file_izin);
+            }
+
             if ($izin->delete()) {
                 return new PostResource(true, 'Deleted Succesfully', []);
             }
@@ -60,5 +66,4 @@ class IzinController extends Controller
             return new PostResource(false, 'Not Permitted', []);
         }
     }
-
 }
