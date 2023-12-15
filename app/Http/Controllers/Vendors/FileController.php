@@ -117,7 +117,7 @@ class FileController extends Controller
 
         else if($request->whatfile=='spt'){
             $file = base64_decode($request->file, true);
-            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/ktp_pengurus.pdf';
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/spt.pdf';
             if(Storage::disk('public_vendor')->put($filename, $file)){
                 $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
                 $p->spt=$filename;
@@ -132,7 +132,7 @@ class FileController extends Controller
         }
         else if($request->whatfile=='pph'){
             $file = base64_decode($request->file, true);
-            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/ktp_pengurus.pdf';
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/pph.pdf';
             if(Storage::disk('public_vendor')->put($filename, $file)){
                 $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
                 $p->pph=$filename;
@@ -147,7 +147,7 @@ class FileController extends Controller
         }
         else if($request->whatfile=='lap_keuangan'){
             $file = base64_decode($request->file, true);
-            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/ktp_pengurus.pdf';
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/lap_keuangan.pdf';
             if(Storage::disk('public_vendor')->put($filename, $file)){
                 $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
                 $p->lap_keuangan=$filename;
@@ -162,7 +162,7 @@ class FileController extends Controller
         }
         else if($request->whatfile=='rek_koran'){
             $file = base64_decode($request->file, true);
-            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/ktp_pengurus.pdf';
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/rek_koran.pdf';
             if(Storage::disk('public_vendor')->put($filename, $file)){
                 $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
                 $p->rek_koran=$filename;
