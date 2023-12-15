@@ -56,12 +56,14 @@ class IzinController extends Controller
         $izin = Izin::where('id_izin', $id)->first();
         if ($izin->perusahaan_id == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
             if (Storage::exists('vendor_file/' . $izin->file_izin)) {
-                Storage::delete('vendor_file/' . $izin->file_izin);
+                return new PostResource(true, 'ada', []);
+                // Storage::delete('vendor_file/' . $izin->file_izin);
             }
+            return new PostResource(true, 'tdidak sada', []);
 
-            if ($izin->delete()) {
-                return new PostResource(true, 'Deleted Succesfully', []);
-            }
+            // if ($izin->delete()) {
+            //     return new PostResource(true, 'Deleted Succesfully', []);
+            // }
         } else {
             return new PostResource(false, 'Not Permitted', []);
         }
