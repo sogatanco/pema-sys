@@ -45,4 +45,5 @@ Route::controller(FileController::class)->group(function(){
 
 Route::controller(IzinController::class)->group(function(){
     Route::post('izin/store', 'store');
+    Route::get('izin/my', 'view');
 });
