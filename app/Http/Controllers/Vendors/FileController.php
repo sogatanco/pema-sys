@@ -51,5 +51,52 @@ class FileController extends Controller
                 return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
             }
         }
+        else if($request->whatfile=='logo'){
+            $dataImage = explode(',', $request->file);
+            $file=base64_decode($dataImage[1], true);
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/logo.png';
+            if(Storage::disk('public_vendor')->put($filename, $file)){
+                $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
+                $p->logo_perusahaan=$filename;
+                if($p->save()){
+                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
+                }else{
+                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                }
+            }else{
+                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+            }
+        }
+        else if($request->whatfile=='npwp'){
+            $file = base64_decode($request->file, true);
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/npwp.pdf';
+            if(Storage::disk('public_vendor')->put($filename, $file)){
+                $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
+                $p->file_npwp=$filename;
+                if($p->save()){
+                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
+                }else{
+                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                }
+            }else{
+                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+            }
+        }
+
+        else if($request->whatfile=='pvd'){
+            $file = base64_decode($request->file, true);
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/pvd.pdf';
+            if(Storage::disk('public_vendor')->put($filename, $file)){
+                $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
+                $p->file_pvd=$filename;
+                if($p->save()){
+                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
+                }else{
+                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                }
+            }else{
+                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+            }
+        }
     }
 }
