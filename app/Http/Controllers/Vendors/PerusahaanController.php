@@ -33,8 +33,8 @@ class PerusahaanController extends Controller
         $user = Auth::user();
 
         $dataUmum = Perusahaan::where('user_id', $user->id)
-                    ->join('bidang_usaha', 'bidang_usaha.perusahaan_id', '=', 'perusahaan.id')
-                    ->join('master_bidangusaha', 'master_bidangusaha.id_bidang', '=', 'bidang_usaha.master_bidangusaha_id')
+                    ->leftJoin('bidang_usaha', 'bidang_usaha.perusahaan_id', '=', 'perusahaan.id')
+                    ->leftJoin('master_bidangusaha', 'master_bidangusaha.id_bidang', '=', 'bidang_usaha.master_bidangusaha_id')
                     ->first();
 
         return response()->json([
