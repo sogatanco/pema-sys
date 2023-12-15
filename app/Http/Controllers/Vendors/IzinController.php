@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor\Izin;
 use App\Models\Vendor\ViewPerusahaan;
-use App\Models\Vendor\Perusahaan;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
 

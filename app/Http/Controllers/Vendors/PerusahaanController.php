@@ -106,15 +106,4 @@ class PerusahaanController extends Controller
         }
     }
 
-    public function uploadStrukturOrganisasi(Request $request, $companyId)
-    {
-        $data = $request->all();
-
-        // save to db
-
-        return response()->json([
-            "status" => true,
-            "data" => $data
-        ]);
-    }
 }
