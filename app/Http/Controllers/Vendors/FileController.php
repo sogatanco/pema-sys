@@ -36,5 +36,20 @@ class FileController extends Controller
                 return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
             }
         }
+        else if($request->whatfile=='profil'){
+            $file = base64_decode($request->file, true);
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/company_profile.pdf';
+            if(Storage::disk('public_vendor')->put($filename, $file)){
+                $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
+                $p->company_profile=$filename;
+                if($p->save()){
+                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
+                }else{
+                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                }
+            }else{
+                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+            }
+        }
     }
 }
