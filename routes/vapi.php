@@ -51,6 +51,6 @@ Route::controller(IzinController::class)->group(function(){
 
 Route::controller(PortoController::class)->group(function(){
     Route::post('porto/store', 'store');
-    // Route::get('izin/my', 'view');
+    Route::get('porto/my', 'view');
     // Route::get('izin/delete/{id}', 'delete');
 });
