@@ -9,6 +9,7 @@ use App\Http\Controllers\Vendors\AktaController;
 use App\Http\Controllers\Vendors\FileController;
 use App\Models\Vendor\Akta;
 
+
 Route::middleware('auth:api_vendor')->get('/uservendor', function (Request $request) {
     return $request->user();
 });
