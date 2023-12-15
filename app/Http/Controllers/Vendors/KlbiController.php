@@ -11,7 +11,7 @@ use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
 
 
-class IzinController extends Controller
+class KlbiController extends Controller
 {
     public function __construct()
     {
