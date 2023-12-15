@@ -6,6 +6,7 @@ use App\Http\Controllers\Vendors\UserController;
 use App\Http\Controllers\Vendors\PerusahaanController;
 use App\Http\Controllers\Vendors\JajaranController;
 use App\Http\Controllers\Vendors\AktaController;
+use App\Http\Controllers\Vendors\FileController;
 use App\Models\Vendor\Akta;
 
 Route::middleware('auth:api_vendor')->get('/uservendor', function (Request $request) {
@@ -34,4 +35,8 @@ Route::controller(AktaController::class)->group(function() {
     Route::post('akta/store', 'store');
     Route::get('akta/view', 'viewFile');
     Route::get('akta/delete/{id}', 'deleteAkta');
+});
+
+Route::controller(FileController::class)->group(function(){
+    Route::post('file/upload','uplaodFile' );
 });

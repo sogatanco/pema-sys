@@ -12,7 +12,7 @@ use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
 
 
-class AktaController extends Controller
+class FileController extends Controller
 {
     public function __construct()
     {
