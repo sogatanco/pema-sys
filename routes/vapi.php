@@ -7,6 +7,7 @@ use App\Http\Controllers\Vendors\PerusahaanController;
 use App\Http\Controllers\Vendors\JajaranController;
 use App\Http\Controllers\Vendors\AktaController;
 use App\Http\Controllers\Vendors\FileController;
+use App\Http\Controllers\Vendors\IzinController;
 use App\Models\Vendor\Akta;
 
 
@@ -40,4 +41,9 @@ Route::controller(AktaController::class)->group(function() {
 
 Route::controller(FileController::class)->group(function(){
     Route::post('file/upload','uplaodFile' );
+});
+
+Route::controller(IzinController::class)->group(function(){
+    Route::post('izin/store', 'store');
+    Route::get('izin/my', 'view');
 });
