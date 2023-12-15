@@ -62,9 +62,9 @@ class PerusahaanController extends Controller
         
         $validator = Validator::make($request->all(), [
             'email' => ["required"],
-            'npwp' => ['required'],
+            'no_npwp' => ['required'],
             'id_bidang' => ["required"],
-            'kontak' => ['required'],
+            'hp' => ['required'],
             'alamat' => ['required'],
             'provinsi' => ['required']
         ]);
