@@ -50,4 +50,15 @@ class IzinController extends Controller
         return new PostResource(true, 'Detail Akta ' , $filename);
     }
 
+    public function delete($id){
+        $izin = Izin::where('id_izin', $id)->first();
+        if ($izin->perusahaan_id == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
+            if ($izin->delete()) {
+                return new PostResource(true, 'Deleted Succesfully', []);
+            }
+        } else {
+            return new PostResource(false, 'Not Permitted', []);
+        }
+    }
+
 }
