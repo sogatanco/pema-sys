@@ -59,6 +59,9 @@ class AktaController extends Controller
     {
         $akta = Akta::where('id_akta', $id)->first();
         if ($akta->id_perusahaan == ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id) {
+            if (file_exists(public_path('vendor_file/' . $akta->file_akta))) {
+                Storage::disk('public_vendor')->delete($akta->file_akta);
+            }
             if ($akta->delete()) {
                 return new PostResource(true, 'Deleted Succesfully', []);
             }

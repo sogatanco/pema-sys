@@ -8,7 +8,8 @@ use App\Http\Controllers\Vendors\JajaranController;
 use App\Http\Controllers\Vendors\AktaController;
 use App\Http\Controllers\Vendors\FileController;
 use App\Http\Controllers\Vendors\IzinController;
-use App\Models\Vendor\Akta;
+use App\Http\Controllers\Vendors\PortoController;
+use App\Http\Controllers\Vendors\KlbiController;
 
 
 Route::middleware('auth:api_vendor')->get('/uservendor', function (Request $request) {
@@ -47,4 +48,14 @@ Route::controller(IzinController::class)->group(function(){
     Route::post('izin/store', 'store');
     Route::get('izin/my', 'view');
     Route::get('izin/delete/{id}', 'delete');
+});
+
+Route::controller(PortoController::class)->group(function(){
+    Route::post('porto/store', 'store');
+    Route::get('porto/my', 'view');
+    Route::get('porto/delete/{id}', 'delete');
+});
+
+Route::controller(KlbiController::class)->group(function(){
+    Route::post('klbi/store', 'store');
 });
