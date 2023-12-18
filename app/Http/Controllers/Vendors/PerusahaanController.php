@@ -77,11 +77,10 @@ class PerusahaanController extends Controller
         }
 
         // upload file
-
         $newData = [
             'email_alternatif' => $request->email_alternatif,
             'no_npwp' => $request->no_npwp,
-            'hp' => $request->kontak,
+            'hp' => $request->hp,
             'alamat' => $request->alamat,
             'provinsi' => $request->provinsi,
         ];
@@ -90,10 +89,13 @@ class PerusahaanController extends Controller
         $company = Perusahaan::where('user_id', $user->id)->first();
         $savedData = Perusahaan::where('user_id', $user->id)->update($newData);
 
-        if($savedData){
-
+        if($savedData){ 
             // simpan bentuk usaha,
-            $savedBidang = BidangUsaha::create(['master_bidangusaha_id' => $request->id_bidang, 'perusahaan_id' => $company->id]);
+            $bidangUsahaIsCreated = BidangUsaha::where(['perusahaan_id' => $company->id, 'master_bidangusaha_id' => $request->id_bidang])->count() >= 1;
+
+            if(!$bidangUsahaIsCreated){
+                BidangUsaha::create(['master_bidangusaha_id' => $request->id_bidang, 'perusahaan_id' => $company->id]);
+            };
 
             return response()->json([
                 "status" => true,
