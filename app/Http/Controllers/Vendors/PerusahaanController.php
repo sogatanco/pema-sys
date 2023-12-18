@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Vendor\ViewPerusahaan;
+use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\Storage;
 
 class PerusahaanController extends Controller
 {
@@ -79,7 +82,40 @@ class PerusahaanController extends Controller
             ], 400));
         }
 
-        // upload file
+        // upload file pvd
+        if($request->whatfile=='pvd'){
+            $file = base64_decode($request->file, true);
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/pvd.pdf';
+            if(Storage::disk('public_vendor')->put($filename, $file)){
+                $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
+                $p->file_pvd=$filename;
+                if($p->save()){
+                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
+                }else{
+                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                }
+            }else{
+                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+            }
+        }
+
+        // upload file npwp
+        if($request->whatfile=='npwp'){
+            $file = base64_decode($request->file, true);
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/npwp.pdf';
+            if(Storage::disk('public_vendor')->put($filename, $file)){
+                $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
+                $p->file_npwp=$filename;
+                if($p->save()){
+                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
+                }else{
+                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                }
+            }else{
+                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+            }
+        }
+
         $newData = [
             'email_alternatif' => $request->email_alternatif,
             'no_npwp' => $request->no_npwp,
