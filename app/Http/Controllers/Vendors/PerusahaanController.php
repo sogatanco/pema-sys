@@ -42,6 +42,7 @@ class PerusahaanController extends Controller
                     'perusahaan.hp',
                     'perusahaan.alamat',
                     'perusahaan.provinsi',
+                    'perusahaan.struktur_organisasi',
                     'master_bidangusaha.id_bidang',
                     'master_bidangusaha.nama_bidang'
                     )
