@@ -83,34 +83,26 @@ class PerusahaanController extends Controller
         }
 
         // upload file pvd
-        if($request->whatfile=='pvd'){
+        if($request->file_pvd !== null){
             $file = base64_decode($request->file, true);
             $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/pvd.pdf';
             if(Storage::disk('public_vendor')->put($filename, $file)){
                 $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
                 $p->file_pvd=$filename;
-                if($p->save()){
-                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
-                }else{
-                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
-                }
+                $p->save();
             }else{
                 return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
             }
         }
 
         // upload file npwp
-        if($request->whatfile=='npwp'){
+        if($request->file_npwp !== null){
             $file = base64_decode($request->file, true);
             $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/npwp.pdf';
             if(Storage::disk('public_vendor')->put($filename, $file)){
                 $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
                 $p->file_npwp=$filename;
-                if($p->save()){
-                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
-                }else{
-                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
-                }
+                $p->save();
             }else{
                 return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
             }
