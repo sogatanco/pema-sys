@@ -67,7 +67,9 @@ class PerusahaanController extends Controller
             'id_bidang' => ["required"],
             'hp' => ['required'],
             'alamat' => ['required'],
-            'provinsi' => ['required']
+            'provinsi' => ['required'],
+            'file_pvd' => ['required'],
+            'file_npwp' => ['required']
         ]);
 
         if($validator->fails()){
