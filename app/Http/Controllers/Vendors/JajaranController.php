@@ -45,8 +45,8 @@ class JajaranController extends Controller
 
     public function myDirek(){
         $jjr=Jajaran::where('perusahaan_id',ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id)->get();
-        $data=$jjr;
-        $data['struktur']='dgsdsg';
+        $data['list']=$jjr;
+        $data['struktur']=ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->struktur_organisasi;
         return new PostResource(true, 'My Directors', $data);
     }   
 
