@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor\Jajaran;
 use App\Models\Vendor\ViewPerusahaan;
 use App\Http\Resources\PostResource;
+use PhpParser\Node\Expr\Cast\Object_;
 
 class JajaranController extends Controller
 {
@@ -44,7 +45,14 @@ class JajaranController extends Controller
 
     public function myDirek(){
         $jjr=Jajaran::where('perusahaan_id',ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id)->get();
-        return new PostResource(true, 'My Directors', $jjr);
+        $data['list']=$jjr;
+        $data['struktur_base64']=null;
+        $data['struktur_filename']=null;
+        if (file_exists(public_path('vendor_file/' . ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->struktur_organisasi))){
+            $data['struktur_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->struktur_organisasi)));
+            $data['struktur_filename']='struktur.pdf';
+        }  
+        return new PostResource(true, 'My Directors', $data);
     }   
 
     public function deleteDir($id){

@@ -42,6 +42,7 @@ Route::controller(AktaController::class)->group(function() {
 
 Route::controller(FileController::class)->group(function(){
     Route::post('file/upload','uplaodFile' );
+    Route::get('file/dokumen-perusahaan', 'viewFile');
 });
 
 Route::controller(IzinController::class)->group(function(){
