@@ -19,6 +19,13 @@ class FileController extends Controller
         $this->middleware('auth:api_vendor');
     }
 
+    function viewFile(){
+        $p=ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first();
+        $doc['company_profil']='company_profile.pdf';
+        $doc['company_profil_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
+        return new PostResource(true, 'Dokumen Perusahaan', $doc);
+    }
+
     function uplaodFile(Request $request)
     {   
         if($request->whatfile=='struktur'){
@@ -174,7 +181,36 @@ class FileController extends Controller
             }else{
                 return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
             }
-        }else{
+        }else if($request->whatfile=='fakta_integritas'){
+            $file = base64_decode($request->file, true);
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/fakta_integritas.pdf';
+            if(Storage::disk('public_vendor')->put($filename, $file)){
+                $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
+                $p->fakta_integritas=$filename;
+                if($p->save()){
+                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
+                }else{
+                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                }
+            }else{
+                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+            }
+        }else if($request->whatfile=='sk_kemenkumham'){
+            $file = base64_decode($request->file, true);
+            $filename = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id .'/sk_kemenkumham.pdf';
+            if(Storage::disk('public_vendor')->put($filename, $file)){
+                $p=Perusahaan::find(ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id);
+                $p->sk_kemenkumham=$filename;
+                if($p->save()){
+                    return new PostResource(true, "Upload ".$request->whatfile." Berhasil", []);
+                }else{
+                    return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                }
+            }else{
+                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+            }
+        }
+        else{
             return new PostResource(false, "Please Define what file on request", []);
         }
 
