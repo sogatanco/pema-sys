@@ -37,7 +37,7 @@ class FileController extends Controller
         $doc['sk_kemenkumham_base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->sk_kemenkumham))){
             $doc['sk_kemenkumham']='sk_kemenkumham.pdf';
-            $doc['sk_kemenkumham_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->sk_kemenkumham)));
+            // $doc['sk_kemenkumham_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->sk_kemenkumham)));
         }
         return new PostResource(true, 'Dokumen Perusahaan', $doc);
     }
