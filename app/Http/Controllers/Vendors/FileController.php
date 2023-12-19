@@ -29,9 +29,15 @@ class FileController extends Controller
         }
         $doc['ktp_pengurus']=null;
         $doc['ktp_pengurus_base64']=null;
-        if (file_exists(public_path('vendor_file/' . $p->ktp_penguruse))){
+        if (file_exists(public_path('vendor_file/' . $p->ktp_pengurus))){
             $doc['ktp_pengurus']='ktp_pengurus.pdf';
-            $doc['ktp_pengurus_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
+            $doc['ktp_pengurus_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->ktp_pengurus)));
+        }
+        $doc['spt']=null;
+        $doc['spt_base64']=null;
+        if (file_exists(public_path('vendor_file/' . $p->spt))){
+            $doc['spt']='spt.pdf';
+            $doc['spt_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->spt)));
         }
         return new PostResource(true, 'Dokumen Perusahaan', $doc);
     }
