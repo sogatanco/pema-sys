@@ -46,8 +46,12 @@ class JajaranController extends Controller
     public function myDirek(){
         $jjr=Jajaran::where('perusahaan_id',ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id)->get();
         $data['list']=$jjr;
-        $data['struktur_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->struktur_organisasi)));
-        $data['struktur_filename']='struktur.pdf';
+        $data['struktur_base64']=null;
+        $data['struktur_filename']=null;
+        if (file_exists(public_path('vendor_file/' . ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->struktur_organisasi))){
+            $data['struktur_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->struktur_organisasi)));
+            $data['struktur_filename']='struktur.pdf';
+        }  
         return new PostResource(true, 'My Directors', $data);
     }   
 
