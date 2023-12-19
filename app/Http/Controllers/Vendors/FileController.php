@@ -39,6 +39,20 @@ class FileController extends Controller
             $doc['sk_kemenkumham']='sk_kemenkumham.pdf';
             $doc['sk_kemenkumham_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->sk_kemenkumham)));
         }
+
+        $doc['fakta_integritas']=null;
+        $doc['fakta_integritas_base64']=null;
+        if (file_exists(public_path('vendor_file/' . $p->fakta_integritas))){
+            $doc['fakta_integritas']='fakta_integritas.pdf';
+            $doc['fakta_integritas_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->fakta_integritas)));
+        }
+
+        $doc['spt']=null;
+        $doc['spt_base64']=null;
+        if (file_exists(public_path('vendor_file/' . $p->spt))){
+            $doc['spt']='spt.pdf';
+            $doc['spt_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->spt)));
+        }
         return new PostResource(true,'Doc Company', $doc);
     }
 
