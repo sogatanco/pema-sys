@@ -91,7 +91,7 @@ class PerusahaanController extends Controller
                 $p->file_pvd=$filename;
                 $p->save();
             }else{
-                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                return new PostResource(false, "Upload PVD Gagal", []);
             }
         }
 
@@ -104,7 +104,7 @@ class PerusahaanController extends Controller
                 $p->file_npwp=$filename;
                 $p->save();
             }else{
-                return new PostResource(false, "Upload ".$request->whatfile." Gagal", []);
+                return new PostResource(false, "Upload NPWP Gagal", []);
             }
         }
 
