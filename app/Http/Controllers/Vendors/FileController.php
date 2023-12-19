@@ -27,11 +27,11 @@ class FileController extends Controller
             $doc['company_profil']='company_profile.pdf';
             $doc['company_profil_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
         }
-        $doc['company_profil']=null;
-        $doc['company_profil_base64']=null;
-        if (file_exists(public_path('vendor_file/' . $p->company_profile))){
-            $doc['company_profil']='company_profile.pdf';
-            $doc['company_profil_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
+        $doc['ktp_pengurus']=null;
+        $doc['ktp_pengurus_base64']=null;
+        if (file_exists(public_path('vendor_file/' . $p->ktp_penguruse))){
+            $doc['ktp_pengurus']='ktp_pengurus.pdf';
+            $doc['ktp_pengurus_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
         }
         return new PostResource(true, 'Dokumen Perusahaan', $doc);
     }
