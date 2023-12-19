@@ -46,7 +46,7 @@ class PerusahaanController extends Controller
                     'perusahaan.alamat',
                     'perusahaan.provinsi',
                     'perusahaan.file_npwp',
-                    'perusahaan.struktur_organisasi',
+                    'perusahaan.file_pvd',
                     'master_bidangusaha.id_bidang',
                     'master_bidangusaha.nama_bidang'
                     )
@@ -56,6 +56,9 @@ class PerusahaanController extends Controller
                     ->first();
 
                     $dataUmum->npwp_base64= base64_encode(file_get_contents(public_path('vendor_file/' . $dataUmum->file_npwp)));
+                    $dataUmum->npwp_base64= base64_encode(file_get_contents(public_path('vendor_file/' . $dataUmum->file_pvd)));
+                    $dataUmum->file_npwp='npwp.pdf';
+                    $dataUmum->file_pvd='pvd.pdf';
 
         return response()->json([
             "success" => true,
