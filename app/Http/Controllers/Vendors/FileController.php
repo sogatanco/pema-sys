@@ -21,25 +21,25 @@ class FileController extends Controller
 
     function viewFile(){
         $p=Perusahaan::where('user_id', Auth::user()->id)->get()->first();
-        // $doc['company_profil']=null;
-        // $doc['company_profil_base64']=null;
-        // if (file_exists(public_path('vendor_file/' . $p->company_profile))){
-        //     $doc['company_profil']='company_profile.pdf';
-        //     $doc['company_profil_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
-        // }
-        // $doc['ktp_pengurus']=null;
-        // $doc['ktp_pengurus_base64']=null;
-        // if (file_exists(public_path('vendor_file/' . $p->ktp_pengurus))){
-        //     $doc['ktp_pengurus']='ktp_pengurus.pdf';
-        //     $doc['ktp_pengurus_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->ktp_pengurus)));
-        // }
-        // $doc['sk_kemenkumham']=null;
-        // $doc['sk_kemenkumham_base64']=null;
-        // if (file_exists(public_path('vendor_file/' . $p->sk_kemenkumham))){
-        //     $doc['sk_kemenkumham']='sk_kemenkumham.pdf';
-        //     // $doc['sk_kemenkumham_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->sk_kemenkumham)));
-        // }
-        return new PostResource(true,  $p->sk_kemenkumham, file_exists(public_path('vendor_file/' . $p->sk_kemenkumham)));
+        $doc['company_profil']=null;
+        $doc['company_profil_base64']=null;
+        if (file_exists(public_path('vendor_file/' . $p->company_profile))){
+            $doc['company_profil']='company_profile.pdf';
+            $doc['company_profil_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
+        }
+        $doc['ktp_pengurus']=null;
+        $doc['ktp_pengurus_base64']=null;
+        if (file_exists(public_path('vendor_file/' . $p->ktp_pengurus))){
+            $doc['ktp_pengurus']='ktp_pengurus.pdf';
+            $doc['ktp_pengurus_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->ktp_pengurus)));
+        }
+        $doc['sk_kemenkumham']=null;
+        $doc['sk_kemenkumham_base64']=null;
+        if (file_exists(public_path('vendor_file/' . $p->sk_kemenkumham))){
+            $doc['sk_kemenkumham']='sk_kemenkumham.pdf';
+            $doc['sk_kemenkumham_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->sk_kemenkumham)));
+        }
+        return new PostResource(true,'Doc Company', $doc);
     }
 
     function uplaodFile(Request $request)
