@@ -45,6 +45,7 @@ class PerusahaanController extends Controller
                     'perusahaan.hp',
                     'perusahaan.alamat',
                     'perusahaan.provinsi',
+                    'perusahaan.file_npwp',
                     'perusahaan.struktur_organisasi',
                     'master_bidangusaha.id_bidang',
                     'master_bidangusaha.nama_bidang'
@@ -53,6 +54,8 @@ class PerusahaanController extends Controller
                     ->leftJoin('bidang_usaha', 'bidang_usaha.perusahaan_id', '=', 'perusahaan.id')
                     ->leftJoin('master_bidangusaha', 'master_bidangusaha.id_bidang', '=', 'bidang_usaha.master_bidangusaha_id')
                     ->first();
+
+                    $dataUmum->npwp_base64= base64_encode(file_get_contents(public_path('vendor_file/' . $dataUmum->file_npwp)));
 
         return response()->json([
             "success" => true,
