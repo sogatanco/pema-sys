@@ -21,7 +21,7 @@ class FileController extends Controller
 
     function viewFile(){
         $p=Perusahaan::where('user_id', Auth::user()->id)->get()->first();
-        $doc[0]['id']='profile';
+        $doc[0]['id']='profil';
         $doc[0]['file_name']=null;
         $doc[0]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->company_profile))){
