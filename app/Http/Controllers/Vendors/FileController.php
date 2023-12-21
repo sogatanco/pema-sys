@@ -21,58 +21,82 @@ class FileController extends Controller
 
     function viewFile(){
         $p=Perusahaan::where('user_id', Auth::user()->id)->get()->first();
+<<<<<<< HEAD
         $doc['company_profil']=null;
         $doc['company_profil_base64']=null;
         $docs = [];
         if (file_exists(public_path('vendor_file/' . $p->company_profile))){
             array_push(['filename' => 'company_profile.pdf', 'base64' => base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile))), $docs]);
+=======
+        $doc[0]['id']='profil';
+        $doc[0]['file_name']=null;
+        $doc[0]['base64']=null;
+        if (file_exists(public_path('vendor_file/' . $p->company_profile))){
+            $doc[0]['id']='profile';
+            $doc[0]['file_name']='company_profile.pdf';
+            $doc[0]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
+>>>>>>> f5e60cb7d622cc9f53330b16aa94df190ed30f81
         }
-        $doc['ktp_pengurus']=null;
-        $doc['ktp_pengurus_base64']=null;
+        $doc[1]['id']='ktp';
+        $doc[1]['file_name']=null;
+        $doc[1]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->ktp_pengurus))){
-            $doc['ktp_pengurus']='ktp_pengurus.pdf';
-            $doc['ktp_pengurus_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->ktp_pengurus)));
+            $doc[1]['id']='ktp';
+            $doc[1]['file_name']='ktp_pengurus.pdf';
+            $doc[1]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->ktp_pengurus)));
         }
-        $doc['sk_kemenkumham']=null;
-        $doc['sk_kemenkumham_base64']=null;
+        $doc[2]['id']='sk_kemenkumham';
+        $doc[2]['file_name']=null;
+        $doc[2]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->sk_kemenkumham))){
-            $doc['sk_kemenkumham']='sk_kemenkumham.pdf';
-            $doc['sk_kemenkumham_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->sk_kemenkumham)));
+            $doc[2]['id']='sk_kemenkumham';
+            $doc[2]['file_name']='sk_kemenkumham.pdf';
+            $doc[2]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->sk_kemenkumham)));
         }
 
-        $doc['fakta_integritas']=null;
-        $doc['fakta_integritas_base64']=null;
+        $doc[3]['id']='fakta_integritas';
+        $doc[3]['file_name']=null;
+        $doc[3]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->fakta_integritas))){
-            $doc['fakta_integritas']='fakta_integritas.pdf';
-            $doc['fakta_integritas_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->fakta_integritas)));
+            $doc[3]['id']='fakta_integritas';
+            $doc[3]['file_name']='fakta_integritas.pdf';
+            $doc[3]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->fakta_integritas)));
         }
 
-        $doc['spt']=null;
-        $doc['spt_base64']=null;
+        $doc[4]['id']='spt';
+        $doc[4]['file_name']=null;
+        $doc[4]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->spt))){
-            $doc['spt']='spt.pdf';
-            $doc['spt_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->spt)));
+            $doc[4]['id']='spt';
+            $doc[4]['file_name']='spt.pdf';
+            $doc[4]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->spt)));
         }
 
-        $doc['pph']=null;
-        $doc['pph_base64']=null;
+        $doc[5]['id']='pph';
+        $doc[5]['file_name']=null;
+        $doc[5]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->pph))){
-            $doc['pph']='pph.pdf';
-            $doc['pph_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->pph)));
+            $doc[5]['id']='pph';
+            $doc[5]['file_name']='pph.pdf';
+            $doc[5]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->pph)));
         }
 
-        $doc['lap_keuangan']=null;
-        $doc['lap_keuangan_base64']=null;
+        $doc[6]['id']='lap_keuangan';
+        $doc[6]['file_name']=null;
+        $doc[6]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->lap_keuangan))){
-            $doc['lap_keuangan']='lap_keuangan.pdf';
-            $doc['lap_keuangan_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->lap_keuangan)));
+            $doc[6]['id']='lap_keuangan';
+            $doc[6]['file_name']='lap_keuangan.pdf';
+            $doc[6]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->lap_keuangan)));
         }
 
-        $doc['rek_koran']=null;
-        $doc['rek_koran_base64']=null;
+        $doc[7]['id']='rek_koran';
+        $doc[7]['file_name']=null;
+        $doc[7]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->rek_koran))){
-            $doc['rek_koran']='rek_koran.pdf';
-            $doc['rek_koran_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->rek_koran)));
+            $doc[7]['id']='rek_koran';
+            $doc[7]['file_name']='rek_koran.pdf';
+            $doc[7]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->rek_koran)));
         }
         return new PostResource(true,'Doc Company', $doc);
     }
