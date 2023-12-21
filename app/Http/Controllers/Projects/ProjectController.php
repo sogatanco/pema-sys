@@ -74,11 +74,22 @@ class ProjectController extends Controller
                 $progress[$p] = array_sum($totalProgress[$p]);
                 $totalTask[$p] = count($allTask[$p]);
 
-                // cari stage aktif
-                $projects[$p]['current_stage'] = ProjectStage::select('project_stages.*', 'project_phases.title AS phase')
-                                                ->where(['project_id' => $projects[$p]->project_id, 'status' => 1])
-                                                ->join('project_phases', 'project_phases.id','=','project_stages.phase')
-                                                ->first();
+                if($data->category === 'business'){
+                    // cari stage aktif
+                    $projects[$p]['current_stage'] = ProjectStage::select('project_stages.*', 'project_phases.title AS phase')
+                                                    ->where(['project_id' => $projects[$p]->project_id, 'status' => 1])
+                                                    ->join('project_phases', 'project_phases.id','=','project_stages.phase')
+                                                    ->first();
+                }else{
+                    // jika category non-business
+                    $data['current_stage'] = ProjectStage::select(
+                                                'project_stages.id AS stage_id',
+                                                'start_date',
+                                                'end_date',
+                                            )
+                                            ->where(['project_id' => $projectId, 'status' => 1])
+                                            ->first();
+                }   
 
                 $projects[$p]['total_progress'] = 0;
                 

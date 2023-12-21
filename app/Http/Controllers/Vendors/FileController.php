@@ -23,9 +23,9 @@ class FileController extends Controller
         $p=Perusahaan::where('user_id', Auth::user()->id)->get()->first();
         $doc['company_profil']=null;
         $doc['company_profil_base64']=null;
+        $docs = [];
         if (file_exists(public_path('vendor_file/' . $p->company_profile))){
-            $doc['company_profil']='company_profile.pdf';
-            $doc['company_profil_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
+            array_push(['filename' => 'company_profile.pdf', 'base64' => base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile))), $docs]);
         }
         $doc['ktp_pengurus']=null;
         $doc['ktp_pengurus_base64']=null;
