@@ -10,7 +10,7 @@ class APerusahaanController extends Controller
 {
     function index()
     {
-        $data=ViewPerusahaan::get()->latest();
+        $data=ViewPerusahaan::get();
         new PostResource(true, 'list data Perusahaan', $data);
     }
 }
