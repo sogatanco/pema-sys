@@ -11,6 +11,6 @@ class APerusahaanController extends Controller
     function index()
     {
         $data=ViewPerusahaan::get();
-        new PostResource(true, 'list data Perusahaan', $data);
+        return new PostResource(true, 'list data Perusahaan', $data);
     }
 }
