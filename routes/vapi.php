@@ -60,4 +60,4 @@ Route::controller(PortoController::class)->group(function(){
 Route::controller(KlbiController::class)->group(function(){
     Route::post('kbli/store', 'store');
     Route::get('kbli/view', 'myKbli');
-});
+}); 
