@@ -8,6 +8,7 @@ use App\Http\Controllers\Da\DaActController;
 use App\Http\Controllers\Da\DaActivitController;
 use App\Http\Controllers\Asset\InvCat;
 use App\Http\Controllers\Asset\InvController;
+use App\Http\Controllers\Vendors\Admin\APerusahaanController;
 
 
 Route::controller(DaCatController::class)->group(function () {
@@ -46,4 +47,10 @@ Route::controller(InvController::class)->group(function () {
      Route::get('inv/onme', 'getAssetOnMe')->middleware("role:Employee");
      Route::post('inv/rservice', 'requestService')->middleware("role:Employee");
      Route::get('inv/getrservice', 'getRequest')->middleware("role:Employee");
+});
+
+// vendor admin
+
+Route::controller(APerusahaanController::class)->group(function(){
+     Route::get('vendor/company', 'index')->middleware("role:AdminVendor");
 });
