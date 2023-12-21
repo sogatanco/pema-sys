@@ -21,17 +21,21 @@ class FileController extends Controller
 
     function viewFile(){
         $p=Perusahaan::where('user_id', Auth::user()->id)->get()->first();
-        $doc[0]['company_profil']=null;
-        $doc[0]['company_profil_base64']=null;
+        $doc[0]['id']='profile';
+        $doc[0]['file_name']=null;
+        $doc[0]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->company_profile))){
-            $doc[0]['company_profil']='company_profile.pdf';
-            $doc[0]['company_profil_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
+            $doc[0]['id']='profile';
+            $doc[0]['file_name']='company_profile.pdf';
+            $doc[0]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
         }
-        $doc[1]['ktp_pengurus']=null;
-        $doc[1]['ktp_pengurus_base64']=null;
+        $doc[1]['id']='ktp';
+        $doc[1]['file_name']=null;
+        $doc[1]['base64']=null;
         if (file_exists(public_path('vendor_file/' . $p->ktp_pengurus))){
-            $doc[1]['ktp_pengurus']='ktp_pengurus.pdf';
-            $doc[1]['ktp_pengurus_base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->ktp_pengurus)));
+            $doc[1]['id']='ktp';
+            $doc[1]['file_name']='ktp_pengurus.pdf';
+            $doc[1]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->ktp_pengurus)));
         }
         // $doc['sk_kemenkumham']=null;
         // $doc['sk_kemenkumham_base64']=null;
