@@ -1000,6 +1000,13 @@ class TaskController extends Controller
                     ->limit(5)
                     ->get();
 
+        for ($lt=0; $lt < count($listask); $lt++) { 
+            $listask[$lt]['pics'] = TaskPic::select('project_task_pics.id', 'project_task_pics.employe_id', 'employees.first_name')
+                        ->where('task_id', $listTask[$lt]->task_id)
+                        ->join('employees', 'employees.employe_id', '=', 'project_task_pics.employe_id')
+                        ->get();
+        }
+
         return response()->json([
             "status" => true,
             "data" => $listTask

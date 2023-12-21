@@ -74,8 +74,9 @@ class ProjectController extends Controller
                 $progress[$p] = array_sum($totalProgress[$p]);
                 $totalTask[$p] = count($allTask[$p]);
 
+                // cari stage aktif
                 if($projects[$p]->category === 'business'){
-                    // cari stage aktif
+                    // jika category business
                     $projects[$p]['current_stage'] = ProjectStage::select('project_stages.*', 'project_phases.title AS phase')
                                                     ->where(['project_id' => $projects[$p]->project_id, 'status' => 1])
                                                     ->join('project_phases', 'project_phases.id','=','project_stages.phase')
