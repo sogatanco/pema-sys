@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor\Klbi;
+use App\Models\Vendor\ViewKbli;
 use App\Models\Vendor\ViewPerusahaan;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
@@ -29,5 +30,10 @@ class KlbiController extends Controller
             return new PostResource(false, 'Failed to insert', []);
         }
         
+    }
+
+    public function myKbli(){
+        $data=ViewKbli::where('perusahaan_id',ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id )->get();
+        return new PostResource(true, 'My Kbli', $data);
     }
 }
