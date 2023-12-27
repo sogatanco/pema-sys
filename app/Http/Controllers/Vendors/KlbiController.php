@@ -11,7 +11,7 @@ use App\Models\Vendor\MasterKbli;
 use App\Models\Vendor\ViewPerusahaan;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class KlbiController extends Controller
 {
@@ -42,5 +42,18 @@ class KlbiController extends Controller
     {
         $data = MasterKbli::get();
         return new PostResource(true, 'List Kbli', $data);
+    }
+
+    public function delete($id)
+    {
+        $deleted = Kbli::find($id)->delete();
+
+        if($deleted){
+            return new PostResource(true, 'Kbli has been deleted.', $data);
+        }else{
+            throw new HttpResponseException(response([
+                "message" => "Something went wrong."
+            ], 500));
+        }
     }
 }

@@ -61,4 +61,5 @@ Route::controller(KlbiController::class)->group(function(){
     Route::post('kbli/store', 'store');
     Route::get('kbli/view', 'myKbli');
     Route::get('kbli/list', 'list');
+    Route::delete('kbli/delete/{id}', 'delete');
 }); 
