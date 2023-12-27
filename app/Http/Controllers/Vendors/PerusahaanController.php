@@ -152,7 +152,7 @@ class PerusahaanController extends Controller
     
     public function submit($companyId)
     {
-        $idUser = Auth::user()->id();
+        $idUser = Auth::user()->id;
         $userCompany = Perusahaan::where('user_id')->first();
 
         if($idUser !== $userCompany->id){
