@@ -157,7 +157,8 @@ class PerusahaanController extends Controller
 
         if($userCompany !== $userCompany->id){
             throw new HttpResponseException(response([
-                "message" => "Unauthorized."
+                "message" => "Unauthorized.",
+                "data" => $userCompany,
             ], 401));
         }
 
