@@ -36,7 +36,7 @@ class KlbiController extends Controller
 
         $k=new Kbli();
         $k->id_kbli=$idKbli;
-        $k->perusahaan_id = $perusahaan_id;
+        $k->perusahaan_id = $perusahaanId;
         if($k->save()){
             return new PostResource(true, 'New Klbi Inserted', []);
         }else{
