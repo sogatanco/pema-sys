@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor\Klbi;
 use App\Models\Vendor\ViewKbli;
+use App\Models\Vendor\MasterKbli;
 use App\Models\Vendor\ViewPerusahaan;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
@@ -39,7 +40,7 @@ class KlbiController extends Controller
     
     public function list()
     {
-        $data = ViewKbli::get();
+        $data = MasterKbli::get();
         return new PostResource(true, 'List Kbli', $data);
     }
 }
