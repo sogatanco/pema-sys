@@ -155,10 +155,9 @@ class PerusahaanController extends Controller
         $idUser = Auth::user()->id;
         $userCompany = Perusahaan::where('user_id', $idUser)->first();
 
-        if($userCompany !== $userCompany->id){
+        if($companyId !== $userCompany->id){
             throw new HttpResponseException(response([
-                "message" => "Unauthorized.",
-                "data" => $userCompany,
+                "message" => "Unauthorized."
             ], 401));
         }
 
