@@ -150,20 +150,12 @@ class PerusahaanController extends Controller
         }
     }
     
-    public function submit($companyId)
+    public function submit()
     {
         $idUser = Auth::user()->id;
         $userCompany = Perusahaan::where('user_id', $idUser)->first();
 
-        if($companyId !== $userCompany->id){
-            throw new HttpResponseException(response([
-                "message" => "Unauthorized.",
-                "kj" => $companyId,
-                "dj" => $userCompany->id,
-            ], 401));
-        }
-
-        $statusUpdated = Perusahaan::find($userCompany->id)->update(['status_verifikasi' => 'review']);
+        $statusUpdated = Perusahaan::where('id_user', $idUser)->update(['status_verifikasi' => 'review']);
 
         if($statusUpdated){
             return response()->json([
