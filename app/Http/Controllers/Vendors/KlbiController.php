@@ -22,9 +22,21 @@ class KlbiController extends Controller
 
     public function store(Request $request)
     {
+        $idKbli = $request->id_kbli;
+        $perusahaanId = ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id;
+        
+        
+        $kbliIsExist = Kbli::where(['id_kbli' => $idKbli, 'perusahaan_id' => $perusahaanId])->count() > 0;
+
+        if($kbliIsExist){
+            throw new HttpResponseException(response([
+                "message" => "The data already exist."
+            ], 409));
+        }
+
         $k=new Kbli();
-        $k->id_kbli=$request->id_kbli;
-        $k->perusahaan_id=ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id;
+        $k->id_kbli=$idKbli;
+        $k->perusahaan_id = $perusahaan_id;
         if($k->save()){
             return new PostResource(true, 'New Klbi Inserted', []);
         }else{
@@ -49,7 +61,7 @@ class KlbiController extends Controller
         $deleted = Kbli::find($id)->delete();
 
         if($deleted){
-            return new PostResource(true, 'Kbli has been deleted.', $data);
+            return new PostResource(true, 'Kbli has been deleted.', null);
         }else{
             throw new HttpResponseException(response([
                 "message" => "Something went wrong."
