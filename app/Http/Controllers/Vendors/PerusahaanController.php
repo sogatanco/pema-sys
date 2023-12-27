@@ -149,5 +149,30 @@ class PerusahaanController extends Controller
             ], 500));
         }
     }
+    
+    public function submit($companyId)
+    {
+        $idUser = Auth::user()->id();
+        $userCompany = Perusahaan::where('user_id')->first();
+
+        if($idUser !== $userCompany->id){
+            throw new HttpResponseException(response([
+                "message" => "Unauthorized."
+            ], 401));
+        }
+
+        $statusUpdated = Perusahaan::find($userCompany->id)->update(['status_verifikasi' => 'review']);
+
+        if($statusUpdated){
+            return response()->json([
+                "status" => true,
+                "message" => 'Status has been updated.'
+            ], 200);
+        }else{
+            throw new HttpResponseException(response([
+                "message" => "Something went wrong."
+            ], 500));
+        }
+    }
 
 }

@@ -13,4 +13,9 @@ class APerusahaanController extends Controller
         $data=ViewPerusahaan::get();
         return new PostResource(true, 'list data Perusahaan', $data);
     }
+
+    public function submit()
+    {
+        return new PostResource(true, 'From submit dokumen endpoin', null);
+    }
 }
