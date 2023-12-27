@@ -21,13 +21,6 @@ class FileController extends Controller
 
     function viewFile(){
         $p=Perusahaan::where('user_id', Auth::user()->id)->get()->first();
-<<<<<<< HEAD
-        $doc['company_profil']=null;
-        $doc['company_profil_base64']=null;
-        $docs = [];
-        if (file_exists(public_path('vendor_file/' . $p->company_profile))){
-            array_push(['filename' => 'company_profile.pdf', 'base64' => base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile))), $docs]);
-=======
         $doc[0]['id']='profil';
         $doc[0]['file_name']=null;
         $doc[0]['base64']=null;
@@ -35,7 +28,6 @@ class FileController extends Controller
             $doc[0]['id']='profile';
             $doc[0]['file_name']='company_profile.pdf';
             $doc[0]['base64']=base64_encode(file_get_contents(public_path('vendor_file/' . $p->company_profile)));
->>>>>>> f5e60cb7d622cc9f53330b16aa94df190ed30f81
         }
         $doc[1]['id']='ktp';
         $doc[1]['file_name']=null;

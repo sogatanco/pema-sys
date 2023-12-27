@@ -36,4 +36,10 @@ class KlbiController extends Controller
         $data=ViewKbli::where('perusahaan_id',ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id )->get();
         return new PostResource(true, 'My Kbli', $data);
     }
+    
+    public function list()
+    {
+        $data = ViewKbli::get();
+        return new PostResource(true, 'List Kbli', $data);
+    }
 }
