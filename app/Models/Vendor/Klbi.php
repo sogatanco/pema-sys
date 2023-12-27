@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Klbi extends Model
 {
     protected $connection ='mysql2';
-    protected $table = 'klbi';
+    protected $table = 'kbli';
     protected $primaryKey='id';
 }
