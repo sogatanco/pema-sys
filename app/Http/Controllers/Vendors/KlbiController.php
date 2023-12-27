@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Vendors;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Vendor\Klbi;
+use App\Models\Vendor\Kbli;
 use App\Models\Vendor\ViewKbli;
 use App\Models\Vendor\MasterKbli;
 use App\Models\Vendor\ViewPerusahaan;
@@ -22,8 +22,8 @@ class KlbiController extends Controller
 
     public function store(Request $request)
     {
-        $k=new Klbi();
-        $k->id_klbi=$request->id_klbi;
+        $k=new Kbli();
+        $k->id_kbli=$request->id_kbli;
         $k->perusahaan_id=ViewPerusahaan::where('user_id', Auth::user()->id)->get()->first()->id;
         if($k->save()){
             return new PostResource(true, 'New Klbi Inserted', []);
