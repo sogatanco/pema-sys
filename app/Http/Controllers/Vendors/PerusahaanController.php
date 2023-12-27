@@ -31,6 +31,18 @@ class PerusahaanController extends Controller
         ]);
     }
 
+    public function statusPerusahaan()
+    {
+        $userId = Auth::user()->id;
+
+        $companyStatus = Perusahaan::select('status_verifikasi')->where('user_id', $userId)->first();
+
+        return response()->json([
+            "status" => true,
+            'data' => $companyStatus,
+        ], 200);
+    }
+
     public function getDataUmum()
     {
         $user = Auth::user();

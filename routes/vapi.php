@@ -22,6 +22,7 @@ Route::controller(UserController::class)->group(function() {
 });
 
 Route::controller(PerusahaanController::class)->group(function() {
+    Route::get('perusahaan/status', 'statusPerusahaan');
     Route::get('perusahaan/list-bidang-usaha', 'listBidangUsaha');
     Route::get('perusahaan/data-umum', 'getDataUmum');
     Route::post('perusahaan/store', 'store');
