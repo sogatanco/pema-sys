@@ -90,7 +90,10 @@ class APerusahaanController extends Controller
             'ktp_pengurus', 
             'sk_kemenkumham',
             'fakta_integritas',
-            'spt'
+            'spt',
+            'pph',
+            "lap_keuangan",
+            'rek_koran',
         ];
 
         for ($l=0; $l < count($list); $l++) { 
