@@ -78,4 +78,24 @@ class APerusahaanController extends Controller
 
         return new PostResource(true, 'List izin', $listIzin);
     }
+
+    public function listDokumen($companyId)
+    {
+        $data = Perusahaan::where('id', $companyId)->first();
+        
+        $docs = [];
+
+        if (file_exists(public_path('vendor_file/' . $data->company_profile))){
+
+            $profil = [
+                "name" => "profil",
+                "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->company_profile)))
+            ];
+
+            array_push($docs, $profil);
+            
+        }
+
+        return new PostResource(true, 'List dokumen', $docs);
+    }
 }
