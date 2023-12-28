@@ -24,7 +24,13 @@ class APerusahaanController extends Controller
         $data = ViewPerusahaan::where('status_verifikasi', 'review_submit')
                 ->orWhere('status_verifikasi', 'review_update')
                 ->get();
-                
+
         return new PostResource(true, 'Request data', $data);
+    }
+    
+    public function listDataUmum($companyId)
+    {
+        $data = ViewPerusahan::where('id', $companyId)->first();
+        return new PostResource(true, 'List data umum', $data);
     }
 }

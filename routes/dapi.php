@@ -55,4 +55,6 @@ Route::controller(APerusahaanController::class)->group(function(){
      Route::get('vendor/company', 'index')->middleware("role:AdminVendor");
      Route::get('vendor/company/{id}', 'show')->middleware("role:AdminVendor");
      Route::get('vendor/request-list', 'requestList')->middleware("role:AdminVendor");
+     Route::get('vendor/{id}/list-data-umum', 'listDataUmum')->middleware("role:AdminVendor");
+     Route::get('vendor/{id}/list-jajaran', 'listJajaran')->middleware("role:AdminVendor");
 });
