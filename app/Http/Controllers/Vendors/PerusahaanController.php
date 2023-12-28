@@ -189,13 +189,27 @@ class PerusahaanController extends Controller
     public function documentStatus()
     {
         $idUser = Auth::user()->id;
-        $company = Perusahaan::select('id')->where('user_id', $idUser)->first();
+        $company = Perusahaan::where('user_id', $idUser)->first();
 
-        $akta = Akta::where('id_perusahaan', $company->id)->get();
+        $akta = Akta::where('id_perusahaan', $company->id)->count() > 0 ? true : false;
+        $izinBerusaha = Izin::where('perusahaan_id', $company->id)->count() > 0 ? true : false;
+        $ktp = $company->ktp_pengurus !== '-' ? true : false;
+        $skKemenkumham = $company->sk_kemenkumham !== '-' ? true : false;
+        $faktaIntegritas = $company->fakta_integritas !== '-' ? true : false;
+        $spt = $company->spt !== '-' ? true : false;
+        $pph = $company->pph !== '-' ? true : false;
+        $lapKeuangan = $company->lap_keuangan !== '-' ? true : false;
+        $RekKoran = $company->rek_koran !== '-' ? true : false;
+
+        if($akta && $izinBerusaha && $ktp && $skKemenkumham && $faktaIntegritas && $spt && $pph && $lapKeuangan && $RekKoran ){
+            $status = true;
+        }else{
+            $status = false;
+        }
 
         return response()->json([
             "status" => true,
-            "data" => count($akta) > 0 ? true : false,
+            "data" => $status,
         ], 200);
     }
 
