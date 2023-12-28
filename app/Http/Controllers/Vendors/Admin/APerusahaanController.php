@@ -30,7 +30,7 @@ class APerusahaanController extends Controller
     
     public function listDataUmum($companyId)
     {
-        $data = ViewPerusahan::where('id', $companyId)->first();
+        $data = ViewPerusahaan::where('id', $companyId)->first();
         return new PostResource(true, 'List data umum', $data);
     }
 }
