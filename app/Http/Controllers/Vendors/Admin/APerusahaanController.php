@@ -104,6 +104,24 @@ class APerusahaanController extends Controller
             array_push($docs, $ktp);
         }
 
+        // file sk kemenkumham
+        if (file_exists(public_path('vendor_file/' . $data->sk_kemenkumham))){
+            $sk_kemenkumham = [
+                "name" => "sk_kemenkumham",
+                "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->sk_kemenkumham)))
+            ];
+            array_push($docs, $sk_kemenkumham);
+        }
+
+        // file fakta integritas
+        if (file_exists(public_path('vendor_file/' . $data->fakta_integritas))){
+            $fakta_integritas = [
+                "name" => "fakta_integritas",
+                "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->fakta_integritas)))
+            ];
+            array_push($docs, $fakta_integritas);
+        }
+
         return new PostResource(true, 'List dokumen', $docs);
     }
 }
