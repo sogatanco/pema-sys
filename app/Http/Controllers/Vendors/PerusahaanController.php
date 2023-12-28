@@ -195,7 +195,9 @@ class PerusahaanController extends Controller
 
         return response()->json([
             "status" => true,
-            "data" => $akta
+            "data" => $akta,
+            "data" => $idUser,
+            "data" => $companyId
         ], 200);
     }
 
