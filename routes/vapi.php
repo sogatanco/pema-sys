@@ -30,6 +30,7 @@ Route::controller(PerusahaanController::class)->group(function() {
     Route::get('perusahaan/document-status', 'documentStatus');
     Route::get('perusahaan/jajaran-status', 'jajaranStatus');
     Route::get('perusahaan/portofolio-status', 'portofolioStatus');
+    Route::get('perusahaan/bidangusaha-status', 'bidangUsahaStatus');
 });
 
 Route::controller(JajaranController::class)->group(function() {

@@ -246,4 +246,17 @@ class PerusahaanController extends Controller
         ], 200);
     }
 
+    public function bidangUsahaStatus()
+    {
+        $userId = Auth::user()->id;
+        $company = Perusahaan::where('user_id', $userId)->first();
+
+        $status = BidangUsaha::where('perusahaan_id', $company->id)->count() > 0 ? true : false;
+
+        return response()->json([
+            "status" => true,
+            "data" => $status
+        ], 200);
+    }
+
 }
