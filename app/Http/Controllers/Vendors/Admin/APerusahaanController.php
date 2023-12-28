@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Vendors\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Vendor\ViewPerusahaan;
 use App\Models\Vendor\Jajaran;
+use App\Models\Vendor\Akta;
 use App\Http\Resources\PostResource;
 
 class APerusahaanController extends Controller
