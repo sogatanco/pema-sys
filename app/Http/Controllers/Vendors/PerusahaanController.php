@@ -218,9 +218,18 @@ class PerusahaanController extends Controller
         $userId = Auth::user()->id;
         $company = Perusahaan::where('user_id', $userId)->first();
 
+        $jajaran = Jajaran::where('perusahaan_id', $company->id)->count() > 0 ? true : false;
+        $struktur = $company->struktur_organisasi !== '-' ? true : false;
+
+        if($jajaran && $struktur){
+            $status = true;
+        }else{
+            $status = false;
+        }
+
         return response()->json([
             "status" => true,
-            "data" => $company
+            "data" => $status
         ], 200);
     }
 
