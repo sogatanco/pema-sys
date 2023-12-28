@@ -8,6 +8,7 @@ use App\Models\Vendor\ViewPerusahaan;
 use App\Models\Vendor\Jajaran;
 use App\Models\Vendor\Akta;
 use App\Models\Vendor\Izin;
+use App\Models\Vendor\Porto;
 use App\Http\Resources\PostResource;
 
 class APerusahaanController extends Controller
