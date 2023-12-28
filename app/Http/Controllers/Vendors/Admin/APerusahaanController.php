@@ -38,7 +38,21 @@ class APerusahaanController extends Controller
     
     public function listJajaran($companyId)
     {
-        $data = Jajaran::where('perusahaan_id', $companyId)->get();
+        $data['jajaran'] = Jajaran::where('perusahaan_id', $companyId)->get();
+
+        $struktur = ViewPerusahaan::where('id', $companyId)->get()->first()->struktur_organisasi;
+
+        if (file_exists(public_path('vendor_file/' . $struktur))){
+            $base64 = base64_encode(file_get_contents(public_path('vendor_file/' . $struktur)));
+            $filename = 'struktur.pdf';
+        } else {
+            $base64 = null;
+            $filename = null;
+        }
+
+        $data['struktur_filename'] = $filename;
+        $data['struktur_base64'] = $base64;
+
         return new PostResource(true, 'List jajaran', $data);
     }
 
