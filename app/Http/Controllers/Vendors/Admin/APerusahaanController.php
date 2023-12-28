@@ -108,4 +108,15 @@ class APerusahaanController extends Controller
 
         return new PostResource(true, 'List dokumen', $docs);
     }
+
+    public function listPortofolio($companyId)
+    {
+        $data = Porto::where('perusahaan_id', $companyId)->get();
+
+        for ($p=0; $p < count($data); $p++) { 
+            $data[$p]['base64'] = base64_encode(file_get_contents(public_path('vendor_file/' . $data[$p]->spk)));
+        }
+
+        return new PostResource(true, 'List portofolio', $data);
+    }
 }
