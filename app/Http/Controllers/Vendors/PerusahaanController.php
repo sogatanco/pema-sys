@@ -24,6 +24,7 @@ class PerusahaanController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api_vendor');
+        $userId = Auth::user()->id;
     }
 
     public function listBidangUsaha()
@@ -210,6 +211,16 @@ class PerusahaanController extends Controller
         return response()->json([
             "status" => true,
             "data" => $status,
+        ], 200);
+    }
+
+    public function jajaranStatus()
+    {
+        $company = Perusahaan::where('user_id', $idUser)->first();
+
+        return response()->json([
+            "status" => true,
+            "data" => $company
         ], 200);
     }
 
