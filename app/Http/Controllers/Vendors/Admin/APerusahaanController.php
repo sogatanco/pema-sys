@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Vendor\ViewPerusahaan;
 use App\Models\Vendor\Jajaran;
 use App\Models\Vendor\Akta;
+use App\Models\Vendor\Izin;
 use App\Http\Resources\PostResource;
 
 class APerusahaanController extends Controller
@@ -65,5 +66,16 @@ class APerusahaanController extends Controller
         }
 
         return new PostResource(true, 'List akta', $listAkta);
+    }
+
+    public function listIzin($companyId)
+    {
+        $listIzin = Izin::where('perusahaan_id', $companyId)->get();
+
+        for ($i=0; $i < count($listIzin); $i++) { 
+           $listIzin[$i]['file_base64'] = base64_encode(file_get_contents(public_path('vendor_file/' . $listIzin[$i]->file_izin)));
+        }
+
+        return new PostResource(true, 'List izin', $listIzin);
     }
 }
