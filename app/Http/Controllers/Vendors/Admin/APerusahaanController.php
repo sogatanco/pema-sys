@@ -9,6 +9,7 @@ use App\Models\Vendor\Jajaran;
 use App\Models\Vendor\Akta;
 use App\Models\Vendor\Izin;
 use App\Models\Vendor\Porto;
+use App\Models\Vendor\Kbli;
 use App\Http\Resources\PostResource;
 
 class APerusahaanController extends Controller
@@ -118,6 +119,12 @@ class APerusahaanController extends Controller
             $data[$p]['base64'] = base64_encode(file_get_contents(public_path('vendor_file/' . $data[$p]->spk)));
         }
 
+        return new PostResource(true, 'List portofolio', $data);
+    }
+
+    public function listKbli($companyId)
+    {
+        $data = Kbli::where('perusahaan_id', $companyId)->get();
         return new PostResource(true, 'List portofolio', $data);
     }
 }
