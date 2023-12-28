@@ -21,7 +21,7 @@ class APerusahaanController extends Controller
 
     public function requestList()
     {
-        $data = ViewPerusahaan::where('status_verifikasi', 'review')->get();
+        $data = ViewPerusahaan::where('status_verifikasi', 'review_submit')->get();
         return new PostResource(true, 'Request data', $data);
     }
 }
