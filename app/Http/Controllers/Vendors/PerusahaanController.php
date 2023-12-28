@@ -191,7 +191,7 @@ class PerusahaanController extends Controller
         $idUser = Auth::user()->id;
         $companyId = Perusahaan::select('id')->where('user_id', $idUser)->first();
 
-        $akta = Akta::where('id_perusahaan', $companyId)->first();
+        $akta = Akta::where('id_perusahaan', $companyId)->get();
 
         return response()->json([
             "status" => true,
