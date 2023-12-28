@@ -85,7 +85,13 @@ class APerusahaanController extends Controller
         $data = Perusahaan::where('id', $companyId)->first();
         
         $docs = [];
-        $list = ['company_profile', 'ktp_pengurus'];
+        $list = [
+            'company_profile', 
+            'ktp_pengurus', 
+            'sk_kemenkumham',
+            'fakta_integritas',
+            'spt'
+        ];
 
         for ($l=0; $l < count($list); $l++) { 
             if (file_exists(public_path('vendor_file/' . $data[$list[$l]]))){
@@ -96,51 +102,6 @@ class APerusahaanController extends Controller
                 array_push($docs, $item[$l]);
             }
         }
-
-        // // file company profil 
-        // if (file_exists(public_path('vendor_file/' . $data->company_profile))){
-        //     $profil = [
-        //         "name" => "profil",
-        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->company_profile)))
-        //     ];
-        //     array_push($docs, $profil);
-        // }
-
-        // // file ktp
-        // if (file_exists(public_path('vendor_file/' . $data->ktp_pengurus))){
-        //     $ktp = [
-        //         "name" => "ktp",
-        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->ktp_pengurus)))
-        //     ];
-        //     array_push($docs, $ktp);
-        // }
-
-        // // file sk kemenkumham
-        // if (file_exists(public_path('vendor_file/' . $data->sk_kemenkumham))){
-        //     $sk_kemenkumham = [
-        //         "name" => "sk_kemenkumham",
-        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->sk_kemenkumham)))
-        //     ];
-        //     array_push($docs, $sk_kemenkumham);
-        // }
-
-        // // file fakta integritas
-        // if (file_exists(public_path('vendor_file/' . $data->fakta_integritas))){
-        //     $fakta_integritas = [
-        //         "name" => "fakta_integritas",
-        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->fakta_integritas)))
-        //     ];
-        //     array_push($docs, $fakta_integritas);
-        // }
-
-        // // file spt
-        // if (file_exists(public_path('vendor_file/' . $data->spt))){
-        //     $spt = [
-        //         "name" => "spt",
-        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->spt)))
-        //     ];
-        //     array_push($docs, $spt);
-        // }
 
         return new PostResource(true, 'List dokumen', $docs);
     }
