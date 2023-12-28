@@ -125,6 +125,6 @@ class APerusahaanController extends Controller
     public function listKbli($companyId)
     {
         $data = Kbli::where('perusahaan_id', $companyId)->get();
-        return new PostResource(true, 'List portofolio', $data);
+        return new PostResource(true, 'List kbli', $data);
     }
 }
