@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor\ViewPerusahaan;
+use App\Models\Vendor\Akta;
+use App\Models\Vendor\Izin;
+use App\Models\Vendor\Jajaran;
+use App\Models\Vendor\Kbli;
+use App\Models\Vendor\porto;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -179,6 +184,19 @@ class PerusahaanController extends Controller
                 "message" => "Something went wrong."
             ], 500));
         }
+    }
+
+    public function documentStatus()
+    {
+        $idUser = Auth::user()->id;
+        $companyId = Perusahaan::select('perusahaan_id')->where('user_id', $idUser)->first();
+
+        $akta = Akta::where('perusahaan_id', $companyId)->first();
+
+        return response()->json([
+            "status" => true,
+            "data" => $akta
+        ], 200);
     }
 
 }

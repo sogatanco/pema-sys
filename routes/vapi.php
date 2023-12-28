@@ -27,6 +27,7 @@ Route::controller(PerusahaanController::class)->group(function() {
     Route::get('perusahaan/data-umum', 'getDataUmum');
     Route::post('perusahaan/store', 'store');
     Route::put('perusahaan/submit', 'submit');
+    Route::get('perusahaan/document-status', 'documentStatus');
 });
 
 Route::controller(JajaranController::class)->group(function() {
