@@ -216,7 +216,7 @@ class PerusahaanController extends Controller
     public function jajaranStatus()
     {
         $userId = Auth::user()->id;
-        $company = Perusahaan::where('user_id', $idUser)->first();
+        $company = Perusahaan::where('user_id', $userId)->first();
 
         return response()->json([
             "status" => true,
