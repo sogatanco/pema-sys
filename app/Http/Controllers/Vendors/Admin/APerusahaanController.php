@@ -91,7 +91,7 @@ class APerusahaanController extends Controller
             if (file_exists(public_path('vendor_file/' . $data[$list[$l]]))){
                 $item[$l] = [
                     "name" => $list[$l],
-                    "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data[$data[$list[$l]]])))
+                    "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data[$list[$l]])))
                 ];
                 array_push($docs, $item[$l]);
             }
