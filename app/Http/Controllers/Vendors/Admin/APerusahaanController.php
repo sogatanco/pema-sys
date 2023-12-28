@@ -14,12 +14,14 @@ class APerusahaanController extends Controller
         return new PostResource(true, 'list data Perusahaan', $data);
     }
 
-    public function submit()
-    {
-        return new PostResource(true, 'From submit dokumen endpoin', null);
-    }
     function show($id){
         $data=ViewPerusahaan::where('id', $id)->first();
         return new PostResource(true, 'Data Perusahaan '.$id, $data);
+    }
+
+    public function requestList()
+    {
+        $data = ViewPerusahaan::where('status_verifikasi', 'review')->get();
+        return new PostResource(true, 'Request data', $data);
     }
 }
