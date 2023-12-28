@@ -85,42 +85,62 @@ class APerusahaanController extends Controller
         $data = Perusahaan::where('id', $companyId)->first();
         
         $docs = [];
+        $list = ['company_profile', 'ktp_pengurus'];
 
-        // file company profil 
-        if (file_exists(public_path('vendor_file/' . $data->company_profile))){
-            $profil = [
-                "name" => "profil",
-                "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->company_profile)))
-            ];
-            array_push($docs, $profil);
+        for ($l=0; $l < count($list); $l++) { 
+            if (file_exists(public_path('vendor_file/' . $data[$list[$l]]))){
+                $item[$l] = [
+                    "name" => $list[$l],
+                    "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data[$data[$list[$l]]])))
+                ];
+                array_push($docs, $item[$l]);
+            }
         }
 
-        // file ktp
-        if (file_exists(public_path('vendor_file/' . $data->ktp_pengurus))){
-            $ktp = [
-                "name" => "ktp",
-                "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->ktp_pengurus)))
-            ];
-            array_push($docs, $ktp);
-        }
+        // // file company profil 
+        // if (file_exists(public_path('vendor_file/' . $data->company_profile))){
+        //     $profil = [
+        //         "name" => "profil",
+        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->company_profile)))
+        //     ];
+        //     array_push($docs, $profil);
+        // }
 
-        // file sk kemenkumham
-        if (file_exists(public_path('vendor_file/' . $data->sk_kemenkumham))){
-            $sk_kemenkumham = [
-                "name" => "sk_kemenkumham",
-                "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->sk_kemenkumham)))
-            ];
-            array_push($docs, $sk_kemenkumham);
-        }
+        // // file ktp
+        // if (file_exists(public_path('vendor_file/' . $data->ktp_pengurus))){
+        //     $ktp = [
+        //         "name" => "ktp",
+        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->ktp_pengurus)))
+        //     ];
+        //     array_push($docs, $ktp);
+        // }
 
-        // file fakta integritas
-        if (file_exists(public_path('vendor_file/' . $data->fakta_integritas))){
-            $fakta_integritas = [
-                "name" => "fakta_integritas",
-                "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->fakta_integritas)))
-            ];
-            array_push($docs, $fakta_integritas);
-        }
+        // // file sk kemenkumham
+        // if (file_exists(public_path('vendor_file/' . $data->sk_kemenkumham))){
+        //     $sk_kemenkumham = [
+        //         "name" => "sk_kemenkumham",
+        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->sk_kemenkumham)))
+        //     ];
+        //     array_push($docs, $sk_kemenkumham);
+        // }
+
+        // // file fakta integritas
+        // if (file_exists(public_path('vendor_file/' . $data->fakta_integritas))){
+        //     $fakta_integritas = [
+        //         "name" => "fakta_integritas",
+        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->fakta_integritas)))
+        //     ];
+        //     array_push($docs, $fakta_integritas);
+        // }
+
+        // // file spt
+        // if (file_exists(public_path('vendor_file/' . $data->spt))){
+        //     $spt = [
+        //         "name" => "spt",
+        //         "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->spt)))
+        //     ];
+        //     array_push($docs, $spt);
+        // }
 
         return new PostResource(true, 'List dokumen', $docs);
     }
