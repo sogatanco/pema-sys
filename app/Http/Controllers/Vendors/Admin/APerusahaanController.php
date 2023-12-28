@@ -86,15 +86,22 @@ class APerusahaanController extends Controller
         
         $docs = [];
 
+        // file company profil 
         if (file_exists(public_path('vendor_file/' . $data->company_profile))){
-
             $profil = [
                 "name" => "profil",
                 "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->company_profile)))
             ];
-
             array_push($docs, $profil);
-            
+        }
+
+        // file ktp
+        if (file_exists(public_path('vendor_file/' . $data->ktp_pengurus))){
+            $ktp = [
+                "name" => "ktp",
+                "base_64" => base64_encode(file_get_contents(public_path('vendor_file/' . $data->ktp_pengurus)))
+            ];
+            array_push($docs, $ktp);
         }
 
         return new PostResource(true, 'List dokumen', $docs);
