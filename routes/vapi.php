@@ -29,6 +29,7 @@ Route::controller(PerusahaanController::class)->group(function() {
     Route::put('perusahaan/submit', 'submit');
     Route::get('perusahaan/document-status', 'documentStatus');
     Route::get('perusahaan/jajaran-status', 'jajaranStatus');
+    Route::get('perusahaan/portofolio-status', 'portofolioStatus');
 });
 
 Route::controller(JajaranController::class)->group(function() {

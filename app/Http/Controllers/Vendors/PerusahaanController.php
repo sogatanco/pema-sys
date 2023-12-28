@@ -15,7 +15,7 @@ use App\Models\Vendor\Akta;
 use App\Models\Vendor\Izin;
 use App\Models\Vendor\Jajaran;
 use App\Models\Vendor\Kbli;
-use App\Models\Vendor\porto;
+use App\Models\Vendor\Porto;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
 
@@ -230,6 +230,19 @@ class PerusahaanController extends Controller
         return response()->json([
             "status" => true,
             "data" => $status
+        ], 200);
+    }
+
+    public function portofolioStatus()
+    {
+        $userId = Auth::user()->id;
+        $company = Perusahaan::where('user_id', $userId)->first();
+
+        $porto = Porto::where('perusahaan_id', $company->id)->count() > 0 ? true : false;
+
+        return response()->json([
+            "status" => true,
+            "data" => $porto
         ], 200);
     }
 
