@@ -189,15 +189,13 @@ class PerusahaanController extends Controller
     public function documentStatus()
     {
         $idUser = Auth::user()->id;
-        $companyId = Perusahaan::select('id')->where('user_id', $idUser)->first();
+        $company = Perusahaan::select('id')->where('user_id', $idUser)->first();
 
-        $akta = Akta::where('id_perusahaan', $companyId)->get();
+        $akta = Akta::where('id_perusahaan', $company->id)->get();
 
         return response()->json([
             "status" => true,
             "data" => $akta,
-            "user" => $idUser,
-            "per" => $companyId
         ], 200);
     }
 
