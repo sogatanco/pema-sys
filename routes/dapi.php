@@ -9,7 +9,7 @@ use App\Http\Controllers\Da\DaActivitController;
 use App\Http\Controllers\Asset\InvCat;
 use App\Http\Controllers\Asset\InvController;
 use App\Http\Controllers\Vendors\Admin\APerusahaanController;
-
+use App\Http\Controllers\Vendors\Admin\ATenderController;
 
 Route::controller(DaCatController::class)->group(function () {
      Route::get('/categories', 'index')->middleware("role:Employee");
@@ -62,4 +62,8 @@ Route::controller(APerusahaanController::class)->group(function(){
      Route::get('vendor/{id}/list-dokumen', 'listDokumen')->middleware("role:AdminVendor");
      Route::get('vendor/{id}/list-portofolio', 'listPortofolio')->middleware("role:AdminVendor");
      Route::get('vendor/{id}/list-kbli', 'listKbli')->middleware("role:AdminVendor");
+});
+
+Route::controller(ATenderController::class)->group(function(){
+     Route::post('vendor/tender', 'store')->middleware("role:AdminVendor");
 });
