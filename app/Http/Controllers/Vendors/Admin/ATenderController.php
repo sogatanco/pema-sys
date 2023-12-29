@@ -43,4 +43,9 @@ class ATenderController extends Controller
         }
         return new PostResource(false, 'Failed Tender Insert !', []);
     }
+
+    function index(){
+        $data=Tender::get()->latest();
+        return new PostResource(true, 'List Tender', $data);
+    }
 }
