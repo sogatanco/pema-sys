@@ -45,7 +45,7 @@ class ATenderController extends Controller
     }
 
     function index(){
-        $data=Tender::get()->latest();
+        $data=Tender::latest()->get();
         return new PostResource(true, 'List Tender', $data);
     }
 }
