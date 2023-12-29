@@ -9,7 +9,7 @@ use App\Models\Vendor\Jajaran;
 use App\Models\Vendor\Akta;
 use App\Models\Vendor\Izin;
 use App\Models\Vendor\Porto;
-use App\Models\Vendor\Kbli;
+use App\Models\Vendor\ViewKbli;
 use App\Http\Resources\PostResource;
 
 class APerusahaanController extends Controller
@@ -124,7 +124,7 @@ class APerusahaanController extends Controller
 
     public function listKbli($companyId)
     {
-        $data = Kbli::where('perusahaan_id', $companyId)->get();
+        $data = ViewKbli::where('perusahaan_id', $companyId)->get();
         return new PostResource(true, 'List kbli', $data);
     }
 }
