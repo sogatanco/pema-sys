@@ -15,8 +15,8 @@ class ATenderController extends Controller
         $file_dok_tender = base64_decode($request->dok_tender, true);
         $file_dok_deskripsi_tender = base64_decode($request->dok_deskripsi_tender, true);
 
-        $dok_tender = 'dok_tender/' . time() > '.pdf';
-        $dok_deskripsi_tender = 'dok_deskripsi_tender/' . time() > '.pdf';
+        $dok_tender = 'dok_tender/' . time().'.pdf';
+        $dok_deskripsi_tender = 'dok_deskripsi_tender/' . time(). '.pdf';
 
         if (Storage::disk('public_vendor')->put($dok_tender, $file_dok_tender) && Storage::disk('public_vendor')->put($dok_deskripsi_tender, $file_dok_deskripsi_tender)) {
             $t = new Tender();
