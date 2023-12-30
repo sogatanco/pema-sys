@@ -46,12 +46,11 @@ class APerusahaanController extends Controller
 
         $struktur = ViewPerusahaan::where('id', $companyId)->get()->first()->struktur_organisasi;
 
+        $base64 = null;
+        $filename = null;
         if (file_exists(public_path('vendor_file/' . $struktur))){
             $base64 = base64_encode(file_get_contents(public_path('vendor_file/' . $struktur)));
             $filename = 'struktur.pdf';
-        } else {
-            $base64 = null;
-            $filename = null;
         }
 
         $data['struktur_filename'] = $filename;
@@ -115,7 +114,7 @@ class APerusahaanController extends Controller
     {
         $data = Porto::where('perusahaan_id', $companyId)->get();
 
-        for ($p=0; $p < count($data); $p++) { 
+        for ($p=0; $p < count($data); $p++) {
             $data[$p]['base64'] = base64_encode(file_get_contents(public_path('vendor_file/' . $data[$p]->spk)));
         }
 
