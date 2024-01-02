@@ -27,8 +27,8 @@ class ATenderController extends Controller
         $t->hpd = $request->hps;
         $t->kbli = $request->kbli;
         $t->centang_dok_wajib = $request->centang_dok_wajib;
-        $t->dok_tender = $dok_tender;
-        $t->dok_deskripsi_tender = $dok_deskripsi_tender;
+        $t->dok_tender = $request->dok_tender;
+        $t->dok_deskripsi_tender = $request->dok_deskripsi_tender;
 
         if($t->save()){
             return new PostResource(true, 'Tender Inserted !', []);
