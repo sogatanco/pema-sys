@@ -20,7 +20,7 @@ class ATenderController extends Controller
         $t->nama_tender = $request->nama_tender;
         $t->lokasi = $request->lokasi;
         $t->tgl_pendaftaran = $request->tgl_pendaftaran;
-        $t->batas_pendafaran = $request->batas_pendafaran;
+        $t->batas_pendaftaran = $request->batas_pendaftaran;
         // $t->masa_sanggah = $request->masa_sanggah;
         // $t->tgl_masa_sanggah = $request->tgl_masa_sanggah;
         $t->jenis_pengadaan = $request->jenis_pengadaan;
