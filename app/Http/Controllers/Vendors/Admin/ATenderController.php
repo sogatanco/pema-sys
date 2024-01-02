@@ -26,7 +26,7 @@ class ATenderController extends Controller
         $t->jenis_pengadaan = $request->jenis_pengadaan;
         $t->hpd = $request->hps;
         $t->kbli = $request->kbli;
-        $t->centang_dok_wajib = $request->centang_dok_wajib;
+        $t->centang_dok_wajib = json_encode($request->centang_dok_wajib);
         $t->dok_tender = $request->dok_tender;
         $t->dok_deskripsi_tender = $request->dok_deskripsi_tender;
 
