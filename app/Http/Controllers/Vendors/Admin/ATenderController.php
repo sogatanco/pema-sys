@@ -12,6 +12,11 @@ class ATenderController extends Controller
 {
     function store(Request $request)
     {
+        return response()->json([
+            "status" => "ok",
+            "data" => $request->all()
+        ], 200);
+
         $file_dok_tender = base64_decode($request->dok_tender, true);
         $file_dok_deskripsi_tender = base64_decode($request->dok_deskripsi_tender, true);
 
