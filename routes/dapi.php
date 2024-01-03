@@ -11,10 +11,6 @@ use App\Http\Controllers\Asset\InvController;
 use App\Http\Controllers\Vendors\Admin\APerusahaanController;
 use App\Http\Controllers\Vendors\Admin\ATenderController;
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-     return $request->user();
- });
-
 Route::controller(DaCatController::class)->group(function () {
      Route::get('/categories', 'index')->middleware("role:Employee");
 });

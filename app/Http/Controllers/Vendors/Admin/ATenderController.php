@@ -7,14 +7,10 @@ use App\Models\Vendor\Tender;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\PostResource;
+use Illuminate\Support\Facades\Auth;
 
 class ATenderController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     function store(Request $request)
     {
         $t = new Tender();
