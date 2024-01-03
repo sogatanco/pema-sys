@@ -172,7 +172,7 @@ class PerusahaanController extends Controller
         $idUser = Auth::user()->id;
         $userCompany = Perusahaan::where('user_id', $idUser)->first();
 
-        $statusUpdated = Perusahaan::where('user_id', $idUser)->update(['status_verifikasi' => 'review']);
+        $statusUpdated = Perusahaan::where('user_id', $idUser)->update(['status_verifikasi' => 'review_submit']);
 
         if($statusUpdated){
             return response()->json([
