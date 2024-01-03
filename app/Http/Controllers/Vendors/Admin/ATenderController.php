@@ -10,6 +10,11 @@ use App\Http\Resources\PostResource;
 
 class ATenderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     function store(Request $request)
     {
         $t = new Tender();
