@@ -11,6 +11,7 @@ use App\Models\Vendor\Izin;
 use App\Models\Vendor\Porto;
 use App\Models\Vendor\ViewKbli;
 use App\Http\Resources\PostResource;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class APerusahaanController extends Controller
 {
@@ -125,5 +126,20 @@ class APerusahaanController extends Controller
     {
         $data = ViewKbli::where('perusahaan_id', $companyId)->get();
         return new PostResource(true, 'List kbli', $data);
+    }
+
+    public function updateStatus(Request $request, $companyId)
+    {
+        $status = $request->query('val');
+
+        $updated = Perusahaan::find($companyId)->update(['status_verifikasi' => $status]);
+
+        if($updated) {
+            return new PostResource(true, 'Status updated successfully', []);
+        }else{
+            throw new HttpResponseException(response([
+                "message" => "Something went wrong."
+            ], 500));
+        }
     }
 }
