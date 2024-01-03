@@ -12,6 +12,7 @@ use App\Models\Vendor\Porto;
 use App\Models\Vendor\ViewKbli;
 use App\Http\Resources\PostResource;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Request;
 
 class APerusahaanController extends Controller
 {
@@ -130,11 +131,6 @@ class APerusahaanController extends Controller
 
     public function updateStatus(Request $request, $companyId)
     {
-
-        return response()->json([
-            "data" => "woiii taiikkk"
-        ], 200);
-
         $updated = Perusahaan::where('id', $companyId)->update(['status_verifikasi' => $status]);
 
         if($updated) {
