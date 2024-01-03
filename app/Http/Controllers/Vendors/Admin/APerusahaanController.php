@@ -132,7 +132,7 @@ class APerusahaanController extends Controller
     {
         $status = $request->query('val');
 
-        $updated = Perusahaan::find($companyId)->update(['status_verifikasi' => $status]);
+        $updated = Perusahaan::where('id', $companyId)->update(['status_verifikasi' => $status]);
 
         if($updated) {
             return new PostResource(true, 'Status updated successfully', []);
