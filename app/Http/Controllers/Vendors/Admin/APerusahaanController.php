@@ -131,6 +131,8 @@ class APerusahaanController extends Controller
 
     public function updateStatus(Request $request, $companyId)
     {
+
+        $status = $request->query('val');
         $updated = Perusahaan::where('id', $companyId)->update(['status_verifikasi' => $status]);
 
         if($updated) {
