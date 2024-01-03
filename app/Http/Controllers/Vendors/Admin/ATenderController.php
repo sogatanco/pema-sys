@@ -39,8 +39,8 @@ class ATenderController extends Controller
         $t->dok_deskripsi_tender = $dok_deskripsi_tender;
 
         if ($t->save()) {
-            Storage::disk('public_vendor')->put($t->id_tender . '/' . $dok_tender, $file_dok_tender);
-            Storage::disk('public_vendor')->put($t->id_tender . '/' . $dok_deskripsi_tender, $file_dok_deskripsi_tender);
+            Storage::disk('public_vendor')->put('tender/'.$t->id_tender . '/' . $dok_tender, $file_dok_tender);
+            Storage::disk('public_vendor')->put('tender/'.$t->id_tender . '/' . $dok_deskripsi_tender, $file_dok_deskripsi_tender);
             return new PostResource(true, 'Tender Inserted !', $t);
         } else {
             return new PostResource(false, 'Failed Tender Insert !', []);
