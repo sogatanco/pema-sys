@@ -18,7 +18,7 @@ class ATenderController extends Controller
     function store(Request $request)
     {
         $t = new Tender();
-        $t->user_id = $request->user_id;
+        $t->user_id = Auth::user()->id;
         $t->pilihan_tender = $request->pilihan_tender;
         $t->metode_pengadaan = $request->metode_pengadaan;
         $t->sistem_kualifikasi = $request->sistem_kualifikasi;
