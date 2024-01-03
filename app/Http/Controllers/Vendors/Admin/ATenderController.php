@@ -7,14 +7,13 @@ use App\Models\Vendor\Tender;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Resources\PostResource;
-use Illuminate\Support\Facades\Auth;
 
 class ATenderController extends Controller
 {
     function store(Request $request)
     {
         $t = new Tender();
-        $t->user_id = Auth::user()->id;
+        $t->user_id = $request->user_id;
         $t->pilihan_tender = $request->pilihan_tender;
         $t->metode_pengadaan = $request->metode_pengadaan;
         $t->sistem_kualifikasi = $request->sistem_kualifikasi;
