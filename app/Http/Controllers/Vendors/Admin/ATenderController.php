@@ -52,4 +52,9 @@ class ATenderController extends Controller
         $data = Tender::get();
         return new PostResource(true, 'List Tender', $data);
     }
+
+    function show($id){
+        $td=Tender::where('id_tender', $id)->first();
+        return new PostResource(true, 'Tender', $td);
+    }
 }
