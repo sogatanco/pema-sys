@@ -69,4 +69,5 @@ Route::controller(ATenderController::class)->group(function(){
      Route::post('vendor/tender', 'store')->middleware("role:AdminVendor");
      Route::get('vendor/tender', 'index')->middleware("role:AdminVendor");
      Route::get('vendor/tender/{id}', 'show')->middleware("role:AdminVendor");
+     Route::post('vendor/tender/update', 'update')->middleware("role:AdminVendor");
 });
