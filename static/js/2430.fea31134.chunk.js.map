@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/2430.fea31134.chunk.js","mappings":"2KAEA,MAIA,EAJgBA,KACPC,EAAAA,EAAAA,KAAA,OAAAC,SAAK,W","sources":["pages/projects/AllTask.js"],"sourcesContent":["import React from 'react';\r\n\r\nconst AllTask = () => {\r\n  return <div>AllTask</div>;\r\n};\r\n\r\nexport default AllTask;\r\n"],"names":["AllTask","_jsx","children"],"sourceRoot":""}
