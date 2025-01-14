@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmaterialpro_main=self.webpackChunkmaterialpro_main||[]).push([[9912],{19912:(s,a,e)=>{e.r(a),e.d(a,{default:()=>i});e(65043);var r=e(50295),c=e(12327),m=(e(4038),e(70579));const i=()=>(0,m.jsx)(c.A,{children:(0,m.jsxs)("div",{className:"form-conteiner",children:[(0,m.jsx)("div",{className:"form-content",children:(0,m.jsx)(r.A,{src:"https://form.jotform.com/233040333516040"})}),(0,m.jsx)("div",{className:"mask"})]})})},4038:()=>{}}]);
+//# sourceMappingURL=9912.e755975f.chunk.js.map

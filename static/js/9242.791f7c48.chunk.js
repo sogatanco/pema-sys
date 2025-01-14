@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmaterialpro_main=self.webpackChunkmaterialpro_main||[]).push([[9242],{49242:(e,s,t)=>{t.r(s),t.d(s,{default:()=>l});t(65043);var a=t(50295),i=(t(67742),t(70579));const l=()=>(0,i.jsx)("div",{className:"",style:{width:"100vw",height:"1000px",position:"relative",backgroundColor:"green"},children:(0,i.jsx)("div",{className:"",style:{position:"absolute",top:"0",zIndex:"0",width:"100%",height:"100%"},children:(0,i.jsx)(a.A,{src:"https://www.jotform.com/tables/233041253562043"})})})},67742:()=>{}}]);
+//# sourceMappingURL=9242.791f7c48.chunk.js.map

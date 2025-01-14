@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmaterialpro_main=self.webpackChunkmaterialpro_main||[]).push([[2926],{22926:(a,e,r)=>{r.r(e),r.d(e,{default:()=>n});r(65043);var i=r(70579);const n=()=>(0,i.jsx)("h1",{children:"Unauthorized"})}}]);
+//# sourceMappingURL=2926.b2b685a1.chunk.js.map
