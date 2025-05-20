@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmaterialpro_main=self.webpackChunkmaterialpro_main||[]).push([[6218],{6218:(s,a,e)=>{e.r(a),e.d(a,{default:()=>n});e(65043);var i=e(49157),r=e(18353),c=e(77348),l=e(70579);const n=()=>(0,l.jsxs)(l.Fragment,{children:[(0,l.jsx)(c.A,{}),(0,l.jsx)(i.A,{children:(0,l.jsx)(r.A,{className:"p-4",children:(0,l.jsx)("p",{className:"mb-0",children:"This is some text within a card block."})})})]})}}]);
+//# sourceMappingURL=6218.272c45af.chunk.js.map
