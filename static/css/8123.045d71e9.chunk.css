@@ -1,0 +1,2 @@
+.member{display:flex;justify-content:flex-start;width:100px}.member img{margin-right:-10px}.img-list{height:60px;object-fit:cover;object-position:center;width:80px}.content{display:flex}.image{border-radius:8px;flex:1 1;min-height:250px;width:100%}@media(max-width:768px){.image{min-height:180px}}.text{flex:2 1}.spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(1turn)}}.data-table-wrapper{overflow-x:auto;width:100%}
+/*# sourceMappingURL=8123.045d71e9.chunk.css.map*/
